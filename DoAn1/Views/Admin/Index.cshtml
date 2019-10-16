@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<div>
+    @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+    {
+        <table class="table1" width="500" height="200" border="2" cellpadding="8" align="center">
+            <tr>
+                <th colspan="2"> ĐĂNG NHẬP </th>
+            </tr>
+            <tr>
+                <td> Tài Khoản </td>
+                <td>
+                    <input type="text" placeholder="nhập tài khoản" size="40" name="TaiKhoan">
+                </td>
+            </tr>
+            <tr>
+                <td> Mật Khẩu </td>
+                <td>
+                    <input type="password" placeholder="nhập mật khẩu" size="40" name="MatKhau">
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit">Đăng Nhập</button>
+                    <br />
+                    <br />      
+                </td>
+            </tr>
+
+        </table>
+
+    }
+</div>

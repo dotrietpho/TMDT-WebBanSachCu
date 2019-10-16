@@ -1,0 +1,88 @@
+﻿@model DoAn1.App_Data.Sach
+@{
+    Layout = null;  
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/BookAddStyle.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <ul>
+        <li><a href="#home">Logo</a></li>
+        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
+        <h5> Login in as: </a></h5>
+    </ul>
+</head>
+<body>
+    <div class="vertical-menu">
+        <a href="~/Book">Quản lý sách</a>
+        <a>Quản lý nhân viên </a>
+    </div>
+    <br />
+    <h1 style="text-align:center">Thêm sách mới</h1>
+    <form method="post" enctype="multipart/form-data">
+        <table align="center">
+            <tr>
+                <th>Tên sách:</th>
+                <td><input type="text" name="TenSach"></td>
+            </tr>
+            <tr>
+                <th>Thể loại:</th>
+                <td>
+                    <select name="ChuDe">
+                        <option value="Truyện trinh thám">Truyện trinh thám</option>
+                        <option value="Truyện ngôn tình">Truyện ngôn tình</option>
+                        <option value="Sách song ngữ">Sách song ngữ</option>
+                        <option value="Sách khoa học">Sách khoa học</option>
+                        <option value="Truyện khoa học viễn tưởng">Truyện khoa học viễn tưởng</option>
+                        <option value="Sách dạy nấu ăn">Sách dạy nấu ăn</option>
+                        <option value="Truyện thiếu nhi">Truyện thiếu nhi</option>
+                        <option value="Văn học nước ngoài">Văn học nước ngoài</option>
+                        <option value="Sách giáo khoa">Sách giáo khoa</option>
+                        <option value="Tập tô màu">Tập tô màu</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Giá (vnđ):</th>
+                <td><input type="text" name="GiaSach"></td>
+            </tr>
+            <tr>
+                <th>Số trang:</th>
+                <td><input type="number" name="SoTrang"></td>
+            </tr>
+            <tr>
+                <th>Mô tả:</th>
+                <td><input type="text" name="MoTa"></td>
+            </tr>
+            <tr>
+                <th>Tác giả:</th>
+                <td><input type="text" name="TenTacGia"></td>
+            </tr>
+            <tr>
+                <th>Hình ảnh:</th>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HinhSach, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="file" id="file">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div style="text-align:center"><button type="submit" value="Create" id="create-btn">Thêm sách</button></div>
+        <div class="warning-text">@ViewBag.Messenge</div>
+    </form>
+
+
+    <div class="footer">
+        <p>Sư Vạn Hạnh,Quận 10,Sài Gòn</p>
+        <p>cuahangsach@gmail.com</p>
+        <p>0123456789</p>
+    </div>
+</body>
+</html>

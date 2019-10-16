@@ -1,0 +1,42 @@
+﻿@model DoAn1.App_Data.Banner
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/BookEditStyle.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <ul>
+        <li><a href="#home">Logo</a></li>
+        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
+        <h5> Login in as: </a></h5>
+    </ul>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        <table align="center">
+            <tr>
+                <th>Hình ảnh:</th>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <img style="width:150px;height:150px" src="@Url.Content("~/UploadedFiles/"+Model.LinkAnh )" />
+                            <input type="file" name="file" id="file">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div style="text-align:center"><button type="submit" value="Edit" id="create-btn">Xác nhận</button></div>
+        <div class="warning-text">@ViewBag.Messenge</div>
+    </form>
+
+</body>
+</html>

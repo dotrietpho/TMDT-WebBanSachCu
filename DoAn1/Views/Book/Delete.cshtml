@@ -1,0 +1,101 @@
+﻿@model DoAn1.App_Data.Sach
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/BookAddStyle.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+    <ul>
+        <li><a href="#home">Logo</a></li>
+        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
+        <h5> Login in as: </a></h5>
+    </ul>
+</head>
+<body>
+    <h3>Bạn có chắc chắn muốn xoá sản phẩm này ?</h3>
+    <div style="text-align:center">
+        <h4> @Html.DisplayFor(model => model.TenSach)</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TenSach)
+            </dd>
+    
+            <dt>
+                Hình:
+            </dt>
+    
+            <dd>
+                <img style="width:150px;height:150px" src="@Url.Content("~/UploadedFiles/"+Model.HinhSach )" />
+            </dd>
+            <dt>
+                Chủ đề:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ChuDe)
+            </dd>
+            <dt>
+               Giá:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.GiaSach)
+            </dd>
+    
+            <dt>
+                Tác giả:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TenTacGia)
+            </dd>
+    
+            <dt>
+                Số trang:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SoTrang)
+            </dd>
+    
+            <dt>
+                Số lượng xem:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SoLuongXem)
+            </dd>
+    
+            <dt>
+                Mô tả:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+    
+        
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn-delete" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

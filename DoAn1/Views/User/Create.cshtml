@@ -1,0 +1,67 @@
+﻿@model DoAn1.App_Data.KhachHang
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/BookAddStyle.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <ul>
+        <li><a href="#home">Logo</a></li>
+        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
+        <h5> Login in as: </a></h5>
+    </ul>
+</head>
+<body>
+    <div class="vertical-menu">
+        <a href="~/Book">Quản lý sách</a>
+        <a href="~/User">Quản lý nhân viên </a>
+    </div>
+    <br />
+    <h1 style="text-align:center">Thêm khách hàng</h1>
+    <form method="post" enctype="multipart/form-data">
+        <table align="center">
+            <tr>
+                <th>Tài khoản:</th>
+                <td><input type="text" name="TaiKhoan"></td>
+            </tr>
+            <tr>
+                <th>Mật khẩu:</th>
+                <td>
+                    <input type="password" name="MatKhau" />
+                </td>
+            </tr>
+            <tr>
+                <th>Tên khách hàng:</th>
+                <td><input type="text" name="TenKH"></td>
+            </tr>
+            <tr>
+                <th>Số điện thoại:</th>
+                <td><input type="number" name="SDT"></td>
+            </tr>
+            <tr>
+                <th>Giới tính:</th>
+                <td><input type="text" name="GioiTinh"></td>
+            </tr>
+            <tr>
+                <th>Ngày sinh:</th>
+                <td><input type="date" name="NgaySinh"></td>
+            </tr>
+        
+        </table>
+        <div style="text-align:center"><button type="submit" value="Create" id="create-btn">Thêm khách hàng</button></div>
+        <div class="warning-text">@ViewBag.Messenge</div>
+    </form>
+
+
+    <div class="footer">
+        <p>Sư Vạn Hạnh,Quận 10,Sài Gòn</p>
+        <p>cuahangsach@gmail.com</p>
+        <p>0123456789</p>
+    </div>
+</body>
+</html>

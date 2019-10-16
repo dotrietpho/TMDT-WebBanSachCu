@@ -1,0 +1,83 @@
+﻿@model DoAn1.App_Data.KhachHang
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/BookAddStyle.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+    <ul>
+        <li><a href="#home">Logo</a></li>
+        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
+        <h5> Login in as: </a></h5>
+    </ul>
+</head>
+<body>
+    <h3>Bạn có chắc chắn muốn xoá khách hàng này ? (Dữ liệu không thể khôi phục)</h3>
+    <div style="text-align:center">
+        <h4> @Html.DisplayFor(model => model.TaiKhoan)</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tài khoản:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TaiKhoan)
+            </dd>
+
+            <dt>
+                Mật khẩu:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MatKhau)
+            </dd>
+            <dt>
+                Tên:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TenKH)
+            </dd>
+            <dt>
+                Số điện thoại:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+            <dt>
+                Giới tính:
+            </dt>
+               
+            <dd>
+                @Html.DisplayFor(model => model.GioiTinh)
+            </dd>
+           
+            <dt>
+                Ngày sinh:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NgaySinh)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn-delete" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@model DoAn1.App_Data.HoaDon
+
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/Content/register.css" rel="stylesheet" />
+</head>
+
+@using (Html.BeginForm())
+{
+    <br>
+    <br>
+    <br> <br /><br /><br /><br />
+    <div class="warning-text">@ViewBag.Messenge</div>
+    <div class="title text-center" style="font-size: 50px;">THANH TOÁN</div>
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <input class="registerTerm" name="DiaChiGiaoHang" style="float: right;" placeholder="Địa chỉ*"></input>
+            </div>
+            <div class="col-lg-6">
+                <input class="registerTerm" type="text" name="SDTGiaoHang" style="float: left;" placeholder="Số điện thoại*"></input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <input class="registerTerm" type="text" name="GhiChu" style="float: right;" placeholder="Ghi chú"></input>
+            </div>
+            <div class="col-lg-6">
+                <input class="registerTerm" type="text" name="NgayHenGiaoHang" style="float: left;" placeholder="Ngày nhận hàng"></input>
+            </div>
+        </div>
+        <br />
+        <input class="register-btn" type="submit" value="Xác nhận" />
+    </div>
+}
+

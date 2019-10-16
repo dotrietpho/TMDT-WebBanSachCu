@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "CategoryBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <div class="row">
+        <div class="sidebar col-lg-3">
+
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+               
+                <div class="warning-text">@ViewBag.Messenge</div>
+    
+                    <!-- Picture, Title and Price-->
+                    <div class="row">
+                        @if (ViewBag.ListBook.Count != 0)
+                        {
+                            <div class="col-lg-10 booklist">
+                                @foreach (var item in ViewBag.ListBook)
+                                {
+                                <a href="~/Home/Detail/@item.id">
+                                    <div class="col-lg-4 text-center box box-padding">
+                                        <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
+                                        <div class="price">@item.GiaSach</div>
+                                        <div class="title">@item.TenSach</div>
+                                        <div class="text-center starbox">
+                                            <i class="glyphicon glyphicon-star star"></i>
+                                            <i class="glyphicon glyphicon-star star"></i>
+                                            <i class="glyphicon glyphicon-star star"></i>
+                                            <i class="glyphicon glyphicon-star star"></i>
+                                            <i class="glyphicon glyphicon-star star"></i>
+                                            <i class="title">(105)</i>
+
+                                        </div>
+
+                                    </div>
+                                </a>
+                                }
+                                </div>
+                                }
+
+                          
+                            </div>
+                            <!-- Page Navigation -->
+
+
+                        
+            </div>
+        </div>
+    </div>
+</body>
+

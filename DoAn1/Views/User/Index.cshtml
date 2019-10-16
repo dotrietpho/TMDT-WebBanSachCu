@@ -1,0 +1,102 @@
+﻿
+@model PagedList.IPagedList<DoAn1.App_Data.KhachHang>
+@using PagedList.Mvc;
+
+<!DOCTYPE html>
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/BookListStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <ul>
+        <li><a href="#home">Logo</a></li>
+        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
+        <h5> Login in as: </h5>
+    </ul>
+</head>
+<body>
+    <div>
+        <div class="vertical-menu">
+            <a href="~/Book">Quản lý sách</a>
+            <a href="~/User">Quản lý khách hàng</a>
+            <a href="~/HoaDon">Quản lý đơn hàng</a>
+            <a href="~/Banner">Quản lý quảng cáo</a>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+    <form action="~/User/Create">
+        <input type="submit" id="create-btn" value="Thêm khách hàng">
+    </form>
+    <div>
+        <form action="~/User/Index" method="get" id="search-form">
+            <p>
+                @Html.TextBox("SearchString", null, new { @class = "Search" })<button type="submit"><i class="material-icons">search</i></button>
+            </p>
+        </form>
+        <div class="warning-text">@ViewBag.Messenge</div>
+        <table id="t01" style="width:75%">
+            <tr>
+                <th>
+                    Tài khoản
+                </th>
+                <th>
+                    Tên khách hàng
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Ngày sinh
+                </th>
+                <th>
+                    Chức năng
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaiKhoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenKH)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SDT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TaiKhoan }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TaiKhoan })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+    <div class="paged-table">
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page }))
+    </div>
+    <div class="footer">
+        <p>Sư Vạn Hạnh,Quận 10,Sài Gòn</p>
+        <p>cuahangsach@gmail.com</p>
+        <p>0123456789</p>
+    </div>
+</body>
+</html>
