@@ -8,7 +8,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Trang Chủ</title>
 
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -17,20 +16,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/bookdetail.css" rel="stylesheet" />
-
-
 </head>
 
-<body>
+<body P>
     <nav class="navbar">
         <div class="container-fluid">
 
             <!-- BRAND and LOGO (Navigation 1) -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="~/home">
-                    <img alt="Brand" class="logo-img" src="~/Content/logo.png">
-                    <a class="navbar-brand nav-element" href="~/home">BOOK<span style="color:#00cc99; padding-right:50px">STORE</span></a>
-
+                    <img alt="Brand" class="logo-img" src="~/Content/Recycle-Handbook.png">
+                    <a class="navbar-brand nav-element" href="~/home">RE<span style="color:#00cc99; padding-right:50px">BOOK</span></a>
                 </a>
             </div>
 
@@ -52,11 +48,7 @@
                         <button type="submit" class="searchButton">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
-
-
                     </div>
-
-
                 </div>
             </form>
 
@@ -80,20 +72,19 @@
             {
                 <div class="logined-text navbar-left">
                     <li style="list-style-type:none;">
-                        <ul> <a class="">@user.TenKH</a></ul>
+                        <ul> <a class="" style="font-size: 20px; color:rgba(0,0,0,.7); font-weight:600;" href="#">@user.TenKH</a></ul>
                         <ul><a href="/Login/Logout" id="logout-user"><b>Đăng Xuất</b></a></ul>
                     </li>
                 </div>
             }
-
         </div>
     </nav>
 
     <!-- Navigation 2 -->
-   <div class="navbar2">
+    <div class="navbar2">
         <ul>
             <div class="dropdown">
-                <button class="dropbtn">All Categories</button>
+                <button class="dropbtn">Thể Loại</button>
                 <div class="dropdown-content">
                     <a href="~/Home/CategoryBook?categoryString=Truyện Trinh Thám"> Truyện Trinh Thám</a>
                     <a href="~/Home/CategoryBook?categoryString=Truyện Ngôn Tình">Truyện Ngôn Tình</a>
@@ -101,16 +92,18 @@
                     <a href="~/Home/CategoryBook?categoryString=Sách Khoa Học">Sách Khoa Học</a>
                     <a href="~/Home/CategoryBook?categoryString=Truyện Khoa Học Viễn Tưởng">Truyện Khoa Học Viễn Tưởng</a>
                     <a href="~/Home/CategoryBook?categoryString=Sách Dạy Nấu Ăn">Sách Dạy Nấu Ăn</a>
-                   <a href="~/Home/CategoryBook?categoryString=Truyện Thiếu Nhi">Truyện Thiếu Nhi</a>
+                    <a href="~/Home/CategoryBook?categoryString=Truyện Thiếu Nhi">Truyện Thiếu Nhi</a>
                     <a href="~/Home/CategoryBook?categoryString=Văn Học Nước Ngoài">Văn Học Nước Ngoài</a>
                     <a href="~/Home/CategoryBook?categoryString=Sách Giáo Khoa">Sách Giáo Khoa</a>
-                   <a href="~/Home/CategoryBook?categoryString=Tập Tô Màu">Tập Tô Màu</a>
+                    <a href="~/Home/CategoryBook?categoryString=Tập Tô Màu">Tập Tô Màu</a>
                 </div>
             </div>
-            <li><a class="active" href="#home">Home</a></li>
-            <li><a href="#accountt">My Account</a></li>
-            <li><a href="#about">About Us</a></li>
+            <li><a class="active" href="#home">Trang chủ</a></li>
+            <li><a href="#accountt">Tài khoản</a></li>
+            <li><a href="#about">Giới thiệu</a></li>
         </ul>
     </div>
-    @RenderBody()
+    <div class="container">
+        @RenderBody()
+    </div>
 </body>

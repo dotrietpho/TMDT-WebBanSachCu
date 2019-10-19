@@ -4,36 +4,65 @@
 }
 
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div>
-    @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
-    {
-        <table class="table1" width="500" height="200" border="2" cellpadding="8" align="center">
-            <tr>
-                <th colspan="2"> ĐĂNG NHẬP </th>
-            </tr>
-            <tr>
-                <td> Tài Khoản </td>
-                <td>
-                    <input type="text" placeholder="nhập tài khoản" size="40" name="TaiKhoan">
-                </td>
-            </tr>
-            <tr>
-                <td> Mật Khẩu </td>
-                <td>
-                    <input type="password" placeholder="nhập mật khẩu" size="40" name="MatKhau">
-                </td>
-            </tr>
-            <tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <button type="submit">Đăng Nhập</button>
-                    <br />
-                    <br />      
-                </td>
-            </tr>
+    <title>&nbsp; &nbsp;</title>
 
-        </table>
+    <!-- Bootstrap -->
+    <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Content/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Content/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="~/Content/vendors/animate.css/animate.min.css" rel="stylesheet">
 
-    }
-</div>
+    <!-- Custom Theme Style -->
+    <link href="~/Content/vendors/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="login">
+    <div>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+                    {
+                        <h1>Admin</h1>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Tài khoản" name="TaiKhoan" />
+                        </div>
+                        <div>
+                            <input type="password" class="form-control" placeholder="Mật khẩu" name="MatKhau" />
+                        </div>
+                        <div>
+                            <button class="btn btn-default submit" type="submit">Đăng Nhập</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1>
+                                    <img style="width:25px" src="~/Content/Recycle-Handbook.png" /> Re-Book!
+                                </h1>
+                            </div>
+                        </div>
+                    }
+                    </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

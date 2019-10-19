@@ -6,11 +6,9 @@
 }
 
 <body>
-    <div class="row">
-        <div class="sidebar col-lg-3">
-          
-        </div>
-        <div id="myCarousel" class="carousel slide col-lg-9" data-ride="carousel">
+    <div class="container-fluid">
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -20,20 +18,21 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
+
                 @if (ViewBag.Banners != null)
                 {
                     for (int i = 0; i < ViewBag.Banners.Count; i++)
                     {
                         if (i == 0)
                         {
-                            <div class="item active">
-                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" />
+                            <div class="item active" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
                             </div>
                         }
                         else
                         {
-                            <div class="item">
-                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" />
+                            <div class="item" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
                             </div>
                         }
                     }
@@ -51,13 +50,9 @@
             </a>
         </div>
     </div>
-    <!-- Addvertise -->
-    <div class="col-lg-3">
-    </div>
-
 
     <!-- Booklist-->
-    <div class="col-lg-9 booklist">
+    <div class="col-lg-12 booklist card">
         <!-- Picture, Title and Price-->
         <div class="row">
             @if (ViewBag.ListBook != null)
@@ -66,21 +61,11 @@
                 foreach (var item in ViewBag.ListBook)
                 {
                     <a href="~/Home/Detail/@item.id">
-                        <div class="col-lg-3 text-center box box-padding">
+                        <div class="col-lg-4 text-center box box-padding">
                             <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
                             <div class="price">-15%</div>
                             <div class="title">@item.TenSach</div>
                             <div class="gia"> @item.GiaSach VNĐ</div>
-                            <div class="text-center starbox">
-                                <i class="glyphicon glyphicon-star star"></i>
-                                <i class="glyphicon glyphicon-star star"></i>
-                                <i class="glyphicon glyphicon-star star"></i>
-                                <i class="glyphicon glyphicon-star star"></i>
-                                <i class="glyphicon glyphicon-star star"></i>
-                                <i class="title">(105)</i>
-
-                            </div>
-
                         </div>
                     </a>
                 }
@@ -92,8 +77,5 @@
             }
         </div>
         <!-- Page Navigation -->
-
-
     </div>
-
 </body>

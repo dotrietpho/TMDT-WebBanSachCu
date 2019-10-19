@@ -18,23 +18,16 @@
                     <div class="row">
                         @if (ViewBag.ListBook.Count != 0)
                         {
-                            <div class="col-lg-10 booklist">
+                            <div class="col-lg-10 booklist card">
                                 @foreach (var item in ViewBag.ListBook)
                                 {
                                 <a href="~/Home/Detail/@item.id">
                                     <div class="col-lg-4 text-center box box-padding">
                                         <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
-                                        <div class="price">@item.GiaSach</div>
+                                        <div class="price">-15%</div>
                                         <div class="title">@item.TenSach</div>
-                                        <div class="text-center starbox">
-                                            <i class="glyphicon glyphicon-star star"></i>
-                                            <i class="glyphicon glyphicon-star star"></i>
-                                            <i class="glyphicon glyphicon-star star"></i>
-                                            <i class="glyphicon glyphicon-star star"></i>
-                                            <i class="glyphicon glyphicon-star star"></i>
-                                            <i class="title">(105)</i>
+                                        <div class="gia"> @item.GiaSach VNĐ</div>
 
-                                        </div>
 
                                     </div>
                                 </a>

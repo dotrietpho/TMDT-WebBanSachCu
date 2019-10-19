@@ -307,3 +307,44 @@ D:\Users\Admin\Documents\Visual Studio 2017\Projects\DoAn1 - 01-06 - Giaodien 2\
 D:\Users\Admin\Documents\Visual Studio 2017\Projects\DoAn1 - 01-06 - Giaodien 2\DoAn1 - 01-06 - Giaodien\DoAn1\obj\Debug\DoAn1.csproj.CoreCompileInputs.cache
 D:\Users\Admin\Documents\Visual Studio 2017\Projects\DoAn1 - 01-06 - Giaodien 2\DoAn1 - 01-06 - Giaodien\DoAn1\obj\Debug\DoAn1.csproj.CopyComplete
 D:\Users\Admin\Documents\Visual Studio 2017\Projects\DoAn1 - 01-06 - Giaodien 2\DoAn1 - 01-06 - Giaodien\DoAn1\obj\Debug\DoAn1.csprojAssemblyReference.cache
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\DoAn1.dll.config
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\DoAn1.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\DoAn1.pdb
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\Antlr3.Runtime.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\EntityFramework.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\EntityFramework.SqlServer.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\Microsoft.Web.Infrastructure.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\Newtonsoft.Json.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\PagedList.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\PagedList.Mvc.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Helpers.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Mvc.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Optimization.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Razor.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.WebPages.Deployment.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.WebPages.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.WebPages.Razor.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\WebGrease.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\EntityFramework.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\EntityFramework.SqlServer.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\PagedList.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\PagedList.Mvc.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Helpers.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Mvc.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Optimization.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.Razor.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.WebPages.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.WebPages.Deployment.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\System.Web.WebPages.Razor.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\Newtonsoft.Json.xml
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\bin\Antlr3.Runtime.pdb
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.csprojAssemblyReference.cache
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.Migrations.createdb.resources
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.Migrations.change.resources
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.Migrations.a.resources
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.Migrations.a1.resources
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.csproj.GenerateResource.cache
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.csproj.CoreCompileInputs.cache
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.csproj.CopyComplete
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.dll
+D:\Working Project\WebApplication1\TMDT-WebBanSachCu\DoAn1\obj\Debug\DoAn1.pdb

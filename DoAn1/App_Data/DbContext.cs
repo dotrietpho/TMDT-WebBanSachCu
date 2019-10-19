@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using System.Data.Entity;
 
 namespace DoAn1.App_Data
 {
     public class DbContext : System.Data.Entity.DbContext
     {
-        public DbContext() : base() {
+        public DbContext() : base()
+        {
             string databasename = "DoAn1 - 31/05";
             this.Database.Connection.ConnectionString = "Data Source=.;Initial Catalog=" + databasename + ";Trusted_Connection=Yes";
         }
+
         public DbSet<Sach> Sach { get; set; }
         public DbSet<ChiTietGioHang> ChiTietGioHang { get; set; }
         public DbSet<GioHang> GioHang { get; set; }

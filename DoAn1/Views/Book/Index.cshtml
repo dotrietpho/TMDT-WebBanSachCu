@@ -1,22 +1,11 @@
 ﻿
 @model PagedList.IPagedList<DoAn1.App_Data.Sach>
 @using PagedList.Mvc;
-
-<!DOCTYPE html>
 @{
-    Layout = null;
+    ViewBag.Title = "Book";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/BookListStyle.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <ul>
-        <li><a href="#home">Logo</a></li>
-        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
-        <h5> Login in as: </h5>
-    </ul>
-</head>
+
 <body>
     <div>
         <div class="vertical-menu">
@@ -105,4 +94,3 @@
         <p>0123456789</p>
     </div>
 </body>
-</html>
