@@ -1,10 +1,6 @@
 ﻿using DoAn1.App_Data;
 using PagedList;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DoAn1.Controllers
@@ -14,6 +10,8 @@ namespace DoAn1.Controllers
         // GET: User
         public ActionResult Index(int? page, string searchString)
         {
+            ViewBag.Active = "User";
+            ViewBag.Search = searchString;
             if (page == null) page = 1;
             if (searchString == null)
                 searchString = "";
@@ -33,6 +31,7 @@ namespace DoAn1.Controllers
         //Phuong thuc create, Cho nay la GET method
         public ActionResult Create()
         {
+            ViewBag.Active = "User";
             //Tra ve view ten la "Create" khi goi "localhost:49897/Book/Create"
             return View();
         }
@@ -41,11 +40,12 @@ namespace DoAn1.Controllers
         [HttpPost]
         public ActionResult Create(KhachHang newUser)
         {
+            ViewBag.Active = "User";
             if (newUser.MatKhau.Length < 6)
             {
                 ViewBag.Messenge = "Mật khẩu phải có ít nhất 6 ký tự";
                 return View();
-            }   
+            }
             try
             {
                 using (var db = new DbContext())
@@ -59,7 +59,7 @@ namespace DoAn1.Controllers
             }
             catch
             {
-                ViewBag.Messenge= "Some thing wrong";
+                ViewBag.Messenge = "Some thing wrong";
                 return View();
             }
         }
@@ -67,6 +67,7 @@ namespace DoAn1.Controllers
         //Phuong thuc Edit, method GET (Lay Book can edit thong qua id)
         public ActionResult Edit(string id)
         {
+            ViewBag.Active = "User";
             using (var db = new DbContext())
             {
                 //Lay book theo id
@@ -80,6 +81,7 @@ namespace DoAn1.Controllers
         [HttpPost]
         public ActionResult Edit(KhachHang editedUser)
         {
+            ViewBag.Active = "User";
             try
             {
                 using (var db = new DbContext())
@@ -103,22 +105,20 @@ namespace DoAn1.Controllers
             }
         }
 
-
-        //Tao di coi phim
         public ActionResult Delete(string id)
         {
+            ViewBag.Active = "User";
             using (var db = new DbContext())
             {
                 var user = db.KhachHang.Select(p => p).Where(p => p.TaiKhoan == id).FirstOrDefault();
                 return View(user);
             }
-
         }
-
 
         [HttpPost]
         public ActionResult Delete(string id, FormCollection collection)
         {
+            ViewBag.Active = "User";
             try
             {
                 using (var db = new DbContext())

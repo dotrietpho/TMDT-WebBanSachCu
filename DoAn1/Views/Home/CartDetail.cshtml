@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "CartDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,121 +10,107 @@
     <div>
         @if (TempData["listemptyMessage"] == null)
         {
-            <br>
-            <br>
-            <br>
-            <div class="title text-center" style="font-size: 50px;">GIỎ HÀNG</div>
+        <br>
+        <br>
+        <br>
+        <div class="title text-center" style="font-size: 50px;">GIỎ HÀNG</div>
 
-            <div class="container" style="background-color: white;">
-                <table class="table table-bordered mycart">
-                    <thead>
-                        <tr>
-                            <th>Hình ảnh</th>
-                            <th>Tên sách</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Chi tiết</th>
-                            <th>Gỡ bỏ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var book in ViewBag.ListBook)
+        <div class="container" style="background-color: white;">
+            <table class="table table-bordered mycart">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên sách</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Chi tiết</th>
+                        <th>Gỡ bỏ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in ViewBag.ListBook)
                         {
-                            <tr onclick="z.value=parseInt(x.value)*parseInt(y.value)">
-                                <td><img src="~/UploadedFiles/@book.HinhSach" alt="" width="75" height="115" style="vertical-align: middle;"></td>
-                                <td style="vertical-align: middle;">@book.TenSach</td>
-                                <td style="vertical-align: middle;">
-                                    <output id="x">@book.GiaSach</output><div>đ</div>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <a href="~/Home/ExtractCart/@book.idSach" class="fa fa-minus" title="Search W3Schools"></a>
-                                    <input id="y" type="number" disabled value="@book.SoLuong">
-                                    <a href="~/Home/InsertCart/@book.idSach" class="fa fa-plus" title="Search W3Schools"></a>
-
-
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <a href="/Home/Detail/@book.idSach" class="fa fa-search"></a>
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <a href="/Home/RemoveCart/@book.idSach" class="button"> <input class="cart-btn" id="remove" value="Gỡ"></a>
-                                </td>
-                            </tr>
+                    <tr onclick="z.value=parseInt(x.value)*parseInt(y.value)">
+                        <td><img src="~/UploadedFiles/@book.HinhSach" alt="" width="75" height="115" style="vertical-align: middle;"></td>
+                        <td style="vertical-align: middle;">@book.TenSach</td>
+                        <td style="vertical-align: middle;">
+                            <output id="x">@book.GiaSach</output><div>đ</div>
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <a href="~/Home/ExtractCart/@book.idSach" class="fa fa-minus" title="Search W3Schools"></a>
+                            <input id="y" type="number" disabled value="@book.SoLuong">
+                            <a href="~/Home/InsertCart/@book.idSach" class="fa fa-plus" title="Search W3Schools"></a>
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <a href="/Home/Detail/@book.idSach" class="fa fa-search"></a>
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <a href="/Home/RemoveCart/@book.idSach" class="button"> <input class="cart-btn" id="remove" value="Gỡ"></a>
+                        </td>
+                    </tr>
                         }
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
-                <div class="row">
+            <div class="row">
 
-
-
-                    <div class="col-lg-3">
-                        <a class="button" href="/Home">  <input class="cart-btn" type="submit" style="float: left;" value="Mua thêm"></a>
-                    </div>
-
-                    <div class="col-lg-7"></div>
-
-                    <div class="col-lg-2">
-                        <input class="cart-btn" type="submit" style="float: right;" value="Refresh"></input>
-                    </div>
-
+                <div class="col-lg-3">
+                    <a class="button" href="/Home">  <input class="cart-btn" type="submit" style="float: left;" value="Mua thêm"></a>
                 </div>
 
-            </div>
-            <br>
-            <br>
-            <div class="container">
-                <div class="row">
+                <div class="col-lg-7"></div>
 
-
-
-                    <div class="col-lg-6" style="padding: 50px; float:left; background-color: white; width: 49%">
-                        QuangCao
-                    </div>
-
-                    <div class="col-lg-6" style="float:right; background-color: white; width: 49%">
-                        <div class="title" style="padding: 20px;">Thành tiền</div>
-
-                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
-                        <div class="row">
-                            <div class="col-lg-9">
-                                <div style="text-align: right;">Thành tiền</div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div style="text-align: right; padding-right: 20px;">@ViewBag.TongGia</div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-9">
-                                <div style="text-align: right;"><h4>Tổng thành tiền (Gồm VAT)</h4></div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div style="text-align: right; padding-right: 20px;"><h4>@ViewBag.TongGia</h4></div>
-                            </div>
-                        </div>
-
-
-                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
-                        <div style="padding: 20px">
-                            <a href="/Home/ThanhToan" style="padding-left:1500px" class="button">
-                                <input class="cart-btn" id="payment" style="float: right;" value="Thanh toán">
-                            </a>
-
-                        </div>
-                    </div>
-
-
-
-
+                <div class="col-lg-2">
+                    <input class="cart-btn" type="submit" style="float: right;" value="Refresh"></input>
                 </div>
             </div>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6" style="padding: 50px; float:left; background-color: white; width: 49%">
+                    QuangCao
+                </div>
+
+                <div class="col-lg-6" style="float:right; background-color: white; width: 49%">
+                    <div class="title" style="padding: 20px;">Thành tiền</div>
+
+                    <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div style="text-align: right;">Thành tiền</div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div style="text-align: right; padding-right: 20px;">@ViewBag.TongGia</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div style="text-align: right;"><h4>Tổng thành tiền (Gồm VAT)</h4></div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div style="text-align: right; padding-right: 20px;"><h4>@ViewBag.TongGia</h4></div>
+                        </div>
+                    </div>
+
+                    <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                    <div style="padding: 20px">
+                        <a href="/Home/ThanhToan" style="padding-left:1500px" class="button">
+                            <input class="cart-btn" id="payment" style="float: right;" value="Thanh toán">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         }
         else
         {
-            <div class="warning-text">Giỏ hàng trống</div>
-            <div style="text-align:center"><h1>Click <a href="/Home" class="cheer-text">Vào đây</a> để bắt đầu mua sắm</h1>  </div>
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <div class="warning-text">Giỏ hàng trống</div>
+        <div style="text-align:center"><h1>Click <a href="/Home" class="cheer-text">Vào đây</a> để bắt đầu mua sắm</h1>  </div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         }
 </body>

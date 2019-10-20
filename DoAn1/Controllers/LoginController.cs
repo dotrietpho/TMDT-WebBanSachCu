@@ -1,9 +1,6 @@
 ﻿using DoAn1.App_Data;
 using DoAn1.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DoAn1.Controllers
@@ -18,8 +15,8 @@ namespace DoAn1.Controllers
             {
                 ViewBag.Messenge = TempData["messenge"].ToString();
             }
-            if (Session.Count>0)
-                return  Redirect(Url.Content("~/"));
+            if (Session.Count > 0)
+                return Redirect(Url.Content("~/"));
             return View();
         }
 
@@ -41,9 +38,9 @@ namespace DoAn1.Controllers
                     TempData["messenge"] = "Sai tên đăng nhập hoặc mật khẩu!";
                     return RedirectToAction("Index");
                 }
-
             }
         }
+
         public ActionResult Register()
         {
             //Neu Session da ton tai (da dang nhap) -> tra ve trang chu
@@ -77,7 +74,7 @@ namespace DoAn1.Controllers
                     {
                         db.KhachHang.Add(new KhachHang(a.TaiKhoan, a.password, a.TenKH, a.SDT, a.NgaySinh));
                         db.SaveChanges();
-                        Session["User"] = new LoginModel(a.TaiKhoan,a.password,a.TenKH) ;
+                        Session["User"] = new LoginModel(a.TaiKhoan, a.password, a.TenKH);
                         return RedirectToAction("Redirect");
                     }
                     else
@@ -85,7 +82,6 @@ namespace DoAn1.Controllers
                         ViewBag.Messenge = "Mật khẩu nhập lại không đúng!";
                         return View();
                     }
-
                 }
             }
             catch
@@ -99,6 +95,7 @@ namespace DoAn1.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult Logout(LoginModel a)
         {

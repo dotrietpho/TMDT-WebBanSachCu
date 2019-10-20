@@ -1,14 +1,11 @@
-﻿using System;
+﻿using DoAn1.App_Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using DoAn1.App_Data;
 
 namespace DoAn1.Models
 {
     public class GioHangHelper
     {
-
         public bool isGioHangTonTai(string userID)
         {
             using (var db = new DbContext())
@@ -18,6 +15,7 @@ namespace DoAn1.Models
                 return true;
             }
         }
+
         public bool TaoGioHang(string userID)
         {
             try
@@ -29,31 +27,32 @@ namespace DoAn1.Models
                 }
                 return true;
             }
-            catch 
+            catch
             {
-                return false;             
+                return false;
             }
         }
 
-        public bool ThemSanPham(int idSach,string userID)
+        public bool ThemSanPham(int idSach, string userID)
         {
             try
             {
                 using (var db = new DbContext())
                 {
                     var checker = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
-                    if (checker !=null)
+                    if (checker != null)
                     {
-                        checker.count++;                     
+                        checker.count++;
                     }
-                    else {
-                        db.ChiTietGioHang.Add(new ChiTietGioHang(userID, idSach));                     
+                    else
+                    {
+                        db.ChiTietGioHang.Add(new ChiTietGioHang(userID, idSach));
                     }
                     db.SaveChanges();
                     return true;
                 }
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -67,7 +66,7 @@ namespace DoAn1.Models
                 using (var db = new DbContext())
                 {
                     var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
-                        a.count++;
+                    a.count++;
                     db.SaveChanges();
                     return true;
                 }
@@ -84,7 +83,7 @@ namespace DoAn1.Models
             try
             {
                 using (var db = new DbContext())
-                {                
+                {
                     var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
                     if (a.count == 1)
                         db.ChiTietGioHang.Remove(a);
@@ -158,7 +157,7 @@ namespace DoAn1.Models
                 string s = string.Format("{0}", total);
                 return s;
             }
-            catch 
+            catch
             {
                 throw;
             }
@@ -170,24 +169,23 @@ namespace DoAn1.Models
             {
                 using (var db = new DbContext())
                 {
-
                     var q = from p in db.ChiTietGioHang
                             where p.IDGioHang == userID
                             from sach in db.Sach
                             where sach.id == p.idSach
                             from x in db.ChiTietGioHang
                             where x.idSach == sach.id
-                            select new { id = sach.id, TenSach =sach.TenSach, GiaSach= sach.GiaSach, HinhSach= sach.HinhSach, count=  x.count };
+                            select new { id = sach.id, TenSach = sach.TenSach, GiaSach = sach.GiaSach, HinhSach = sach.HinhSach, count = x.count };
 
                     IEnumerable<ChiTietGioHangModel> cart = from ca in q.AsEnumerable()
-                                                    select new ChiTietGioHangModel
-                                                    (
-                                                        ca.id,
-                                                        ca.TenSach,
-                                                        ca.GiaSach,
-                                                        ca.HinhSach,
-                                                        ca.count
-                                                    );
+                                                            select new ChiTietGioHangModel
+                                                            (
+                                                                ca.id,
+                                                                ca.TenSach,
+                                                                ca.GiaSach,
+                                                                ca.HinhSach,
+                                                                ca.count
+                                                            );
                     return cart.ToList();
                 }
             }

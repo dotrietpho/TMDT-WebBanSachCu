@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoAn1.App_Data
 {
@@ -11,6 +7,7 @@ namespace DoAn1.App_Data
     {
         [Key]
         public int id { get; set; }
+
         public string TinhTrang { get; set; }
         public int TongTien { get; set; }
         public string DiaChiGiaoHang { get; set; }
@@ -34,7 +31,8 @@ namespace DoAn1.App_Data
             this.GhiChu = ghiChu;
         }
 
-        public HoaDon() { }
-
+        public HoaDon()
+        {
+        }
     }
 }

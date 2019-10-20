@@ -1,8 +1,7 @@
 namespace DoAn1.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class createdb : DbMigration
     {
         public override void Up()
@@ -10,114 +9,113 @@ namespace DoAn1.Migrations
             CreateTable(
                 "dbo.ChiTietGioHangs",
                 c => new
-                    {
-                        IDGioHang = c.String(nullable: false, maxLength: 128),
-                        idSach = c.Int(nullable: false),
-                        count = c.Int(nullable: false),
-                        Sach_id = c.Int(),
-                    })
+                {
+                    IDGioHang = c.String(nullable: false, maxLength: 128),
+                    idSach = c.Int(nullable: false),
+                    count = c.Int(nullable: false),
+                    Sach_id = c.Int(),
+                })
                 .PrimaryKey(t => new { t.IDGioHang, t.idSach })
                 .ForeignKey("dbo.GioHangs", t => t.IDGioHang, cascadeDelete: true)
                 .ForeignKey("dbo.Saches", t => t.Sach_id)
                 .Index(t => t.IDGioHang)
                 .Index(t => t.Sach_id);
-            
+
             CreateTable(
                 "dbo.GioHangs",
                 c => new
-                    {
-                        IDGioHang = c.String(nullable: false, maxLength: 128),
-                        TongTienGioHang = c.Int(nullable: false),
-                        TinhTrang = c.String(),
-                        isDeleted = c.Boolean(nullable: false),
-                    })
+                {
+                    IDGioHang = c.String(nullable: false, maxLength: 128),
+                    TongTienGioHang = c.Int(nullable: false),
+                    TinhTrang = c.String(),
+                    isDeleted = c.Boolean(nullable: false),
+                })
                 .PrimaryKey(t => t.IDGioHang);
-            
+
             CreateTable(
                 "dbo.Saches",
                 c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        TenSach = c.String(),
-                        HinhSach = c.String(),
-                        ChuDe = c.String(),
-                        GiaSach = c.Int(nullable: false),
-                        TenTacGia = c.String(),
-                        SoTrang = c.Int(nullable: false),
-                        NgayXuatBan = c.String(),
-                        SoLuongXem = c.Int(nullable: false),
-                        MoTa = c.String(),
-                        isDeleted = c.Boolean(nullable: false),
-                    })
+                {
+                    id = c.Int(nullable: false, identity: true),
+                    TenSach = c.String(),
+                    HinhSach = c.String(),
+                    ChuDe = c.String(),
+                    GiaSach = c.Int(nullable: false),
+                    TenTacGia = c.String(),
+                    SoTrang = c.Int(nullable: false),
+                    NgayXuatBan = c.String(),
+                    SoLuongXem = c.Int(nullable: false),
+                    MoTa = c.String(),
+                    isDeleted = c.Boolean(nullable: false),
+                })
                 .PrimaryKey(t => t.id);
-            
+
             CreateTable(
                 "dbo.ChiTietHoaDons",
                 c => new
-                    {
-                        idHoaDon = c.String(nullable: false, maxLength: 128),
-                        idSach = c.Int(nullable: false),
-                        count = c.Int(nullable: false),
-                        HoaDon_id = c.Int(),
-                        Sach_id = c.Int(),
-                    })
+                {
+                    idHoaDon = c.String(nullable: false, maxLength: 128),
+                    idSach = c.Int(nullable: false),
+                    count = c.Int(nullable: false),
+                    HoaDon_id = c.Int(),
+                    Sach_id = c.Int(),
+                })
                 .PrimaryKey(t => new { t.idHoaDon, t.idSach })
                 .ForeignKey("dbo.HoaDons", t => t.HoaDon_id)
                 .ForeignKey("dbo.Saches", t => t.Sach_id)
                 .Index(t => t.HoaDon_id)
                 .Index(t => t.Sach_id);
-            
+
             CreateTable(
                 "dbo.HoaDons",
                 c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        TinhTrang = c.String(),
-                        TongTien = c.Int(nullable: false),
-                        DiaChiGiaoHang = c.String(),
-                        SDTGiaoHang = c.String(),
-                        GhiChu = c.String(),
-                        NgayLapHD = c.String(),
-                        NgayHenGiaoHang = c.String(),
-                        isDeleted = c.Boolean(nullable: false),
-                        idKhachHang = c.String(),
-                        KhachHang_TaiKhoan = c.String(maxLength: 128),
-                    })
+                {
+                    id = c.Int(nullable: false, identity: true),
+                    TinhTrang = c.String(),
+                    TongTien = c.Int(nullable: false),
+                    DiaChiGiaoHang = c.String(),
+                    SDTGiaoHang = c.String(),
+                    GhiChu = c.String(),
+                    NgayLapHD = c.String(),
+                    NgayHenGiaoHang = c.String(),
+                    isDeleted = c.Boolean(nullable: false),
+                    idKhachHang = c.String(),
+                    KhachHang_TaiKhoan = c.String(maxLength: 128),
+                })
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.KhachHangs", t => t.KhachHang_TaiKhoan)
                 .Index(t => t.KhachHang_TaiKhoan);
-            
+
             CreateTable(
                 "dbo.KhachHangs",
                 c => new
-                    {
-                        TaiKhoan = c.String(nullable: false, maxLength: 128),
-                        MatKhau = c.String(),
-                        TenKH = c.String(),
-                        NgaySinh = c.String(),
-                        SDT = c.String(),
-                        GioiTinh = c.String(),
-                        SoLanTruyCap = c.Int(nullable: false),
-                        AnhDaiDien = c.String(),
-                        isDeleted = c.Boolean(nullable: false),
-                        idGioHang = c.String(maxLength: 128),
-                    })
+                {
+                    TaiKhoan = c.String(nullable: false, maxLength: 128),
+                    MatKhau = c.String(),
+                    TenKH = c.String(),
+                    NgaySinh = c.String(),
+                    SDT = c.String(),
+                    GioiTinh = c.String(),
+                    SoLanTruyCap = c.Int(nullable: false),
+                    AnhDaiDien = c.String(),
+                    isDeleted = c.Boolean(nullable: false),
+                    idGioHang = c.String(maxLength: 128),
+                })
                 .PrimaryKey(t => t.TaiKhoan)
                 .ForeignKey("dbo.GioHangs", t => t.idGioHang)
                 .Index(t => t.idGioHang);
-            
+
             CreateTable(
                 "dbo.TaiKhoanAdmins",
                 c => new
-                    {
-                        id = c.String(nullable: false, maxLength: 128),
-                        TaiKhoan = c.String(),
-                        MatKhau = c.String(),
-                    })
+                {
+                    id = c.String(nullable: false, maxLength: 128),
+                    TaiKhoan = c.String(),
+                    MatKhau = c.String(),
+                })
                 .PrimaryKey(t => t.id);
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.ChiTietHoaDons", "Sach_id", "dbo.Saches");

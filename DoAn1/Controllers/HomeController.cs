@@ -1,17 +1,13 @@
 ﻿using DoAn1.App_Data;
 using DoAn1.Models;
-using PagedList;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DoAn1.Controllers
 {
     public class HomeController : Controller
     {
-        
         public ActionResult Index()
         {
             using (var db = new DbContext())
@@ -19,8 +15,8 @@ namespace DoAn1.Controllers
                 var banners = db.Banner.ToList();
                 ViewBag.Banners = banners;
                 //Lay tat ca sach sap xep theo id giam dan (moi nhat)
-               var listBook = db.Sach.Where(p => !p.isDeleted).OrderByDescending(p => p.id).Take(16).ToList();
-                ViewBag.ListBook = listBook;                 
+                var listBook = db.Sach.Where(p => !p.isDeleted).OrderByDescending(p => p.id).Take(16).ToList();
+                ViewBag.ListBook = listBook;
                 if (listBook.Count() == 0)
                     ViewBag.Messenge = "Không tìm được sách theo yêu cầu!";
                 return View();
@@ -33,12 +29,12 @@ namespace DoAn1.Controllers
             using (var db = new DbContext())
             {
                 //Tat ca sach trong csdl
-                var books = from l in db.Sach 
+                var books = from l in db.Sach
                             select l;
                 //Ten saches chua ky tu can tim kiem
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    books = books.Where(s => s.TenSach.Contains(searchString)|| s.TenTacGia.Contains(searchString)||s.ChuDe.Contains(searchString)).Take(12); 
+                    books = books.Where(s => s.TenSach.Contains(searchString) || s.TenTacGia.Contains(searchString) || s.ChuDe.Contains(searchString)).Take(12);
                 }
                 //Tra ra ViewBag
                 ViewBag.ListBook = books.ToList();
@@ -47,7 +43,6 @@ namespace DoAn1.Controllers
                 return View();
             }
         }
-
 
         //Tim sach theo ten chu de
         public ActionResult CategoryBook(string categoryString)
@@ -136,7 +131,8 @@ namespace DoAn1.Controllers
                     return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
             }
-            catch {
+            catch
+            {
                 ViewBag.Messenge = "Some thing wong";
                 return Redirect(Request.UrlReferrer.PathAndQuery);
             }
@@ -157,14 +153,13 @@ namespace DoAn1.Controllers
                     var user = (LoginModel)HttpContext.Session["User"];
                     ViewBag.ListBook = helper.ChiTietGioHang(user.TaiKhoan);
                     ViewBag.TongGia = helper.TongTienGioHang(user.TaiKhoan);
-                    if(helper.ChiTietGioHang(user.TaiKhoan).Count==0)
+                    if (helper.ChiTietGioHang(user.TaiKhoan).Count == 0)
                         TempData["listemptyMessage"] = "No results";
                     return View();
                 }
             }
             catch
             {
-
                 throw;
             }
         }
@@ -278,7 +273,6 @@ namespace DoAn1.Controllers
             {
                 return Redirect(Request.UrlReferrer.PathAndQuery);
             }
-
         }
 
         public ActionResult Switch()
@@ -289,6 +283,5 @@ namespace DoAn1.Controllers
             }
             return View();
         }
-
     }
 }

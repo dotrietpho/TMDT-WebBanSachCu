@@ -1,101 +1,69 @@
 ﻿@model DoAn1.App_Data.Sach
-
 @{
-    Layout = null;
+    ViewBag.Title = "Xoá Sách";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="container-fluid mt-5">
 
-<!DOCTYPE html>
+    <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
 
-<html>
-<head>
-    <link href="~/Content/BookAddStyle.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-    <ul>
-        <li><a href="#home">Logo</a></li>
-        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
-        <h5> Login in as: </a></h5>
-    </ul>
-</head>
-<body>
-    <h3>Bạn có chắc chắn muốn xoá sản phẩm này ?</h3>
-    <div style="text-align:center">
-        <h4> @Html.DisplayFor(model => model.TenSach)</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Tên:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TenSach)
-            </dd>
-    
-            <dt>
-                Hình:
-            </dt>
-    
-            <dd>
-                <img style="width:150px;height:150px" src="@Url.Content("~/UploadedFiles/"+Model.HinhSach )" />
-            </dd>
-            <dt>
-                Chủ đề:
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.ChuDe)
-            </dd>
-            <dt>
-               Giá:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.GiaSach)
-            </dd>
-    
-            <dt>
-                Tác giả:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TenTacGia)
-            </dd>
-    
-            <dt>
-                Số trang:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.SoTrang)
-            </dd>
-    
-            <dt>
-                Số lượng xem:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.SoLuongXem)
-            </dd>
-    
-            <dt>
-                Mô tả:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.MoTa)
-            </dd>
-    
-        
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn-delete" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
+
+            <h4 class="mb-2 mb-sm-0 pt-1">
+                <a href="@Url.Action("Index", "Book")"><i class="fas fa-home"></i></a>
+                <span>/</span>
+                <a href="@Url.Action("Index", "Book")">Quản lý Sách</a>
+                <span>/</span>
+                <span>@ViewBag.Title</span>
+            </h4>
+        </div>
     </div>
-</body>
-</html>
+    <!-- Heading -->
+
+    <div class="col-md-8 offset-2">
+        <div class="border border-light p-5">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+            <p class="h4 mb-4 text-center">@ViewBag.Title</p>
+
+            <label for="TenSach">Tên Sách:</label>
+            @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control mb-4", @name = "TenSach", @id = "TenSach", @disabled = "" } })
+
+            <label for="ChuDe">Thể loại:</label>
+            @Html.EditorFor(model => model.ChuDe, new { htmlAttributes = new { @class = "form-control mb-4", @name = "ChuDe", @id = "ChuDe", @disabled = "" } })
+
+            <label for="GiaSach">Giá (vnđ):</label>
+            @Html.EditorFor(model => model.GiaSach, new { htmlAttributes = new { @id = "GiaSach", @name = "GiaSach", @class = "form-control mb-4", @disabled = "" } })
+
+            <label for="SoTrang">Số trang:</label>
+            @Html.EditorFor(model => model.SoTrang, new { htmlAttributes = new { @id = "SoTrang", @name = "SoTrang", @class = "form-control mb-4", @disabled = "" } })
+
+            <label for="MoTa">Mô tả:</label>
+            @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @id = "MoTa", @name = "MoTa", @class = "form-control mb-4", @disabled = "" } })
+
+            <label for="TenTacGia">Tác giả:</label>
+            @Html.EditorFor(model => model.TenTacGia, new { htmlAttributes = new { @id = "TenTacGia", @name = "TenTacGia", @class = "form-control mb-4", @disabled = "" } })
+
+            <label for="file">Hình ảnh:</label>
+
+            <div class="text-center mb-4">
+                <img style="max-width:200px;max-height:200px" src="@Url.Content("~/UploadedFiles/"+Model.HinhSach)" />
+            </div>
+
+            <div class="warning-text">@ViewBag.Messenge</div>
+
+            <div class="text-center">
+                @using (Html.BeginForm())
+                {
+                @Html.AntiForgeryToken()
+                <h3>Bạn có chắc chắn muốn xoá sản phẩm này ?</h3>
+                <button class="btn btn-danger" type="submit" value="Delete" id="btn-delete">Xác nhận</button>
+                <a class="btn btn-success" href="@Url.Action("Index", "Book")" id="btn-cancel">Huỷ</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

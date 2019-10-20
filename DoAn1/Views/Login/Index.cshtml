@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -13,23 +12,21 @@
     <div>
         @using (Html.BeginForm("LoginCheck", "Login", FormMethod.Post))
         {
-            <div class="title text-center" style="font-size: 50px;">ĐĂNG NHẬP</div>
-            <div style="text-align: center;">
-                <input class="loginTerm" type="text" name="TaiKhoan" placeholder="Địa chỉ Email*">
-            </div>
-            <div style="text-align: center;">
-                <input class="loginTerm" type="password" name="MatKhau" placeholder="Mật khẩu*">
-            </div>
+        <div class="title text-center" style="font-size: 50px;">ĐĂNG NHẬP</div>
+        <div style="text-align: center;">
+            <input class="loginTerm" type="text" name="TaiKhoan" placeholder="Địa chỉ Email*">
+        </div>
+        <div style="text-align: center;">
+            <input class="loginTerm" type="password" name="MatKhau" placeholder="Mật khẩu*">
+        </div>
 
-
-
-            <br>
-            <br>
-            <br>
-            <input class="login-btn" type="submit" value="Đăng nhập" />
-            <br>
-            <br>
-            <br>
+        <br>
+        <br>
+        <br>
+        <input class="login-btn" type="submit" value="Đăng nhập" />
+        <br>
+        <br>
+        <br>
         }
         <a href="/Login/Register" class="button">
             <input class=" register-btn" type="submit" value="Tạo tài khoản" />

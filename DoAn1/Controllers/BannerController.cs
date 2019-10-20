@@ -1,12 +1,9 @@
 ﻿using DoAn1.App_Data;
-using System;
-using System.Collections.Generic;
+using PagedList;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PagedList;
-using DoAn1.Models;
 
 namespace DoAn1.Controllers
 {
@@ -15,9 +12,9 @@ namespace DoAn1.Controllers
         // GET: Banner
         public ActionResult Index(int? page)
         {
+            ViewBag.Active = "Banner";
             if (Session.Count != 0)
             {
-
                 using (var db = new DbContext())
                 {
                     //Lay het tat ca Book co trong csdl
@@ -38,6 +35,7 @@ namespace DoAn1.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.Active = "Banner";
             using (var db = new DbContext())
             {
                 //Lay book theo id
@@ -51,6 +49,7 @@ namespace DoAn1.Controllers
         [HttpPost]
         public ActionResult Edit(Banner editedBook, HttpPostedFileBase file)
         {
+            ViewBag.Active = "Banner";
             try
             {
                 using (var db = new DbContext())

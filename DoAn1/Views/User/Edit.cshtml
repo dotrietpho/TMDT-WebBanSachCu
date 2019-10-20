@@ -1,88 +1,61 @@
 ﻿@model DoAn1.App_Data.KhachHang
-
 @{
-    Layout = null;
+    ViewBag.Title = "Sửa Khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!DOCTYPE html>
+<div class="container-fluid mt-5">
 
-<html>
-<head>
-    <link href="~/Content/BookEditStyle.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-    <ul>
-        <li><a href="#home">Logo</a></li>
-        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
-        <h5> Login in as: </a></h5>
-    </ul>
-</head>
-<body>
-    <form method="post" enctype="multipart/form-data">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.TaiKhoan)
-        <table align="center">
-            <tr>
-                <th>Mật khẩu:</th>
-                <td>
-                    <div class="form-group">
-                        <div>
-                            @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th>Tên:</th>
-                <td>
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th>Số điện thoại:</th>
-                <td>
-                    <div class="form-group">
+    <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
 
-                        <div>
-                            @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th>Giới tính:</th>
-                <td>
-                    <div class="form-group">
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
 
-                        <div>
-                            @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th>Ngày sinh:</th>
-                <td>
-                    <div class="form-group">
-                        <div>
-                            <input type="date" value="@Model.NgaySinh" name="NgaySinh" />
-                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <div style="text-align:center"><button type="submit" value="Edit" id="create-btn">Xác nhận</button></div>
-        <div class="warning-text">@ViewBag.Messenge</div>
-    </form>
+            <h4 class="mb-2 mb-sm-0 pt-1">
+                <a href="@Url.Action("Index", "User")"><i class="fas fa-home"></i></a>
+                <span>/</span>
+                <a href="@Url.Action("Index", "User")">Quản lý Khách hàng</a>
+                <span>/</span>
+                <span>@ViewBag.Title</span>
+            </h4>
+        </div>
+    </div>
+    <!-- Heading -->
 
-</body>
-</html>
+    <div class="col-md-8 offset-2">
+        <form class="border border-light p-5" method="post" enctype="multipart/form-data">
+
+            <p class="h4 mb-4 text-center">@ViewBag.Title</p>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <label for="TaiKhoan">Tài khoản:</label>
+            @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @id = "TaiKhoan", @name = "TaiKhoan", @class = "form-control mb-4", @disabled = true } })
+
+            <label for="MatKhau">Mật khẩu:</label>
+            @Html.PasswordFor(model => model.MatKhau, new { @id = "MatKhau", @name = "MatKhau", @class = "form-control mb-4" })
+            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+
+            <label for="TenKH">Tên khách hàng:</label>
+            @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @id = "TenKH", @name = "TenKH", @class = "form-control mb-4" } })
+            @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+
+            <label for="SDT">Số điện thoại:</label>
+            @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @id = "SDT", @name = "SDT", @class = "form-control mb-4" } })
+            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+
+            <label for="GioiTinh">Giới tính:</label>
+            @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @id = "GioiTinh", @name = "GioiTinh", @class = "form-control mb-4" } })
+            @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+
+            <label for="NgaySinh">Ngày sinh:</label>
+            <input type="date" id="NgaySinh" name="NgaySinh" class="form-control mb-4" placeholder="Ngày sinh" value="@Model.NgaySinh">
+            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+
+            <button class="btn btn-info btn-block" type="submit" value="Edit" id="create-btn">Xác nhận</button>
+
+            <div class="warning-text">@ViewBag.Messenge</div>
+        </form>
+    </div>
+</div>

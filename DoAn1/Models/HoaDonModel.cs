@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DoAn1.Models
+﻿namespace DoAn1.Models
 {
     public class HoaDonModel
     {
-        string diaChiGiaoHang { get; set; }
-        string sdtKhachHang { get; set; }
-        string ghiChu { get; set; }
-        string ngayHenGiaoHang { get; set; }
+        private string diaChiGiaoHang { get; set; }
+        private string sdtKhachHang { get; set; }
+        private string ghiChu { get; set; }
+        private string ngayHenGiaoHang { get; set; }
     }
 }

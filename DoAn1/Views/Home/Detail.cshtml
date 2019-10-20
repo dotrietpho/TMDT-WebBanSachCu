@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -79,49 +78,48 @@
                     <div class="carousel-inner">
                         @if (ViewBag.ListBookLienQuan.Count != 0 || ViewBag.ListBookLienQuan != null)
                         {
-                            <div class="item active">
-                                <div class="row">
-                                    @for (int i = 0; i < 4; i++)
+                        <div class="item active">
+                            <div class="row">
+                                @for (int i = 0; i < 4; i++)
                                     {
                                         if (i < ViewBag.ListBookLienQuan.Count)
                                         {
-                                        <div class="col-md-3">
-                                            <div class="thumbnail">
-                                                <img  style="height:377px;width:250px;" src="~/UploadedFiles/@ViewBag.ListBookLienQuan[i].HinhSach" alt="Slide11">
-                                                <div class="caption text-center">
-                                                    <h3>@ViewBag.ListBookLienQuan[i].TenSach</h3>
-                                                    <a href="~/Home/Detail/@ViewBag.ListBookLienQuan[i].id" class="btn btn-primary slide-price" role="button">@ViewBag.ListBookLienQuan[i].GiaSach đ</a>
-                                                </div>
-                                            </div>
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img style="height:377px;width:250px;" src="~/UploadedFiles/@ViewBag.ListBookLienQuan[i].HinhSach" alt="Slide11">
+                                        <div class="caption text-center">
+                                            <h3>@ViewBag.ListBookLienQuan[i].TenSach</h3>
+                                            <a href="~/Home/Detail/@ViewBag.ListBookLienQuan[i].id" class="btn btn-primary slide-price" role="button">@ViewBag.ListBookLienQuan[i].GiaSach đ</a>
                                         </div>
-                                   
+                                    </div>
+                                </div>
+
                                         }
                                     }
-                                </div>
                             </div>
+                        </div>
                             if (ViewBag.ListBookLienQuan.Count <5 || ViewBag.ListBookLienQuan != null)
                             {
-                                <div class="item">
-                                    <div class="row">
-                                        @for (int i = 4; i < 8; i++)
+                        <div class="item">
+                            <div class="row">
+                                @for (int i = 4; i < 8; i++)
                                         {
                                             if (i < ViewBag.ListBookLienQuan.Count)
                                             {
-                                            <div class="col-md-3">
-                                                <div class="thumbnail">
-                                                    <img style="height:377px;width:250px;" src="~/UploadedFiles/@ViewBag.ListBookLienQuan[i].HinhSach" alt="Slide11">
-                                                    <div class="caption text-center">
-                                                        <h3>@ViewBag.ListBookLienQuan[i].TenSach</h3>
-                                                        <a href="~/Home/Detail/@ViewBag.ListBookLienQuan[i].id" class="btn btn-primary slide-price" role="button">@ViewBag.ListBookLienQuan[i].GiaSach đ</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            }
-                                        }
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img style="height:377px;width:250px;" src="~/UploadedFiles/@ViewBag.ListBookLienQuan[i].HinhSach" alt="Slide11">
+                                        <div class="caption text-center">
+                                            <h3>@ViewBag.ListBookLienQuan[i].TenSach</h3>
+                                            <a href="~/Home/Detail/@ViewBag.ListBookLienQuan[i].id" class="btn btn-primary slide-price" role="button">@ViewBag.ListBookLienQuan[i].GiaSach đ</a>
+                                        </div>
                                     </div>
                                 </div>
+                                            }
+                                        }
+                            </div>
+                        </div>
                             }
-                        
 
                         }
                     </div>
@@ -141,6 +139,3 @@
     <script src="~/Content/cartonbox.js"></script>
 </body>
 }
-
-
-

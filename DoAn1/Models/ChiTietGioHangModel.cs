@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DoAn1.Models
+﻿namespace DoAn1.Models
 {
     public class ChiTietGioHangModel
     {
@@ -21,6 +16,9 @@ namespace DoAn1.Models
             this.HinhSach = hinh;
             this.SoLuong = soluong;
         }
-        public ChiTietGioHangModel() { }
+
+        public ChiTietGioHangModel()
+        {
+        }
     }
 }

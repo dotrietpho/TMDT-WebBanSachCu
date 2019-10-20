@@ -1,8 +1,6 @@
-﻿using System;
+﻿using DoAn1.App_Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using DoAn1.App_Data;
 
 namespace DoAn1.Models
 {
@@ -14,7 +12,6 @@ namespace DoAn1.Models
             {
                 using (var db = new DbContext())
                 {
-
                     var q = from p in db.ChiTietHoaDons
                             where p.idHoaDon == idHoaDon
                             from sach in db.Sach
@@ -48,7 +45,7 @@ namespace DoAn1.Models
                 using (var db = new DbContext())
                 {
                     var q = db.GioHang.Where(p => p.IDGioHang == idGioHang).FirstOrDefault();
-                    HoaDon hoaDon = new HoaDon("Chờ xác nhận", q, diaChi, sdt, ngayHen, idGioHang,ghiChu);
+                    HoaDon hoaDon = new HoaDon("Chờ xác nhận", q, diaChi, sdt, ngayHen, idGioHang, ghiChu);
                     db.HoaDon.Add(hoaDon);
                     db.SaveChanges();
                     LapChiTietHoaDon(hoaDon.id, idGioHang);
@@ -62,7 +59,8 @@ namespace DoAn1.Models
 
         public void LapChiTietHoaDon(int idhoaDon, string idGioHang)
         {
-            try {
+            try
+            {
                 using (var db = new DbContext())
                 {
                     GioHangHelper a = new GioHangHelper();
@@ -79,7 +77,6 @@ namespace DoAn1.Models
                 }
             }
             catch { throw; }
-            
         }
     }
 }

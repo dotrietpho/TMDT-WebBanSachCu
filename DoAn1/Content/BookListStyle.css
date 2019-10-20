@@ -1,136 +1,156 @@
-.table{
-	padding:100px;
-}
-table{
-	float:right;
+.table {
+    padding: 100px;
 }
 
-caption{
-	padding-top:100px;
-	padding-bottom:10px;
+table {
+    float: right;
 }
+
+caption {
+    padding-top: 100px;
+    padding-bottom: 10px;
+}
+
 table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
+    border: 1px solid black;
+    border-collapse: collapse;
 }
-th, td {
-  padding: 15px;
-  text-align: center;
-}
-table#t01 tr:nth-child(even) {
-  background-color: #eee;
-}
-table#t01 tr:nth-child(odd) {
- background-color: #fff;
-}
-table#t01 th {
-  background-color: #275e96;
-  color: white;
-}
-.vertical-menu {
-  width: 300px; 
-   position: absolute;
 
- padding-top: 1px;
- border: 1px solid black;
- border-collapse: collapse;
+th, td {
+    padding: 15px;
+    text-align: center;
 }
-h5{
- color:white;
- float:right;
+
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
 }
+
+table#t01 tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+table#t01 th {
+    background-color: #275e96;
+    color: white;
+}
+
+.vertical-menu {
+    width: 300px;
+    position: absolute;
+    padding-top: 1px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+h5 {
+    color: white;
+    float: right;
+}
+
 .vertical-menu a {
-  background-color: #eee; 
-  color: black; 
-  display: block; 
-  padding: 12px;
-  text-decoration: none; 
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
 }
-.Search{
-	width:500px;
-    height:30px;
+
+.Search {
+    width: 500px;
+    height: 30px;
 }
-.Login{
-	float:right;
+
+.Login {
+    float: right;
 }
-.Cart{
-	float:right;
+
+.Cart {
+    float: right;
 }
+
 .vertical-menu a:hover {
-  background-color: #ccc; 
+    background-color: #ccc;
 }
+
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #275e96;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #275e96;
 }
 
 li {
-  float: left;
+    float: left;
 }
 
-li a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+    li a {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
 
-li a:hover {
-  background-color: #111;
-}
+        li a:hover {
+            background-color: #111;
+        }
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .column {
-  float: right;
-  width: 25%;
-  padding: 0 10px;
-}
-.row {margin: 0 -5px;
-padding-bottom:30px;
+    float: right;
+    width: 25%;
+    padding: 0 10px;
 }
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.row {
+    margin: 0 -5px;
+    padding-bottom: 30px;
 }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  text-align: center;
-  background-color: #f1f1f1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
 }
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-}
-.img{
-	height:150px;
-}
-.footer {
-   left: 0;
-   bottom: 0;
 
-   width:100%;
-   height:75px;
-   background-color: #275e96;
-   color: white;
-  position: fixed;
- text-align: center;
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
 }
+
+.img {
+    height: 150px;
+}
+
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 75px;
+    background-color: #275e96;
+    color: white;
+    position: fixed;
+    text-align: center;
+}
+
 #create-btn {
     float: right;
     background-color: #4CAF50;
@@ -144,22 +164,19 @@ padding-bottom:30px;
     margin: 10px 50px;
     cursor: pointer;
 }
+
 #search-form {
-    padding-left:472px;
+    padding-left: 472px;
 }
+
 .warning-text {
     padding-left: 470px;
     font-size: larger;
     color: brown;
 }
+
 .paged-table {
-    float:left;
-    padding-left:470px;
-    margin-bottom:50px;
+    float: left;
+    padding-left: 470px;
+    margin-bottom: 50px;
 }
-
-
-
-
-
-

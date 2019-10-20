@@ -1,12 +1,8 @@
 ﻿using DoAn1.App_Data;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using PagedList;
 using DoAn1.Models;
+using PagedList;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace DoAn1.Controllers
 {
@@ -15,6 +11,8 @@ namespace DoAn1.Controllers
         // GET: HoaDon
         public ActionResult Index(int? page, string searchString)
         {
+            ViewBag.Active = "HoaDon";
+            ViewBag.Search = searchString;
             if (Session.Count != 0)
             {
                 if (page == null) page = 1;
@@ -40,6 +38,7 @@ namespace DoAn1.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.Active = "HoaDon";
             using (var db = new DbContext())
             {
                 //Lay book theo id
@@ -64,6 +63,7 @@ namespace DoAn1.Controllers
         [HttpPost]
         public ActionResult Edit(HoaDon hoaDon)
         {
+            ViewBag.Active = "HoaDon";
             try
             {
                 using (var db = new DbContext())
@@ -90,18 +90,30 @@ namespace DoAn1.Controllers
 
         public ActionResult Delete(int id)
         {
+            ViewBag.Active = "HoaDon";
             using (var db = new DbContext())
             {
                 var hoadon = db.HoaDon.Select(p => p).Where(p => p.id == id).FirstOrDefault();
-                return View(hoadon);
+                var helper = new HoaDonHelper();
+                try
+                {
+                    ViewBag.ListBook = helper.ChiTietHoaDon(id);
+                    ViewBag.TongGia = hoadon.TongTien.ToString();
+                    if (helper.ChiTietHoaDon(id).Count == 0)
+                        TempData["listemptyMessage"] = "No results";
+                    return View(hoadon);
+                }
+                catch
+                {
+                    throw;
+                }
             }
-
         }
-
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            ViewBag.Active = "HoaDon";
             try
             {
                 using (var db = new DbContext())
@@ -121,6 +133,7 @@ namespace DoAn1.Controllers
 
         public ActionResult ChangeStatus(int id)
         {
+            ViewBag.Active = "HoaDon";
             try
             {
                 using (var db = new DbContext())
@@ -139,6 +152,5 @@ namespace DoAn1.Controllers
                 return View();
             }
         }
-
     }
 }

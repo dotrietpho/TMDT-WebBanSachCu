@@ -10,7 +10,6 @@
  */
 
 (function (global, $) {
-
     if (typeof $ === 'undefined') {
         throwError('Pagination requires jQuery.');
     }
@@ -27,7 +26,6 @@
     }
 
     $.fn[pluginName] = function (options) {
-
         if (typeof options === 'undefined') {
             return this;
         }
@@ -37,7 +35,6 @@
         var attributes = $.extend({}, $.fn[pluginName].defaults, options);
 
         var pagination = {
-
             initialize: function () {
                 var self = this;
 
@@ -64,7 +61,6 @@
 
                 // dataSource`s type is unknown, parse it to find true data
                 self.parseDataSource(attributes.dataSource, function (dataSource) {
-
                     // Currently in asynchronous mode
                     self.isAsync = Helpers.isString(dataSource);
                     if (Helpers.isArray(dataSource)) {
@@ -855,7 +851,6 @@
 
     // Instance defaults
     $.fn[pluginName].defaults = {
-
         // Data source
         // Array | String | Function | Object
         //dataSource: '',
@@ -986,7 +981,6 @@
         //paginationData.hooks[hook] = callback;
         paginationData.hooks[hook] = paginationData.hooks[hook] || [];
         paginationData.hooks[hook].push(callback);
-
     };
 
     // Static method
@@ -1088,5 +1082,4 @@
             return $;
         });
     }
-
 })(this, window.jQuery);

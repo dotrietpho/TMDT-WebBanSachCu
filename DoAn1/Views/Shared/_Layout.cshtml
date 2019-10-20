@@ -64,18 +64,18 @@
             </div>
             @if (user == null)
             {
-                <div class="login-text navbar-left">
-                    <a href="~/Login">Login</a>
-                </div>
+            <div class="login-text navbar-left">
+                <a href="~/Login">Login</a>
+            </div>
             }
             else
             {
-                <div class="logined-text navbar-left">
-                    <li style="list-style-type:none;">
-                        <ul> <a class="" style="font-size: 20px; color:rgba(0,0,0,.7); font-weight:600;" href="#">@user.TenKH</a></ul>
-                        <ul><a href="/Login/Logout" id="logout-user"><b>Đăng Xuất</b></a></ul>
-                    </li>
-                </div>
+            <div class="logined-text navbar-left">
+                <li style="list-style-type:none;">
+                    <ul> <a class="" style="font-size: 20px; color:rgba(0,0,0,.7); font-weight:600;" href="#">@user.TenKH</a></ul>
+                    <ul><a href="/Login/Logout" id="logout-user"><b>Đăng Xuất</b></a></ul>
+                </li>
+            </div>
             }
         </div>
     </nav>

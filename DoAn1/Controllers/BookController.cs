@@ -1,12 +1,9 @@
 ﻿using DoAn1.App_Data;
-using System;
-using System.Collections.Generic;
+using PagedList;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PagedList;
-using DoAn1.Models;
 
 namespace DoAn1.Controllers
 {
@@ -15,6 +12,8 @@ namespace DoAn1.Controllers
         // GET: Book
         public ActionResult Index(int? page, string searchString)
         {
+            ViewBag.Active = "Book";
+            ViewBag.Search = searchString;
             if (Session.Count != 0)
             {
                 if (page == null) page = 1;
@@ -34,14 +33,14 @@ namespace DoAn1.Controllers
             }
             else
             {
-               return Redirect(Url.Content("~/Admin"));
+                return Redirect(Url.Content("~/Admin"));
             }
         }
-
 
         //Phuong thuc create, Cho nay la GET method
         public ActionResult Create()
         {
+            ViewBag.Active = "Book";
             //Tra ve view ten la "Create" khi goi "localhost:49897/Book/Create"
             return View();
         }
@@ -50,6 +49,7 @@ namespace DoAn1.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Exclude = "id")]Sach newBook, HttpPostedFileBase file)
         {
+            ViewBag.Active = "Book";
             try
             {
                 string _path = "";
@@ -60,7 +60,7 @@ namespace DoAn1.Controllers
                     file.SaveAs(_path);
                     newBook.HinhSach = _fileName;
                 }
-                
+
                 using (var db = new DbContext())
                 {
                     //Them sach moi vao csdl
@@ -80,6 +80,7 @@ namespace DoAn1.Controllers
         //Phuong thuc Edit, method GET (Lay Book can edit thong qua id)
         public ActionResult Edit(int id)
         {
+            ViewBag.Active = "Book";
             using (var db = new DbContext())
             {
                 //Lay book theo id
@@ -93,6 +94,7 @@ namespace DoAn1.Controllers
         [HttpPost]
         public ActionResult Edit(Sach editedBook, HttpPostedFileBase file)
         {
+            ViewBag.Active = "Book";
             try
             {
                 using (var db = new DbContext())
@@ -101,7 +103,7 @@ namespace DoAn1.Controllers
                     var book = db.Sach.Select(p => p).Where(p => p.id == editedBook.id).FirstOrDefault();
 
                     string _path = "";
-                    if (file != null  )
+                    if (file != null)
                     {
                         string _fileName = Path.GetFileName(file.FileName);
                         _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _fileName);
@@ -111,6 +113,7 @@ namespace DoAn1.Controllers
 
                     book.TenSach = editedBook.TenSach;
                     book.SoTrang = editedBook.SoTrang;
+                    book.ChuDe = editedBook.ChuDe;
                     book.GiaSach = editedBook.GiaSach;
                     book.MoTa = editedBook.MoTa;
                     book.isDeleted = editedBook.isDeleted;
@@ -127,22 +130,20 @@ namespace DoAn1.Controllers
             }
         }
 
-
-        
         public ActionResult Delete(int id)
         {
+            ViewBag.Active = "Book";
             using (var db = new DbContext())
             {
                 var book = db.Sach.Select(p => p).Where(p => p.id == id).FirstOrDefault();
                 return View(book);
             }
-
         }
-
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            ViewBag.Active = "Book";
             try
             {
                 using (var db = new DbContext())

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoAn1.App_Data
 {
@@ -11,6 +7,7 @@ namespace DoAn1.App_Data
     {
         [Key]
         public int id { get; set; }
+
         public string TenSach { get; set; }
         public string HinhSach { get; set; }
         public string ChuDe { get; set; }
@@ -23,7 +20,7 @@ namespace DoAn1.App_Data
         public bool isDeleted { get; set; }
         public ICollection<ChiTietGioHang> ChiTietGioHangs { get; set; }
 
-        public Sach(int id, string ten,string ngayXuatBan, int gia, string tenTacGia,string chude)
+        public Sach(int id, string ten, string ngayXuatBan, int gia, string tenTacGia, string chude)
         {
             this.id = id;
             TenSach = ten;
@@ -34,7 +31,10 @@ namespace DoAn1.App_Data
             isDeleted = false;
         }
 
-        public Sach() { }
+        public Sach()
+        {
+        }
+
         public Sach(Sach a)
         {
             this.id = a.id;

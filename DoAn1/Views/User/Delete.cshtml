@@ -1,83 +1,58 @@
 ﻿@model DoAn1.App_Data.KhachHang
-
 @{
-    Layout = null;
+    ViewBag.Title = "Xoá Khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="container-fluid mt-5">
 
-<!DOCTYPE html>
+    <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
 
-<html>
-<head>
-    <link href="~/Content/BookAddStyle.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-    <ul>
-        <li><a href="#home">Logo</a></li>
-        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
-        <h5> Login in as: </a></h5>
-    </ul>
-</head>
-<body>
-    <h3>Bạn có chắc chắn muốn xoá khách hàng này ? (Dữ liệu không thể khôi phục)</h3>
-    <div style="text-align:center">
-        <h4> @Html.DisplayFor(model => model.TaiKhoan)</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Tài khoản:
-            </dt>
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
 
-            <dd>
-                @Html.DisplayFor(model => model.TaiKhoan)
-            </dd>
-
-            <dt>
-                Mật khẩu:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.MatKhau)
-            </dd>
-            <dt>
-                Tên:
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.TenKH)
-            </dd>
-            <dt>
-                Số điện thoại:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.SDT)
-            </dd>
-
-            <dt>
-                Giới tính:
-            </dt>
-               
-            <dd>
-                @Html.DisplayFor(model => model.GioiTinh)
-            </dd>
-           
-            <dt>
-                Ngày sinh:
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.NgaySinh)
-            </dd>
-
-        </dl>
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn-delete" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
+            <h4 class="mb-2 mb-sm-0 pt-1">
+                <a href="@Url.Action("Index", "User")"><i class="fas fa-home"></i></a>
+                <span>/</span>
+                <a href="@Url.Action("Index", "User")">Quản lý Khách hàng</a>
+                <span>/</span>
+                <span>@ViewBag.Title</span>
+            </h4>
+        </div>
     </div>
-</body>
-</html>
+    <!-- Heading -->
+
+    <div class="col-md-8 offset-2">
+        <div class="border border-light p-5">
+
+            <p class="h4 mb-4 text-center">@ViewBag.Title</p>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <label for="TaiKhoan">Tài khoản:</label>
+            @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @id = "TaiKhoan", @name = "TaiKhoan", @class = "form-control mb-4", @disabled = true } })
+
+            <label for="TenKH">Tên khách hàng:</label>
+            @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @id = "TenKH", @name = "TenKH", @class = "form-control mb-4", @disabled = true } })
+
+            <label for="SDT">Số điện thoại:</label>
+            @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @id = "SDT", @name = "SDT", @class = "form-control mb-4", @disabled = true } })
+
+            <label for="GioiTinh">Giới tính:</label>
+            @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @id = "GioiTinh", @name = "GioiTinh", @class = "form-control mb-4", @disabled = true } })
+
+            <label for="NgaySinh">Ngày sinh:</label>
+            <input type="date" id="NgaySinh" name="NgaySinh" class="form-control mb-4" placeholder="Ngày sinh" value="@Model.NgaySinh" disabled>
+
+            <div class="text-center">
+                @using (Html.BeginForm())
+                {
+                @Html.AntiForgeryToken()
+                <h3>Bạn có chắc chắn muốn xoá khách hàng này ? (Dữ liệu không thể khôi phục)</h3>
+                <button class="btn btn-danger" type="submit" value="Delete" id="btn-delete">Xác nhận</button>
+                <a class="btn btn-success" href="@Url.Action("Index", "User")" id="btn-cancel">Huỷ</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

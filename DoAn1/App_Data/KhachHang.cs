@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DoAn1.App_Data
 {
@@ -12,6 +6,7 @@ namespace DoAn1.App_Data
     {
         [Key]
         public string TaiKhoan { get; set; }
+
         public string MatKhau { get; set; }
         public string TenKH { get; set; }
         public string NgaySinh { get; set; }
@@ -21,17 +16,20 @@ namespace DoAn1.App_Data
         public string AnhDaiDien { get; set; }
         public bool isDeleted { get; set; }
         public string idGioHang { get; set; }
-     
+
         public virtual GioHang GioHang { get; set; }
+
         public KhachHang()
         { }
-        public KhachHang(string taikhoan,string matkhau,string tenKH, string NgaySinh)
+
+        public KhachHang(string taikhoan, string matkhau, string tenKH, string NgaySinh)
         {
             this.TaiKhoan = taikhoan;
             this.MatKhau = matkhau;
             this.TenKH = tenKH;
             this.NgaySinh = NgaySinh;
         }
+
         public KhachHang(string taikhoan, string matkhau, string tenKH, string SDT, string ngaysinh)
         {
             this.TaiKhoan = taikhoan;
@@ -40,6 +38,7 @@ namespace DoAn1.App_Data
             this.NgaySinh = ngaysinh;
             this.SDT = SDT;
         }
+
         public KhachHang(KhachHang a)
         {
             this.TaiKhoan = a.TaiKhoan;
@@ -55,7 +54,4 @@ namespace DoAn1.App_Data
             this.GioHang = a.GioHang;
         }
     }
-
-    
-    
 }

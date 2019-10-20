@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -12,20 +11,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>&nbsp; &nbsp;</title>
+    <title>Login</title>
 
     <!-- Bootstrap -->
-    <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
-    <link href="~/Content/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- NProgress -->
-    <link href="~/Content/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="~/Content/Admin/css/nprogress.css" rel="stylesheet" />
     <!-- Animate.css -->
-    <link href="~/Content/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/css/animate.min.css" rel="stylesheet" />
 
     <!-- Custom Theme Style -->
-    <link href="~/Content/vendors/build/css/custom.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/css/custom.min.css" rel="stylesheet" />
 </head>
 
 <body class="login">
@@ -35,34 +33,33 @@
                 <section class="login_content">
                     @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
                     {
-                        <h1>Admin</h1>
-                        <div>
-                            <input type="text" class="form-control" placeholder="Tài khoản" name="TaiKhoan" />
-                        </div>
-                        <div>
-                            <input type="password" class="form-control" placeholder="Mật khẩu" name="MatKhau" />
-                        </div>
-                        <div>
-                            <button class="btn btn-default submit" type="submit">Đăng Nhập</button>
-                        </div>
+                    <h1>Admin</h1>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Tài khoản" name="TaiKhoan" />
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" placeholder="Mật khẩu" name="MatKhau" />
+                    </div>
+                    <div>
+                        <button class="btn btn-dark submit" type="submit">Đăng Nhập</button>
+                    </div>
 
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
                         <div class="clearfix"></div>
+                        <br />
 
-                        <div class="separator">
-                            <div class="clearfix"></div>
-                            <br />
-
-                            <div>
-                                <h1>
-                                    <img style="width:25px" src="~/Content/Recycle-Handbook.png" /> Re-Book!
-                                </h1>
-                            </div>
+                        <div>
+                            <h1>
+                                <img style="width:25px" src="~/Content/Recycle-Handbook.png" /> Re-Book!
+                            </h1>
                         </div>
+                    </div>
                     }
-                    </section>
+                </section>
             </div>
         </div>
     </div>
 </body>
 </html>
-

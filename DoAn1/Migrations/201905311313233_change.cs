@@ -1,8 +1,7 @@
 namespace DoAn1.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class change : DbMigration
     {
         public override void Up()
@@ -11,7 +10,7 @@ namespace DoAn1.Migrations
             AlterColumn("dbo.ChiTietHoaDons", "idHoaDon", c => c.Int(nullable: false));
             AddPrimaryKey("dbo.ChiTietHoaDons", new[] { "idHoaDon", "idSach" });
         }
-        
+
         public override void Down()
         {
             DropPrimaryKey("dbo.ChiTietHoaDons");

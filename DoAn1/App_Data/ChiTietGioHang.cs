@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoAn1.App_Data
 {
@@ -13,6 +8,7 @@ namespace DoAn1.App_Data
         [Key]
         [Column(Order = 1)]
         public string IDGioHang { get; set; }
+
         [Key]
         [Column(Order = 2)]
         public int idSach { get; set; }
@@ -27,6 +23,9 @@ namespace DoAn1.App_Data
             this.idSach = idSach;
             this.count = 1;
         }
-        public ChiTietGioHang() { }
+
+        public ChiTietGioHang()
+        {
+        }
     }
 }

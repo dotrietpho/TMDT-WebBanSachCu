@@ -1,106 +1,108 @@
-﻿
-@model PagedList.IPagedList<DoAn1.App_Data.HoaDon>
+﻿@model PagedList.IPagedList<DoAn1.App_Data.HoaDon>
 @using PagedList.Mvc;
 
-<!DOCTYPE html>
 @{
-    Layout = null;
+    ViewBag.Title = "Quản lý Hoá đơn";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/BookListStyle.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <ul>
-        <li><a href="#home">Logo</a></li>
-        <li class="Login"><a href="#contact"><i class="material-icons">face</i>ADMIN1</a></li>
-        <h5> Login in as: </h5>
-    </ul>
-</head>
-<body>
-    <div>
-        <div class="vertical-menu">
-            <a href="~/Book">Quản lý sách</a>
-            <a href="~/User">Quản lý khách hàng</a>
-            <a href="~/HoaDon">Quản lý đơn hàng</a>
-            <a href="~/Banner">Quản lý quảng cáo</a>
+
+<div class="container-fluid mt-5">
+
+    <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
+
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
+
+            <h4 class="mb-2 mb-sm-0 pt-1">
+                <a href="@Url.Action("Index", "HoaDon")"><i class="fas fa-home"></i></a>
+                <span>/</span>
+                <span>@ViewBag.Title</span>
+            </h4>
+
+            <form class="d-flex justify-content-center" action="~/HoaDon/Index" method="get" id="search-form">
+                <!-- Default input -->
+                @Html.TextBox("SearchString", null, new { @class = "Search form-control", @value = ViewBag.Search })
+                <button class="btn btn-primary btn-sm my-0 p" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
-        <br />
-        <br />
-        <br />
     </div>
-    <div>
-        <form action="~/HoaDon/Index" method="get" id="search-form">
-            <p>
-                @Html.TextBox("SearchString", null, new { @class = "Search" })<button type="submit"><i class="material-icons">search</i></button>
-            </p>
-        </form>
-        <div class="warning-text">@ViewBag.Messenge</div>
-        <table id="t01" style="width:75%">
-            <tr>
-                <th>
-                    Khách hàng
-                </th>
-                <th>
-                    Đia chỉ giao hàng
-                </th>
-                <th>
-                    Tổng tiền
-                </th>
-                <th>
-                    Số điện thoại
-                </th>
-                <th>
-                    Tình trạng
-                </th>
-                <th>
-                    Chức năng
-                </th>
-            </tr>
+    <!-- Heading -->
 
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idKhachHang)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TongTien)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SDTGiaoHang)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TinhTrang)
-                </td>
-                <td>
-                    @Html.ActionLink("Đổi trạng thái", "ChangeStatus", new { id = item.id }) |
-                    @Html.ActionLink("Chi tiết", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                </td>
-            </tr>
-            }
+    <div class="warning-text mb-4">@ViewBag.Messenge</div>
 
-        </table>
-        <br />
+    <!--Grid row-->
+    <div class="row wow fadeIn">
 
+        <!--Grid column-->
+        <div class="col-md-12 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <!-- Table  -->
+                    <table class="table table-hover">
+                        <!-- Table head -->
+                        <thead class="blue-grey lighten-4">
+                            <tr>
+                                <th>#</th>
+                                <th>Khách hàng</th>
+                                <th>Đia chỉ giao hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Số điện thoại</th>
+                                <th>Tình trạng</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <!-- Table head -->
+                        <!-- Table body -->
+                        <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                            <tr>
+                                <th scope="row">@(i + 1)</th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].idKhachHang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].DiaChiGiaoHang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].TongTien)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].SDTGiaoHang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].TinhTrang)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Đổi trạng thái", "ChangeStatus", new { id = Model[i].id }) |
+                                    @Html.ActionLink("Chi tiết", "Edit", new { id = Model[i].id }) |
+                                    @Html.ActionLink("Xoá", "Delete", new { id = Model[i].id })
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                        <!-- Table body -->
+                    </table>
+                    <!-- Table  -->
+
+                    <div class="paged-table">
+                        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { SearchString = ViewBag.Search, page }))
+                    </div>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+        <!--Grid column-->
     </div>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-    <div class="paged-table">
-        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-            new { page }))
-    </div>
-    <div class="footer">
-        <p>Sư Vạn Hạnh,Quận 10,Sài Gòn</p>
-        <p>cuahangsach@gmail.com</p>
-        <p>0123456789</p>
-    </div>
-</body>
-</html>
+    <!--Grid row-->
+</div>
