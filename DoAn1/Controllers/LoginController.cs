@@ -1,6 +1,7 @@
 ﻿using DoAn1.App_Data;
 using DoAn1.Models;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
 namespace DoAn1.Controllers
@@ -46,7 +47,7 @@ namespace DoAn1.Controllers
             //Neu Session da ton tai (da dang nhap) -> tra ve trang chu
             if (Session.Count > 0)
                 return Redirect(Url.Content("~/"));
-            return View();
+            return View(new RegisterModel());
         }
 
         // Su dung RegisterModel de luu du lieu Model tra ve tu view, xu ly tren model register
@@ -62,15 +63,23 @@ namespace DoAn1.Controllers
                     if (user != null)
                     {
                         ViewBag.Messenge = "Tài khoản đã tồn tại!";
-                        return View();
+                        return View(a);
                     }
                     if (a.password.Length == 0 || a.ReTypedpassword.Length == 0 || a.TaiKhoan.Length == 0 || a.SDT.Length == 0 || a.TenKH.Length == 0)
                     {
                         ViewBag.Messenge = "Yêu cầu nhập đẩy đủ thông tin!";
-                        return View();
+                        return View(a);
                     }
-                    if (a.password.Length <6 || a.TaiKhoan.Length<6)
-                    { }
+                    if (a.password.Length < 6 || a.TaiKhoan.Length < 6)
+                    {
+                        ViewBag.Messenge = "Tài khoản, password phải dài hơn 6 ký tự";
+                        return View(a);
+                    }
+                    if (!IsPassword(a.password))
+                    {
+                        ViewBag.Messenge = "Password phải có ít nhất 1 ký tự, 1 số";
+                        return View(a);
+                    }
                     //Neu password nhap k trung khop
                     if (a.password == a.ReTypedpassword)
                     {
@@ -81,8 +90,9 @@ namespace DoAn1.Controllers
                     }
                     else
                     {
+
                         ViewBag.Messenge = "Mật khẩu nhập lại không đúng!";
-                        return View();
+                        return View(a);
                     }
                 }
             }
@@ -106,27 +116,21 @@ namespace DoAn1.Controllers
             return Redirect(Url.Content("~/"));
         }
 
-        static bool IsLetter(char c)
+        //Check valid password
+        public bool IsPassword(string psw)
         {
-            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-        }
+            var hasWord = new Regex(@"[a-zA-Z]+");
+            var hasDigit = new Regex(@"[0-9]+");
+            var hasSpecialChar = new Regex("[;\"]+");
 
-        static bool IsDigit(char c)
-        {
-            return c >= '0' && c <= '9';
-        }
+            if (hasWord.IsMatch(psw) && hasDigit.IsMatch(psw) && !hasSpecialChar.IsMatch(psw))
+                return true;
+            else
+            {
+                return false;
+            }
 
-        static bool IsSymbol(char c)
-        {
-            return c > 32 && c < 127 && !IsDigit(c) && !IsLetter(c);
-        }
 
-        static bool IsValidPassword(string password)
-        {
-            return
-               password.Any(c => IsLetter(c)) &&
-               password.Any(c => IsDigit(c)) &&
-               password.Any(c => IsSymbol(c));
         }
     }
 }
