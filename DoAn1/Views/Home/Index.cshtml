@@ -11,9 +11,13 @@
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
+                @if (ViewBag.Banners != null)
+                {
+                    for (int i = 0; i < ViewBag.Banners.Count; i++)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@i" class="@(i==0?"active":"")"></li>
+                    }
+                }
             </ol>
 
             <!-- Wrapper for slides -->
@@ -25,15 +29,15 @@
                     {
                         if (i == 0)
                         {
-                <div class="item active" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
-                    <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
-                </div>
+                            <div class="item active" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
+                            </div>
                         }
                         else
                         {
-                <div class="item" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
-                    <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
-                </div>
+                            <div class="item" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
+                            </div>
                         }
                     }
                 }
@@ -60,20 +64,20 @@
 
                 foreach (var item in ViewBag.ListBook)
                 {
-            <a href="~/Home/Detail/@item.id">
-                <div class="col-lg-4 text-center box box-padding">
-                    <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
-                    <div class="price">-15%</div>
-                    <div class="title">@item.TenSach</div>
-                    <div class="gia"> @item.GiaSach VNĐ</div>
-                </div>
-            </a>
+                    <a href="~/Home/Detail/@item.id">
+                        <div class="col-lg-4 text-center box box-padding">
+                            <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
+                            <div class="price">-15%</div>
+                            <div class="title">@item.TenSach</div>
+                            <div class="gia"> @item.GiaSach VNĐ</div>
+                        </div>
+                    </a>
                 }
             }
 
             else
             {
-            <div class="column">Không tìm được sách theo nhu cầu!</div>
+                <div class="column">Không tìm được sách theo nhu cầu!</div>
             }
         </div>
         <!-- Page Navigation -->
