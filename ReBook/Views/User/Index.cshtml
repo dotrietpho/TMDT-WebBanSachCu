@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<ReBook.App_Data.KhachHang>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Quản lý Khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid mt-5">
+
+    <!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
+
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
+
+            <h4 class="mb-2 mb-sm-0 pt-1">
+                <a href="@Url.Action("Index", "User")"><i class="fas fa-home"></i></a>
+                <span>/</span>
+                <span>@ViewBag.Title</span>
+            </h4>
+
+            <form class="d-flex justify-content-center" action="~/User/Index" method="get" id="search-form">
+                <!-- Default input -->
+                @Html.TextBox("SearchString", null, new { @class = "Search form-control", @value=ViewBag.Search })
+                <button class="btn btn-primary btn-sm my-0 p" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- Heading -->
+
+    <div class="warning-text mb-4">@ViewBag.Messenge</div>
+
+    <a class="btn btn-white mb-4" href="@Url.Action("Create","User")" id="create-btn">
+        Thêm khách hàng
+    </a>
+
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-12 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <!-- Table  -->
+                    <table class="table table-hover">
+                        <!-- Table head -->
+                        <thead class="blue-grey lighten-4">
+                            <tr>
+                                <th>#</th>
+                                <th>Tài khoản</th>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày sinh</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <!-- Table head -->
+                        <!-- Table body -->
+                        <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                            <tr>
+                                <th scope="row">@(i + 1)</th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].TaiKhoan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].TenKH)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].SDT)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model[i].NgaySinh)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = Model[i].TaiKhoan }) |
+                                    @Html.ActionLink("Xoá", "Delete", new { id = Model[i].TaiKhoan })
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                        <!-- Table body -->
+                    </table>
+                    <!-- Table  -->
+
+                    <div class="paged-table">
+                        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+                        @Html.PagedListPager(Model, page => Url.Action("Index",new { SearchString=ViewBag.Search, page }))
+                    </div>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+        <!--Grid column-->
+    </div>
+    <!--Grid row-->
+</div>

@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/Content/cartonbox.css" rel="stylesheet" />
+    <link href="~/Content/cartonbox.min.css" rel="stylesheet" />
+    <link href="~/Content/bookdetail.css" rel="stylesheet" />
+</head>
+@if (ViewBag.Book != null)
+{
+<body>
+    <div class="warning-text">@ViewBag.Messenge</div>
+    <div class="container-fluid" style="padding: 50px 300px px 300px;">
+        <div class="row">
+            <div class="col-lg-12 text-center detailbox">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="../img/sach1.jpg" class="cartonbox" data-cb-type="img"><img src="~/UploadedFiles/@ViewBag.Book.HinhSach" alt="" width="300" height="460"></a>
+                    </div>
+                    <div class="col-lg-5">
+                        <h1 style="font-size: 40px; text-align:left; text-transform: uppercase;">@ViewBag.Book.TenSach</h1>
+                        <h1 style="font-size: 40px; color: #808080; text-align:left;">@ViewBag.Book.GiaSach đ</h1>
+                        <div style="width: 100%; border: 2px solid #e3e3e3; "></div>
+                        <br>
+                        <form action="~/Home/AddCart/@ViewBag.Book.id" method="post">
+                            <div style="float: left; padding-left:50px;">
+                                <input class="buy-btn" type="submit" style="height: 40px;" value="Chọn mua" />
+                            </div>
+                        </form>
+
+                        <br>
+                        <br>
+                        <br>
+                        <div style="width: 100%; border: 2px solid #e3e3e3; "></div>
+                        <br>
+                        <p style="text-align: left;">@ViewBag.Book.MoTa</p>
+                    </div>
+
+                    <div class="col-lg-3 sidebox">
+                        <div>Tên nhà xuất bản:</div>
+                        <br>
+                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                        <br>
+                        <div>Tác giả: @ViewBag.Book.TenTacGia</div>
+                        <br>
+                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                        <br>
+                        <div>Số trang: @ViewBag.Book.SoTrang</div>
+                        <br>
+                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                        <br>
+                        <div>Tình trạng: Còn hàng</div>
+                        <br>
+                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                        <br>
+                        <div>Thể loại: @ViewBag.Book.ChuDe</div>
+                        <br>
+                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                        <br>
+                        <div>Năm xuất bản: @ViewBag.Book.NgayXuatBan</div>
+                        <br>
+                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="title" style="color: #808080;">SẢN PHẨM LIÊN QUAN</div>
+            <div class="well">
+                <!-- Carousel
+                ================================================== -->
+                <div id="myCarousel2" class="carousel slide">
+                    <!-- Carousel Indicators -->
+                    <ol class="carousel-indicators">
+                        @if (ViewBag.ListBookLienQuan != null)
+                            {
+                                for (int i = 0; i < ViewBag.ListBookLienQuan.Count; i += 4)
+                                {
+                        <li data-target="#myCarousel2" data-slide-to="@(i / 4)" class="@(i == 0 ? "active" : "")"></li>
+                                }
+                            }
+                    </ol>
+                    <!-- Carousel Inner -->
+                    <div class="carousel-inner">
+                        @if (ViewBag.ListBookLienQuan != null)
+                            {
+                                for (int i = 0; i < ViewBag.ListBookLienQuan.Count; i += 4)
+                                {
+                        <div class="item @(i == 0 ? "active": "")">
+                            @for (int j = 0; j < 4; j++)
+                                        {
+                                            if (i + j < ViewBag.ListBookLienQuan.Count)
+                                            {
+                            <div class="col-md-3">
+                                <a href="~/Home/Detail/@ViewBag.ListBookLienQuan[i+j].id">
+                                    <div class="thumbnail" style="height: 100%; background-image:url('/UploadedFiles/@ViewBag.ListBookLienQuan[i+j].HinhSach'); background-clip:content-box; background-repeat:round;"></div>
+                                </a>
+                            </div>
+                                            }
+                                        }
+                        </div>
+                                }
+                            }
+                    </div>
+                    <!-- Carousel Navigator -->
+                    <a class="carousel-control left" href="#myCarousel2" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control right" href="#myCarousel2" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div><!-- End Carousel -->
+            </div><!-- End Well -->
+        </div>
+    </div>
+    <script src="~/Content/libs.min.js"></script>
+    <script src="~/Content/app.js"></script>
+    <script src="~/Content/cartonbox.js"></script>
+</body>
+}

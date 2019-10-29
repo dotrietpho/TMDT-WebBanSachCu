@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ReBook.Models.RegisterModel
+<head>
+    <link href="~/Content/register.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="warning-text">@ViewBag.Messenge</div>
+    <div>
+        @using (Html.BeginForm())
+        {
+        <br>
+        <br>
+        <br>
+        <div class="title text-center" style="font-size: 50px;">ĐĂNG KÝ TÀI KHOẢN</div>
+        <div class="container-fluid">
+
+            <div class="col-md-6">
+                <div class="row" style="padding-right : 10px">
+                    <input class="registerTerm" name="TaiKhoan" style="float: right;" value="@Model.TaiKhoan" placeholder="Tài khoản*"></input>
+                </div>
+
+                <div class="row" style="padding-right : 10px">
+                    <input class="registerTerm" type="password" name="password" style="float: right;" placeholder="Mật khẩu*"></input>
+                </div>
+
+                <div class="row" style="padding-right : 10px">
+                    <input class="registerTerm" type="password" name="ReTypedpassword" style="float: right;" placeholder="Xác nhận mật khẩu*"></input>
+                </div>
+
+                <div class="row" style="padding-right : 10px">
+                    <input class="registerTerm" type="text" style="float: right;" name="SDT" value="@Model.SDT" placeholder="SDT*"></input>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row" style="padding-left : 10px">
+                    <input class="registerTerm" type="text" name="TenKH" style="float: left;" value="@Model.TenKH" placeholder="Tên*"></input>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6" style="font-size: 20px; padding-top: 20px;">
+                        <label for="NgaySinh">Ngày sinh: </label>
+                        <input type="date" id="NgaySinh" class="regis" placeholder="nhập ngày sinh" value="@Model.NgaySinh" size="40" name="NgaySinh">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <input class="register-btn" type="submit" value="Đăng ký" />
+        }
+    </div>
+</body>
+<script>
+    function isInputNumber(evt) {
+
+        var ch = String.fromCharCode(evt.which);
+
+        if (!(/[0-9]/.test(ch))) {
+            evt.preventDefault();
+        }
+
+    }</script>

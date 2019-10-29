@@ -1,0 +1,342 @@
+body {
+    background-color: #f2f2f2;
+}
+
+.navbar {
+    height: 100px;
+    padding: 0 6%;
+    margin: 20px 0;
+}
+
+.logo-img {
+    height: 70px;
+}
+
+.navbar-brand {
+    color: black;
+}
+
+.nav-element {
+    padding-top: 40px;
+    font-size: 50px;
+}
+
+.navbar-form .form-control {
+    font-size: 30px;
+    height: 60px;
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00cc99;
+    border-right: none;
+    padding: 5px;
+    height: 50px;
+    outline: none;
+    color: #9DBFAF;
+    font-size: 30px;
+}
+
+    .searchTerm:focus {
+        color: #00cc99;
+        font-size: 30px;
+    }
+
+.searchButton {
+    width: 80px;
+    height: 50px;
+    border: 1px solid #00cc99;
+    background: #00cc99;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+    width: 30%;
+    padding-top: 25px;
+}
+
+/* The container must be positioned relative: */
+.nav-select {
+    padding-top: 25px;
+}
+
+    .nav-select select {
+        border: 3px solid #00cc99;
+        border-right: none;
+        height: 50px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #fff;
+        background: #00cc99;
+        font-size: 30px;
+        -webkit-appearance: button;
+    }
+
+.cart {
+    color: #00cc99;
+    padding-top: 10px;
+    padding-left: 70px;
+    font-size: 50px;
+}
+
+.cart-text {
+    font-size: 30px;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+    .cart-text a {
+        font-size: 30px;
+        color: #00cc99;
+        text-decoration: none;
+    }
+
+.login {
+    color: #00cc99;
+    font-size: 50px;
+    padding-top: 10px;
+    padding-left: 70px;
+}
+
+.login-text {
+    font-size: 30px;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+    .login-text a {
+        font-size: 30px;
+        color: #00cc99;
+        text-decoration: none;
+    }
+
+.navbar2 {
+    background: #00cc99;
+    padding: 0 5% 0 5%;
+}
+
+    .navbar2 ul {
+        list-style-type: none;
+        margin: 0;
+        font-size: 25px;
+        overflow: hidden;
+    }
+
+    .navbar2 li {
+        float: left;
+    }
+
+        .navbar2 li > a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 30px;
+            text-decoration: none;
+        }
+
+        .navbar2 li a:hover:not(.active) {
+            background-color: #003326;
+        }
+
+        .navbar2 li a.active {
+            background-color: #009973;
+        }
+
+footer {
+    margin-top: 40px;
+    vertical-align: middle;
+}
+
+    footer p {
+        line-height: 100px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+    }
+
+#categories {
+    background: #003326;
+    padding-right: 90px;
+    border: 2px solid #e6e6e6;
+    border-top: none;
+    border-bottom: none;
+}
+
+.sidebar {
+}
+
+    .sidebar ul {
+        list-style-type: none;
+        margin: 0;
+        width: 350px;
+        font-size: 25px;
+    }
+
+    .sidebar li a {
+        background-color: white;
+        display: block;
+        color: #b3b3b3;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 2px solid #e6e6e6;
+        border-top: none;
+    }
+
+        .sidebar li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .sidebar li a:hover:not(.active) {
+            background-color: #00cc99;
+            color: white;
+            -webkit-transform: scale(1.3);
+            -ms-transform: scale(1.3);
+            transform: scale(1.3);
+            transition: all 0.3s ease;
+        }
+
+#myCarousel {
+    margin-top: 40px;
+}
+
+.adv {
+}
+
+.box-padding {
+    margin-top: 10px;
+    padding: 15px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.booklist {
+    margin-top: 40px;
+    border: 5px solid #FFF;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.book {
+    height: 300px;
+    left: 10px;
+}
+
+.price {
+    position: absolute;
+    top: -4px;
+    right: 0px;
+    border: 5px solid #de1b1b;
+    background-color: #de1b1b;
+    font-size: 20px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+.title {
+    padding-top: 5px;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.gia {
+    font-size: 18px;
+    color: #27CF2d;
+    font-weight: bold;
+}
+
+.box {
+    transition: box-shadow .3s;
+    height: 455px;
+}
+
+    .box:hover {
+        box-shadow: 0 0 30px rgba(33,33,33,.2);
+    }
+
+.starbox {
+    bottom: 0px;
+}
+
+.star {
+    color: #ff9900;
+    font-size: 30px;
+}
+
+.pagination {
+    font-size: 25px;
+}
+
+    .pagination li {
+    }
+
+        .pagination li a {
+            color: #00cc99;
+        }
+
+.img-sach {
+    height: 300px;
+    width: 200px;
+}
+
+.warning-text {
+    text-align: center;
+    font-size: 30px;
+    color: brown;
+}
+
+.cheer-text {
+    background: red;
+    background: -webkit-linear-gradient(left, orange, yellow, green, cyan, blue, violet);
+    background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: linear-gradient(to right, orange, yellow, green, cyan, blue, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logined-text {
+    padding-top: 5px;
+    color: #00cc99;
+    font-size: 15px;
+}
+
+    .logined-text a {
+        font-size: 15px;
+        color: #00cc99;
+        text-decoration: none;
+    }
+
+.carousel {
+    height: 350px;
+}
+
+.carousel-inner {
+    /* make sure your .items will get correct height */
+    height: 100%;
+}
+
+.item {
+    background-size: cover;
+    background-position: 50% 50%;
+    width: 100%;
+    height: 100%;
+}
+
+    .item img {
+        visibility: hidden;
+    }
