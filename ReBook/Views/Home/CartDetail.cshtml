@@ -33,12 +33,12 @@
                     <tr onclick="z.value=parseInt(x.value)*parseInt(y.value)">
                         <td><img src="~/UploadedFiles/@book.HinhSach" alt="" width="75" height="115" style="vertical-align: middle;"></td>
                         <td style="vertical-align: middle;">@book.TenSach</td>
-                        <td style="vertical-align: middle;">
-                            <output id="x">@book.GiaSach</output><div>đ</div>
+                        <td style="vertical-align: middle; width:150px;">
+                            <output id="x" style="padding-top:0px;">@book.GiaSach đ</output>
                         </td>
                         <td style="vertical-align: middle;">
                             <a href="~/Home/ExtractCart/@book.idSach" class="fa fa-minus" title="Search W3Schools"></a>
-                            <input id="y" type="number" disabled value="@book.SoLuong">
+                            <input id="y" type="number" disabled value="@book.SoLuong" style="width:30px; text-align:center">
                             <a href="~/Home/InsertCart/@book.idSach" class="fa fa-plus" title="Search W3Schools"></a>
                         </td>
                         <td style="vertical-align: middle;">

@@ -24,7 +24,7 @@
                         <div style="width: 100%; border: 2px solid #e3e3e3; "></div>
                         <br>
                         <form action="~/Home/AddCart/@ViewBag.Book.id" method="post">
-                            <div style="float: left; padding-left:50px;">
+                            <div style="float: left;">
                                 <input class="buy-btn" type="submit" style="height: 40px;" value="Chọn mua" />
                             </div>
                         </form>
@@ -38,27 +38,26 @@
                     </div>
 
                     <div class="col-lg-3 sidebox">
-                        <div>Tên nhà xuất bản:</div>
+
+                    
+                        <br>
+                        <div><b>Tác giả</b>: @ViewBag.Book.TenTacGia</div>
                         <br>
                         <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
                         <br>
-                        <div>Tác giả: @ViewBag.Book.TenTacGia</div>
+                        <div><b>Số trang</b>: @ViewBag.Book.SoTrang</div>
                         <br>
                         <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
                         <br>
-                        <div>Số trang: @ViewBag.Book.SoTrang</div>
+                        <div><b>Tình trạng</b>: Còn hàng</div>
                         <br>
                         <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
                         <br>
-                        <div>Tình trạng: Còn hàng</div>
+                        <div><b>Thể loại</b>: @ViewBag.Book.ChuDe</div>
                         <br>
                         <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
                         <br>
-                        <div>Thể loại: @ViewBag.Book.ChuDe</div>
-                        <br>
-                        <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
-                        <br>
-                        <div>Năm xuất bản: @ViewBag.Book.NgayXuatBan</div>
+                        <div><b>Năm xuất bản</b>: @ViewBag.Book.NgayXuatBan</div>
                         <br>
                         <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
                         <br>
