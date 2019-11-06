@@ -99,8 +99,10 @@
                     <div class="paged-table">
                         Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
+
                         @Html.PagedListPager(Model, page => Url.Action("Index", new { SearchString = ViewBag.Search, page }))
-                    </div>
+
+                       </div>
                 </div>
             </div>
             <!--/.Card-->

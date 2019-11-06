@@ -26,16 +26,21 @@ namespace ReBook.Controllers
         //Tim sach theo ten
         public ActionResult SearchBook(string searchString)
         {
+         
             using (var db = new DbContext())
             {
                 //Tat ca sach trong csdl
                 var books = from l in db.Sach
                             select l;
+
                 //Ten saches chua ky tu can tim kiem
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    books = books.Where(s => s.TenSach.Contains(searchString) || s.TenTacGia.Contains(searchString) || s.ChuDe.Contains(searchString)).Take(12);
+                    books = books.Where(s => s.TenSach.Contains(searchString) ||
+                    s.TenTacGia.Contains(searchString) ||
+                    s.ChuDe.Contains(searchString)).Take(12);
                 }
+
                 //Tra ra ViewBag
                 ViewBag.ListBook = books.ToList();
                 if (books.Count() == 0)

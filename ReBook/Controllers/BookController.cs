@@ -12,6 +12,7 @@ namespace ReBook.Controllers
         // GET: Book
         public ActionResult Index(int? page, string searchString)
         {
+          
             ViewBag.Active = "Book";
             ViewBag.Search = searchString;
             if (Session.Count != 0)
@@ -22,7 +23,7 @@ namespace ReBook.Controllers
                 using (var db = new DbContext())
                 {
                     //Lay het tat ca Book co trong csdl
-                    var books = db.Sach.Where(p => !p.isDeleted && (p.TenSach.Contains(searchString) || p.ChuDe.Contains(searchString) || p.TenTacGia.Contains(searchString))).OrderBy(p => p.id).ToList();
+                    var books = db.Sach.Where(p => !p.isDeleted && (StringHelper.convertToUnSign(p.TenSach).Contains(searchString) || p.ChuDe.Contains(searchString) || p.TenTacGia.Contains(searchString))).OrderBy(p => p.id).ToList();
                     int pageSize = 3;
                     int pageNumber = (page ?? 1);
                     //Tra ve view
