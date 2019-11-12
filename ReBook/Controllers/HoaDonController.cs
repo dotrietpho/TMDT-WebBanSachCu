@@ -18,7 +18,7 @@ namespace ReBook.Controllers
                 if (page == null) page = 1;
                 if (searchString == null)
                     searchString = "";
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Lay het tat ca hoadon co trong csdl phu hop voi searchString
                     var hoadons = db.HoaDon.Where(p => !p.isDeleted && (p.idKhachHang.Contains(searchString) || p.SDTGiaoHang.Contains(searchString) || p.TinhTrang.Contains(searchString))).OrderBy(p => p.id).ToList();
@@ -39,7 +39,7 @@ namespace ReBook.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Active = "HoaDon";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 //Lay book theo id
                 var hoadon = db.HoaDon.Select(b => b).Where(b => b.id == id).FirstOrDefault();
@@ -66,7 +66,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "HoaDon";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var hoadon = db.HoaDon.Select(p => p).Where(p => p.id == hoaDon.id).FirstOrDefault();
                     //Edit tung property
@@ -91,7 +91,7 @@ namespace ReBook.Controllers
         public ActionResult Delete(int id)
         {
             ViewBag.Active = "HoaDon";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 var hoadon = db.HoaDon.Select(p => p).Where(p => p.id == id).FirstOrDefault();
                 var helper = new HoaDonHelper();
@@ -116,7 +116,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "HoaDon";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var sach = db.HoaDon.Select(p => p).Where(p => p.id == id).FirstOrDefault();
                     if (sach != null)
@@ -136,7 +136,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "HoaDon";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var hoadon = db.HoaDon.Select(p => p).Where(p => p.id == id).FirstOrDefault();
                     if (hoadon.TinhTrang == "Chờ xác nhận")

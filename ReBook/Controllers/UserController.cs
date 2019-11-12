@@ -15,7 +15,7 @@ namespace ReBook.Controllers
             if (page == null) page = 1;
             if (searchString == null)
                 searchString = "";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 //Lay het tat ca Book co trong csdl
                 var users = db.KhachHang.Where(p => !p.isDeleted && (p.TenKH.Contains(searchString) || p.TaiKhoan.Contains(searchString) || p.SDT.Contains(searchString))).ToList();
@@ -48,7 +48,7 @@ namespace ReBook.Controllers
             }
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Them sach moi vao csdl
                     db.KhachHang.Add(newUser);
@@ -68,7 +68,7 @@ namespace ReBook.Controllers
         public ActionResult Edit(string id)
         {
             ViewBag.Active = "User";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 //Lay book theo id
                 var user = db.KhachHang.Select(b => b).Where(b => b.TaiKhoan == id).FirstOrDefault();
@@ -84,7 +84,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "User";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Edit tung property
                     var user = db.KhachHang.Select(p => p).Where(p => p.TaiKhoan == editedUser.TaiKhoan).FirstOrDefault();
@@ -108,7 +108,7 @@ namespace ReBook.Controllers
         public ActionResult Delete(string id)
         {
             ViewBag.Active = "User";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 var user = db.KhachHang.Select(p => p).Where(p => p.TaiKhoan == id).FirstOrDefault();
                 return View(user);
@@ -121,7 +121,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "User";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var user = db.KhachHang.Select(p => p).Where(p => p.TaiKhoan == id).FirstOrDefault();
                     if (user != null)

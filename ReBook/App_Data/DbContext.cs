@@ -2,9 +2,9 @@
 
 namespace ReBook.App_Data
 {
-    public class DbContext : System.Data.Entity.DbContext
+    public class DBConText : DbContext
     {
-        public DbContext() : base()
+        public DBConText() : base()
         {
             string databasename = "DoAn1 - 31/05";
             this.Database.Connection.ConnectionString = "Data Source=.;Initial Catalog=" + databasename + ";Trusted_Connection=Yes";

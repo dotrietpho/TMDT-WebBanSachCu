@@ -1,5 +1,4 @@
-﻿@model PagedList.IPagedList<ReBook.App_Data.Sach>
-@using PagedList.Mvc;
+﻿@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -72,7 +71,7 @@
                 }
             }
 
-            else
+            @if (ViewBag.Messenge != null)
             {
                 <div class="column">Không tìm được sách theo nhu cầu!</div>
             }

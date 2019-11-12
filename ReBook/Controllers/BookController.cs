@@ -20,7 +20,7 @@ namespace ReBook.Controllers
                 if (page == null) page = 1;
                 if (searchString == null)
                     searchString = "";
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Lay het tat ca Book co trong csdl
                     var books = db.Sach.Where(p => !p.isDeleted && (StringHelper.convertToUnSign(p.TenSach).Contains(searchString) || p.ChuDe.Contains(searchString) || p.TenTacGia.Contains(searchString))).OrderBy(p => p.id).ToList();
@@ -62,7 +62,7 @@ namespace ReBook.Controllers
                     newBook.HinhSach = _fileName;
                 }
 
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Them sach moi vao csdl
                     db.Sach.Add(newBook);
@@ -82,7 +82,7 @@ namespace ReBook.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Active = "Book";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 //Lay book theo id
                 var sach = db.Sach.Select(b => b).Where(b => b.id == id).FirstOrDefault();
@@ -98,7 +98,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "Book";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Edit tung property
                     var book = db.Sach.Select(p => p).Where(p => p.id == editedBook.id).FirstOrDefault();
@@ -134,7 +134,7 @@ namespace ReBook.Controllers
         public ActionResult Delete(int id)
         {
             ViewBag.Active = "Book";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 var book = db.Sach.Select(p => p).Where(p => p.id == id).FirstOrDefault();
                 return View(book);
@@ -147,7 +147,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "Book";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var sach = db.Sach.Select(p => p).Where(p => p.id == id).FirstOrDefault();
                     if (sach != null)

@@ -1,43 +1,81 @@
-﻿@{
+﻿@model PagedList.IPagedList<ReBook.App_Data.Sach>
+@{
     ViewBag.Title = "SearchBook";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}<body>
-    <div class="row">
-        <div class="sidebar col-lg-3">
-        </div>
-        <div class="col-lg-9">
-            <div class="row">
+}
 
-                <div class="warning-text">@ViewBag.Messenge</div>
+<body>
+    <div class="container-fluid">
 
-                <!-- Picture, Title and Price-->
-                <div class="row">
-                    @if (ViewBag.ListBook.Count != 0)
+        @if (ViewBag.Banners.Count > 0)
+        {
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    @for (int i = 0; i < ViewBag.Banners.Count; i++)
                     {
-                    <div class="col-lg-9 booklist">
-                        @foreach (var item in ViewBag.ListBook)
-                            {
-                        <a href="~/Home/Detail/@item.id">
-                            <div class="col-lg-3 text-center box box-padding">
-                                <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
-                                <div class="price">@item.GiaSach</div>
-                                <div class="title">@item.TenSach</div>
-                                <div class="text-center starbox">
-                                    <i class="glyphicon glyphicon-star star"></i>
-                                    <i class="glyphicon glyphicon-star star"></i>
-                                    <i class="glyphicon glyphicon-star star"></i>
-                                    <i class="glyphicon glyphicon-star star"></i>
-                                    <i class="glyphicon glyphicon-star star"></i>
-                                    <i class="title">(105)</i>
-                                </div>
+                        <li data-target="#myCarousel" data-slide-to="@i" class="@(i==0?"active":"")"></li>
+                    }
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+
+                    @for (int i = 0; i < ViewBag.Banners.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="item active" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
                             </div>
-                        </a>
-                            }
-                    </div>
+                        }
+                        else
+                        {
+                            <div class="item" style="background-image: url('./UploadedFiles/@ViewBag.Banners[i].LinkAnh'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                <img src="~/UploadedFiles/@ViewBag.Banners[i].LinkAnh" style="visibility: hidden" />
+                            </div>
+                        }
                     }
                 </div>
-                <!-- Page Navigation -->
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
+        }
+    </div>
+
+    <!-- Booklist-->
+    <div class="col-lg-12 booklist card">
+        <!-- Picture, Title and Price-->
+        <div class="row">
+            @if (ViewBag.ListBook != null)
+            {
+
+                foreach (var item in ViewBag.ListBook)
+                {
+                    <a href="~/Home/Detail/@item.id">
+                        <div class="col-lg-4 text-center box box-padding">
+                            <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
+                            <div class="price">-15%</div>
+                            <div class="title">@item.TenSach</div>
+                            <div class="gia"> @item.GiaSach VNĐ</div>
+                        </div>
+                    </a>
+                }
+            }
+
+            @if (ViewBag.Messenge != null)
+            {
+                <div class="column">Không tìm được sách theo nhu cầu!</div>
+            }
         </div>
+        <!-- Page Navigation -->
     </div>
 </body>

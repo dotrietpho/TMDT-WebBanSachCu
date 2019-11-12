@@ -10,7 +10,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var q = from p in db.ChiTietHoaDons
                             where p.idHoaDon == idHoaDon
@@ -42,7 +42,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var q = db.GioHang.Where(p => p.IDGioHang == idGioHang).FirstOrDefault();
                     HoaDon hoaDon = new HoaDon("Chờ xác nhận", q, diaChi, sdt, ngayHen, idGioHang, ghiChu);
@@ -61,7 +61,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     GioHangHelper a = new GioHangHelper();
                     var chitietGioHangs = a.ChiTietGioHang(idGioHang);

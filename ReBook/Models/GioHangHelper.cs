@@ -8,7 +8,7 @@ namespace ReBook.Models
     {
         public bool isGioHangTonTai(string userID)
         {
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 if (db.GioHang.Where(p => p.IDGioHang == userID).FirstOrDefault() == null)
                     return false;
@@ -20,7 +20,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     db.GioHang.Add(new GioHang(userID));
                     db.SaveChanges();
@@ -37,7 +37,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var checker = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
                     if (checker != null)
@@ -63,7 +63,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
                     a.count++;
@@ -82,7 +82,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
                     if (a.count == 1)
@@ -104,7 +104,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
                     db.ChiTietGioHang.Remove(a);
@@ -123,7 +123,7 @@ namespace ReBook.Models
             try
             {
                 int total = 0;
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Chọn ChiTietGioHangModel trực tiếp bằng query gây ra lỗi (không sử dụng được thực thể có dữ liệu hoặc constructor cho query)
                     //Sửa bằng cách
@@ -167,7 +167,7 @@ namespace ReBook.Models
         {
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var q = from p in db.ChiTietGioHang
                             where p.IDGioHang == userID

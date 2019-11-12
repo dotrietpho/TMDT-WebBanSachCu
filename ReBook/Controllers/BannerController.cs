@@ -15,7 +15,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "Banner";
             if (Session.Count != 0)
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Lay het tat ca Book co trong csdl
                     var books = db.Banner.ToList();
@@ -36,7 +36,7 @@ namespace ReBook.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Active = "Banner";
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 //Lay book theo id
                 var sach = db.Banner.Select(b => b).Where(b => b.id == id).FirstOrDefault();
@@ -52,7 +52,7 @@ namespace ReBook.Controllers
             ViewBag.Active = "Banner";
             try
             {
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     //Edit tung property
                     var book = db.Banner.Select(p => p).Where(p => p.id == editedBook.id).FirstOrDefault();

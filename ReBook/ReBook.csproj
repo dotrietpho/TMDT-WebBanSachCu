@@ -128,7 +128,7 @@
   <ItemGroup>
     <Compile Include="App_Data\ChiTietHoaDon.cs" />
     <Compile Include="App_Data\ChiTietGioHang.cs" />
-    <Compile Include="App_Data\DbContext.cs" />
+    <Compile Include="App_Data\DBConText.cs" />
     <Compile Include="App_Data\GioHang.cs" />
     <Compile Include="App_Data\HoaDon.cs" />
     <Compile Include="App_Data\KhachHang.cs" />

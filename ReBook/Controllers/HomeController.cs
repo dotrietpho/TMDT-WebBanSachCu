@@ -1,6 +1,7 @@
 ﻿using ReBook.App_Data;
 using ReBook.Models;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,7 +11,7 @@ namespace ReBook.Controllers
     {
         public ActionResult Index()
         {
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 var banners = db.Banner.ToList();
                 ViewBag.Banners = banners;
@@ -26,22 +27,26 @@ namespace ReBook.Controllers
         //Tim sach theo ten
         public ActionResult SearchBook(string searchString)
         {
-         
-            using (var db = new DbContext())
+
+            using (var db = new DBConText())
             {
+                db.Sach.Load();
+
                 //Tat ca sach trong csdl
-                var books = from l in db.Sach
-                            select l;
+                var books = db.Sach.Local.ToList();
 
                 //Ten saches chua ky tu can tim kiem
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    books = books.Where(s => s.TenSach.Contains(searchString) ||
-                    s.TenTacGia.Contains(searchString) ||
-                    s.ChuDe.Contains(searchString)).Take(12);
+                    searchString = StringHelper.convertToUnSign(searchString);
+                    books = db.Sach.Local.Where(s => StringHelper.convertToUnSign(s.TenSach).Contains(searchString) ||
+                    StringHelper.convertToUnSign(s.TenTacGia).Contains(searchString) ||
+                    StringHelper.convertToUnSign(s.ChuDe).Contains(searchString)).Take(12).ToList();
                 }
 
                 //Tra ra ViewBag
+                var banners = db.Banner.ToList();
+                ViewBag.Banners = banners;
                 ViewBag.ListBook = books.ToList();
                 if (books.Count() == 0)
                     ViewBag.Messenge = "Không tìm được sách theo yêu cầu!";
@@ -52,7 +57,7 @@ namespace ReBook.Controllers
         //Tim sach theo ten chu de
         public ActionResult CategoryBook(string categoryString)
         {
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 var books = from l in db.Sach
                             select l;
@@ -78,7 +83,7 @@ namespace ReBook.Controllers
             try
             {
                 //Tim sach theo id
-                using (var db = new DbContext())
+                using (var db = new DBConText())
                 {
                     var book = db.Sach.Where(p => p.id == id).FirstOrDefault();
                     if (book == null)
@@ -119,7 +124,7 @@ namespace ReBook.Controllers
                 {
                     //Lay du lieu tu session
                     var user = (LoginModel)HttpContext.Session["User"];
-                    using (var db = new DbContext())
+                    using (var db = new DBConText())
                     {
                         //Neu gio hang chua ton tai va nguoc lai
                         if (!helper.isGioHangTonTai(user.TaiKhoan))

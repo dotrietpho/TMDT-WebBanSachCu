@@ -17,7 +17,7 @@ namespace ReBook.Controllers
         [HttpPost]
         public ActionResult Login(AdminModel a)
         {
-            using (var db = new DbContext())
+            using (var db = new DBConText())
             {
                 var user = db.TaiKhoanAdmin.Where(p => p.TaiKhoan == a.TaiKhoan).FirstOrDefault();
                 if (user != null && user.MatKhau == a.MatKhau)
