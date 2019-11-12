@@ -1,5 +1,7 @@
 ﻿using PagedList;
 using ReBook.App_Data;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -12,20 +14,31 @@ namespace ReBook.Controllers
         // GET: Book
         public ActionResult Index(int? page, string searchString)
         {
-          
             ViewBag.Active = "Book";
             ViewBag.Search = searchString;
             if (Session.Count != 0)
             {
-                if (page == null) page = 1;
-                if (searchString == null)
-                    searchString = "";
                 using (var db = new DBConText())
                 {
-                    //Lay het tat ca Book co trong csdl
-                    var books = db.Sach.Where(p => !p.isDeleted && (StringHelper.convertToUnSign(p.TenSach).Contains(searchString) || p.ChuDe.Contains(searchString) || p.TenTacGia.Contains(searchString))).OrderBy(p => p.id).ToList();
+                    db.Sach.Load();
+                    List<Sach> books;
+
+                    if (string.IsNullOrWhiteSpace(searchString)) { books = db.Sach.Local.ToList(); }
+                    else
+                    {
+                        searchString = StringHelper.convertToUnSign(searchString);
+                        //Lay het tat ca Book co trong csdl
+                        books = db.Sach.Local.Where(
+                                p => !p.isDeleted && (
+                                    StringHelper.convertToUnSign(p.TenSach).Contains(searchString) ||
+                                    StringHelper.convertToUnSign(p.ChuDe).Contains(searchString) ||
+                                    StringHelper.convertToUnSign(p.TenTacGia).Contains(searchString)
+                                )
+                            ).ToList();
+                    }
                     int pageSize = 3;
                     int pageNumber = (page ?? 1);
+
                     //Tra ve view
                     if (books.Count == 0)
                         ViewBag.Messenge = "Không tìm được sách theo yêu cầu!";
