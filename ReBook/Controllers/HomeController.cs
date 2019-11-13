@@ -252,6 +252,16 @@ namespace ReBook.Controllers
         [HttpGet]
         public ActionResult ThanhToan()
         {
+            if (Session.Count == 0)
+            {
+                TempData["messenge"] = "Vui lòng đăng nhập!";
+                return Redirect(Url.Content("~/Login"));
+            }
+
+            var helper = new GioHangHelper();
+            var user = (LoginModel)HttpContext.Session["User"];
+            ViewBag.TongGia = helper.TongTienGioHang(user.TaiKhoan);
+
             return View();
         }
 
@@ -261,6 +271,8 @@ namespace ReBook.Controllers
             try
             {
                 var helper = new HoaDonHelper();
+                var ghhelper = new GioHangHelper();
+
                 if (Session.Count == 0)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
@@ -269,10 +281,11 @@ namespace ReBook.Controllers
                 else
                 {
                     var user = (LoginModel)HttpContext.Session["User"];
+                    ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
                     if (newHoaDon.DiaChiGiaoHang.Length < 5 || newHoaDon.SDTGiaoHang.Length < 9)
                     {
                         ViewBag.Messenge = "Yêu cầu nhập địa chỉ và số điện thoại chính xác!";
-                        return Redirect(Request.UrlReferrer.PathAndQuery);
+                        return View();
                     }
                     helper.LapHoaDon(user.TaiKhoan, newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu);
                     TempData["messenge"] = "Đơn hàng đã được tạo thành công";
@@ -281,7 +294,10 @@ namespace ReBook.Controllers
             }
             catch
             {
-                return Redirect(Request.UrlReferrer.PathAndQuery);
+                var ghhelper = new GioHangHelper();
+                var user = (LoginModel)HttpContext.Session["User"];
+                ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
+                return View();
             }
         }
 

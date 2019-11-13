@@ -251,6 +251,7 @@
     <Content Include="Content\Recycle-Handbook.png" />
     <Content Include="Content\register.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\Transaction\Paypal.js" />
     <Content Include="Content\userinfo.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
