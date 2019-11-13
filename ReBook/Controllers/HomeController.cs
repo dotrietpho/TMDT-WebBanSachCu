@@ -294,7 +294,8 @@ namespace ReBook.Controllers
                         GhiChu = newHoaDon.GhiChu,
                         NgayGiaoHang = newHoaDon.NgayHenGiaoHang.ToString()
                     };
-                    return RedirectToAction("XacNhanThanhToan", info);
+                    TempData[user.TaiKhoan] = info;
+                    return RedirectToAction("XacNhanThanhToan");
                 }
             }
             catch
@@ -316,7 +317,7 @@ namespace ReBook.Controllers
         }
 
         [HttpGet]
-        public ActionResult XacNhanThanhToan(ThongTinGiaoHangModel info)
+        public ActionResult XacNhanThanhToan()
         {
             var ghhelper = new GioHangHelper();
             try
@@ -329,6 +330,11 @@ namespace ReBook.Controllers
                 else
                 {
                     var user = (LoginModel)HttpContext.Session["User"];
+                    var info = TempData[user.TaiKhoan];
+
+                    if (info == null)
+                        return RedirectToAction("Index");
+
                     ViewBag.ListBook = ghhelper.ChiTietGioHang(user.TaiKhoan);
                     ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
                     ViewBag.Info = info;

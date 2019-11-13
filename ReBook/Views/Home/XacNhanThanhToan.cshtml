@@ -10,66 +10,76 @@
 </head>
 <body>
     <div class="container">
-        @using (Html.BeginForm())
-        {
-            <div class="text-center" style="margin: 40px"><h1>Thông tin đơn hàng</h1></div>
-            <div style="margin-bottom: 40px">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <h4><b>Tên khách hàng: </b><input type="text" value="@ViewBag.TenKH" disabled /></h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4><b>Số điện thoại: </b><input name="SDTGiaoHang" type="text" value="@ViewBag.Info.SDT" disabled /></h4>
-                    </div>
+        <div class="text-center" style="margin: 40px"><h1>Thông tin đơn hàng</h1></div>
+        <div style="margin-bottom: 40px">
+            <div class="row justify-content-center">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <h4><b>Tên khách hàng: </b>@ViewBag.TenKH</h4>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <h4><b>Ghi chú: </b><input name="GhiChu" type="text" value="@ViewBag.Info.GhiChu" disabled /></h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4><b>Ngày nhận hàng: </b><input name="NgayHenGiaoHang" type="text" value="@ViewBag.Info.NgayGiaoHang" disabled /></h4>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        <h4><b>Địa chỉ giao hàng: </b><input name="DiaChiGiaoHang" type="text" value="@ViewBag.Info.DiaChi" disabled /></h4>
-                    </div>
+                <div class="col-md-5">
+                    <h4><b>Số điện thoại: </b>@ViewBag.Info.SDT</h4>
                 </div>
             </div>
+            <div class="row justify-content-center">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <h4><b>Ghi chú: </b>@ViewBag.Info.GhiChu</h4>
+                </div>
+                <div class="col-md-5">
+                    <h4><b>Ngày nhận hàng: </b>@ViewBag.Info.NgayGiaoHang</h4>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <h4><b>Địa chỉ giao hàng: </b>@ViewBag.Info.DiaChi</h4>
+                </div>
+            </div>
+        </div>
 
 
-            <table class="table table-bordered mycart">
-                <thead>
-                    <tr>
-                        <th style="width: 40%;">Hình ảnh</th>
-                        <th style="width: 30%;">Tên sách</th>
-                        <th style="width: 10%;">Số lượng</th>
-                        <th style="width: 20%;">Giá</th>
+        <table class="table table-bordered mycart">
+            <thead>
+                <tr>
+                    <th style="width: 40%;">Hình ảnh</th>
+                    <th style="width: 30%;">Tên sách</th>
+                    <th style="width: 10%;">Số lượng</th>
+                    <th style="width: 20%;">Giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in ViewBag.ListBook)
+                {
+                    <tr onclick="z.value=parseInt(x.value)*parseInt(y.value)">
+                        <td><img src="~/UploadedFiles/@book.HinhSach" alt="" width="75" height="115" style="vertical-align: middle;"></td>
+                        <td style="vertical-align: middle;">@book.TenSach</td>
+                        <td style="vertical-align: middle;">@book.SoLuong</td>
+                        <td style="vertical-align: middle;">
+                            <output id="x" style="padding-top:0px;">@book.GiaSach đ</output>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var book in ViewBag.ListBook)
-                    {
-                        <tr onclick="z.value=parseInt(x.value)*parseInt(y.value)">
-                            <td><img src="~/UploadedFiles/@book.HinhSach" alt="" width="75" height="115" style="vertical-align: middle;"></td>
-                            <td style="vertical-align: middle;">@book.TenSach</td>
-                            <td style="vertical-align: middle;">@book.SoLuong</td>
-                            <td style="vertical-align: middle;">
-                                <output id="x" style="padding-top:0px;">@book.GiaSach đ</output>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="4"><h3>Tổng: @ViewBag.TongGia đ</h3></th>
-                    </tr>
-                </tfoot>
-            </table>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="4"><h3>Tổng: @ViewBag.TongGia đ</h3></th>
+                </tr>
+            </tfoot>
+        </table>
 
-
-            <input class="register-btn" type="submit" style="width: 300px" value="Thanh toán khi giao hàng" />
+        @using (Html.BeginForm())
+        {
+            <input id="SDTGiaoHang" name="SDTGiaoHang" type="hidden" value="@ViewBag.Info.SDT" />
+            <input id="GhiChu" name="GhiChu" type="hidden" value="@ViewBag.Info.GhiChu" />
+            <input id="NgayHenGiaoHang" name="NgayHenGiaoHang" type="hidden" value="@ViewBag.Info.NgayGiaoHang" />
+            <input id="DiaChiGiaoHang" name="DiaChiGiaoHang" type="hidden" value="@ViewBag.Info.DiaChi" />
+            <button class="register-btn" type="submit" style="width: 300px">Thanh toán khi giao hàng</button>
         }
+        <br />
+        <hr />
+        <div class="text-center" style="color:GrayText; font-size:larger; font-weight:100; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-bottom: 40px">Hoặc</div>
+
         <div id="paypal-button-container" class="text-center"></div>
 
         <script>
