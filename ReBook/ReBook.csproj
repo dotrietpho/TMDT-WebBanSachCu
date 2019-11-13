@@ -167,6 +167,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\ChiTietDonHangModel.cs" />
     <Compile Include="Models\ChiTietGioHangModel.cs" />
     <Compile Include="Models\GioHangHelper.cs" />
     <Compile Include="Models\HoaDonHelper.cs" />
@@ -239,6 +240,7 @@
     <Content Include="Content\cartonbox.js" />
     <Content Include="Content\cartonbox.min.css" />
     <Content Include="Content\cartonbox.min.js" />
+    <Content Include="Content\validate.js" />
     <Content Include="Content\DoAn1.css" />
     <Content Include="Content\libs.min.css" />
     <Content Include="Content\libs.min.js" />
@@ -251,7 +253,6 @@
     <Content Include="Content\Recycle-Handbook.png" />
     <Content Include="Content\register.css" />
     <Content Include="Content\style.css" />
-    <Content Include="Content\Transaction\Paypal.js" />
     <Content Include="Content\userinfo.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -442,6 +443,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Home\XacNhanThanhToan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

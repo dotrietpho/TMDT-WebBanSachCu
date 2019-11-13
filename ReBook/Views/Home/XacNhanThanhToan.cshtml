@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "XacNhanThanhToan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/Content/mycart.css" rel="stylesheet" />
+    <link href="~/Content/register.css" rel="stylesheet" />
+    <script src="https://www.paypal.com/sdk/js?client-id=AcAFwaVSmK7cLQTMpv6qF3uL0MW7IDfYstW5eAl0LrMrV-FacSSIlYYh6BHYCh55FyAJiBYGFbARiVdK"></script>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            <div class="text-center" style="margin: 40px"><h1>Thông tin đơn hàng</h1></div>
+            <div style="margin-bottom: 40px">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h4><b>Tên khách hàng: </b><input type="text" value="@ViewBag.TenKH" disabled /></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><b>Số điện thoại: </b><input name="SDTGiaoHang" type="text" value="@ViewBag.Info.SDT" disabled /></h4>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h4><b>Ghi chú: </b><input name="GhiChu" type="text" value="@ViewBag.Info.GhiChu" disabled /></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><b>Ngày nhận hàng: </b><input name="NgayHenGiaoHang" type="text" value="@ViewBag.Info.NgayGiaoHang" disabled /></h4>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <h4><b>Địa chỉ giao hàng: </b><input name="DiaChiGiaoHang" type="text" value="@ViewBag.Info.DiaChi" disabled /></h4>
+                    </div>
+                </div>
+            </div>
+
+
+            <table class="table table-bordered mycart">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Hình ảnh</th>
+                        <th style="width: 30%;">Tên sách</th>
+                        <th style="width: 10%;">Số lượng</th>
+                        <th style="width: 20%;">Giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in ViewBag.ListBook)
+                    {
+                        <tr onclick="z.value=parseInt(x.value)*parseInt(y.value)">
+                            <td><img src="~/UploadedFiles/@book.HinhSach" alt="" width="75" height="115" style="vertical-align: middle;"></td>
+                            <td style="vertical-align: middle;">@book.TenSach</td>
+                            <td style="vertical-align: middle;">@book.SoLuong</td>
+                            <td style="vertical-align: middle;">
+                                <output id="x" style="padding-top:0px;">@book.GiaSach đ</output>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4"><h3>Tổng: @ViewBag.TongGia đ</h3></th>
+                    </tr>
+                </tfoot>
+            </table>
+
+
+            <input class="register-btn" type="submit" style="width: 300px" value="Thanh toán khi giao hàng" />
+        }
+        <div id="paypal-button-container" class="text-center"></div>
+
+        <script>
+            let price = @ViewBag.TongGia * 0.000043;
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    // This function sets up the details of the transaction, including the amount and line item details.
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: price,
+                                currency_code: 'USD'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function (details) {
+                        $('#btnConfirm').click();
+                    });
+                }
+            }).render('#paypal-button-container');
+        </script>
+
+    </div>
+</body>

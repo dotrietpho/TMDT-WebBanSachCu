@@ -2,10 +2,9 @@
     ViewBag.Title = "ThanhToan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<head>
-    <link href="~/Content/register.css" rel="stylesheet" />
-    <script src="https://www.paypal.com/sdk/js?client-id=AcAFwaVSmK7cLQTMpv6qF3uL0MW7IDfYstW5eAl0LrMrV-FacSSIlYYh6BHYCh55FyAJiBYGFbARiVdK"></script>
-</head>
+    <head>
+        <link href="~/Content/register.css" rel="stylesheet" />
+    </head>
 
 @using (Html.BeginForm())
 {
@@ -22,45 +21,22 @@
 
         <div class="row">
             <div class="col-lg-6">
-                <input class="registerTerm" name="DiaChiGiaoHang" style="float: right;" placeholder="Địa chỉ*"></input>
+                <input id="DiaChiGiaoHang" class="registerTerm" name="DiaChiGiaoHang" style="float: right;" placeholder="Địa chỉ*">
             </div>
             <div class="col-lg-6">
-                <input class="registerTerm" type="text" name="SDTGiaoHang" style="float: left;" value="" placeholder="Số điện thoại*"></input>
+                <input id="SDTGiaoHang" class="registerTerm" type="text" name="SDTGiaoHang" style="float: left;" value="" placeholder="Số điện thoại*">
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-6">
-                <input class="registerTerm" type="text" name="GhiChu" style="float: right;" placeholder="Ghi chú"></input>
+                <input class="registerTerm" type="text" name="GhiChu" style="float: right;" placeholder="Ghi chú">
             </div>
             <div class="col-lg-6">
-                <input class="registerTerm" type="text" name="NgayHenGiaoHang" style="float: left;" placeholder="Ngày nhận hàng"></input>
+                <input class="registerTerm" type="text" name="NgayHenGiaoHang" style="float: left;" placeholder="Ngày nhận hàng">
             </div>
         </div>
         <br />
-        <input id="btnConfirm" class="register-btn" type="submit" value="Xác nhận" />
-        <div id="paypal-button-container" class="text-center"></div>
-
-        <script>
-            let price = @ViewBag.TongGia * 0.000043;
-            paypal.Buttons({
-                createOrder: function (data, actions) {
-                    // This function sets up the details of the transaction, including the amount and line item details.
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: price,
-                                currency_code: 'USD'
-                            }
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function (details) {
-                        $('#btnConfirm').click();
-                    });
-                }
-            }).render('#paypal-button-container');
-        </script>
+        <input class="register-btn" type="submit" value="Xác nhận" />
     </div>
 }

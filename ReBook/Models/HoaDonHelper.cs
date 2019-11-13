@@ -56,6 +56,22 @@ namespace ReBook.Models
                 throw;
             }
         }
+        public void LapHoaDon(string idGioHang, HoaDon hd)
+        {
+            try
+            {
+                using (var db = new DBConText())
+                {
+                    db.HoaDon.Add(hd);
+                    db.SaveChanges();
+                    LapChiTietHoaDon(hd.id, idGioHang);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
         public void LapChiTietHoaDon(int idhoaDon, string idGioHang)
         {

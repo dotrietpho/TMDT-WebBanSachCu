@@ -287,9 +287,14 @@ namespace ReBook.Controllers
                         ViewBag.Messenge = "Yêu cầu nhập địa chỉ và số điện thoại chính xác!";
                         return View();
                     }
-                    helper.LapHoaDon(user.TaiKhoan, newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu);
-                    TempData["messenge"] = "Đơn hàng đã được tạo thành công";
-                    return RedirectToAction("Switch");
+                    ThongTinGiaoHangModel info = new ThongTinGiaoHangModel()
+                    {
+                        DiaChi = newHoaDon.DiaChiGiaoHang,
+                        SDT = newHoaDon.SDTGiaoHang,
+                        GhiChu = newHoaDon.GhiChu,
+                        NgayGiaoHang = newHoaDon.NgayHenGiaoHang.ToString()
+                    };
+                    return RedirectToAction("XacNhanThanhToan", info);
                 }
             }
             catch
@@ -308,6 +313,66 @@ namespace ReBook.Controllers
                 ViewBag.Messenge = TempData["messenge"].ToString();
             }
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult XacNhanThanhToan(ThongTinGiaoHangModel info)
+        {
+            var ghhelper = new GioHangHelper();
+            try
+            {
+                if (Session.Count == 0)
+                {
+                    TempData["messenge"] = "Vui lòng đăng nhập!";
+                    return Redirect(Url.Content("~/Login"));
+                }
+                else
+                {
+                    var user = (LoginModel)HttpContext.Session["User"];
+                    ViewBag.ListBook = ghhelper.ChiTietGioHang(user.TaiKhoan);
+                    ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
+                    ViewBag.Info = info;
+                    ViewBag.TenKH = user.TenKH;
+
+                    if (ghhelper.ChiTietGioHang(user.TaiKhoan).Count == 0)
+                        TempData["listemptyMessage"] = "No results";
+                    return View();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult XacNhanThanhToan([Bind(Exclude = "id")]HoaDon newHoaDon)
+        {
+            try
+            {
+                var helper = new HoaDonHelper();
+                var ghhelper = new GioHangHelper();
+
+                if (Session.Count == 0)
+                {
+                    TempData["messenge"] = "Vui lòng đăng nhập!";
+                    return Redirect(Url.Content("~/Login"));
+                }
+                else
+                {
+                    var user = (LoginModel)HttpContext.Session["User"];
+                    ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
+                    helper.LapHoaDon(user.TaiKhoan, newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu);
+
+                    TempData["messenge"] = "Đơn hàng đã được tạo thành công";
+                    return RedirectToAction("Switch");
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
         }
     }
 }
