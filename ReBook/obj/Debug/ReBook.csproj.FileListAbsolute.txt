@@ -117,7 +117,6 @@ D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.Migrat
 D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.Migrations.a.resources
 D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.Migrations.a1.resources
 D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.csproj.GenerateResource.cache
-D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.csproj.CoreCompileInputs.cache
 D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.csproj.CopyComplete
 D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.dll
 D:\Users\Admin\Documents\GitHub\TMDT-WebBanSachCu\ReBook\obj\Debug\ReBook.pdb
