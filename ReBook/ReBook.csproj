@@ -144,6 +144,7 @@
     <Compile Include="Controllers\HoaDonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\StringHelper.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,6 +165,10 @@
     <Compile Include="Migrations\201906011236571_a1.cs" />
     <Compile Include="Migrations\201906011236571_a1.Designer.cs">
       <DependentUpon>201906011236571_a1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911200923504_update-table-KhachHang.cs" />
+    <Compile Include="Migrations\201911200923504_update-table-KhachHang.Designer.cs">
+      <DependentUpon>201911200923504_update-table-KhachHang.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminModel.cs" />
@@ -444,6 +449,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Home\XacNhanThanhToan.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -465,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906011236571_a1.resx">
       <DependentUpon>201906011236571_a1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911200923504_update-table-KhachHang.resx">
+      <DependentUpon>201911200923504_update-table-KhachHang.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

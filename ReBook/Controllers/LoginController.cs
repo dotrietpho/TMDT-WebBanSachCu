@@ -83,7 +83,14 @@ namespace ReBook.Controllers
                     //Neu password nhap k trung khop
                     if (a.password == a.ReTypedpassword)
                     {
-                        db.KhachHang.Add(new KhachHang(a.TaiKhoan, a.password, a.TenKH, a.SDT, a.NgaySinh));
+                        db.KhachHang.Add(new KhachHang()
+                        {
+                            TaiKhoan = a.TaiKhoan,
+                            MatKhau = a.password,
+                            TenKH = a.TenKH,
+                            SDT = a.SDT,
+                            NgaySinh = a.NgaySinh
+                        });
                         db.SaveChanges();
                         Session["User"] = new LoginModel(a.TaiKhoan, a.password, a.TenKH);
                         return RedirectToAction("Redirect");

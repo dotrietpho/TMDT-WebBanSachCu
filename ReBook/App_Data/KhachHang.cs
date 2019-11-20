@@ -6,7 +6,6 @@ namespace ReBook.App_Data
     {
         [Key]
         public string TaiKhoan { get; set; }
-
         public string MatKhau { get; set; }
         public string TenKH { get; set; }
         public string NgaySinh { get; set; }
@@ -14,6 +13,8 @@ namespace ReBook.App_Data
         public string GioiTinh { get; set; }
         public int SoLanTruyCap { get; set; }
         public string AnhDaiDien { get; set; }
+        public string DiaChi { get; set; }
+        public string Email { get; set; }
         public bool isDeleted { get; set; }
         public string idGioHang { get; set; }
 
@@ -21,23 +22,6 @@ namespace ReBook.App_Data
 
         public KhachHang()
         { }
-
-        public KhachHang(string taikhoan, string matkhau, string tenKH, string NgaySinh)
-        {
-            this.TaiKhoan = taikhoan;
-            this.MatKhau = matkhau;
-            this.TenKH = tenKH;
-            this.NgaySinh = NgaySinh;
-        }
-
-        public KhachHang(string taikhoan, string matkhau, string tenKH, string SDT, string ngaysinh)
-        {
-            this.TaiKhoan = taikhoan;
-            this.MatKhau = matkhau;
-            this.TenKH = tenKH;
-            this.NgaySinh = ngaysinh;
-            this.SDT = SDT;
-        }
 
         public KhachHang(KhachHang a)
         {
@@ -52,6 +36,8 @@ namespace ReBook.App_Data
             this.isDeleted = a.isDeleted;
             this.idGioHang = a.idGioHang;
             this.GioHang = a.GioHang;
+            this.DiaChi = a.DiaChi;
+            this.Email = a.Email;
         }
     }
 }

@@ -101,8 +101,8 @@
                 </div>
             </li>
             <li><a class="@(ViewBag.Title == "Index" ? "active":"")" href="@Url.Action("Index","Home")">Trang chủ</a></li>
-            <li><a href="#accountt">Tài khoản</a></li>
-            <li><a href="#about">Giới thiệu</a></li>
+            <li><a class="@(ViewBag.Title == "Account" ? "active":"")" href="@Url.Action("Index","Profile")">Tài khoản</a></li>
+            <li><a class="@(ViewBag.Title == "About" ? "active":"")" href="#">Giới thiệu</a></li>
         </ul>
     </div>
     <div class="container">

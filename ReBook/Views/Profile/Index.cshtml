@@ -1,0 +1,88 @@
+﻿@model ReBook.App_Data.KhachHang
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/Content/userinfo.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="title text-center" style="font-size: 50px;">THÔNG TIN TÀI KHOẢN</div>
+    <div class="container-fluid">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <input name="KH.TaiKhoan" type="text" disabled class="registerTerm" style="float: right; background:none;" placeholder="Tài khoản" value="@Model.TaiKhoan" />
+                </div>
+
+                <div class="col-lg-6" style="width: 500px;">
+                    <div class="row">
+                        <div class="col-lg-3" style="font-size: 20px; padding-top: 20px; width: 125px;">Ngày sinh:</div>
+                        <div class="col-lg-3"><input name="nsNgay" class="registerTerm text-center" type="text" style="width: 80px;" placeholder="DD" value="@(Model.NgaySinh.Split('-')[2] ?? "")" /></div>
+                        <div class="col-lg-3"><input name="nsThang" class="registerTerm text-center" type="text" style="width: 80px;" placeholder="MM" value="@(Model.NgaySinh.Split('-')[1] ?? "")" /></div>
+                        <div class="col-lg-3"><input name="nsNam" class="registerTerm text-center" type="text" style="width: 80px;" placeholder="YYYY" value="@(Model.NgaySinh.Split('-')[0] ?? "")" /></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <input name="KH.TenKH" class="registerTerm" type="text" style="float: right;" placeholder="Tên khách hàng" value="@Model.TenKH" />
+                </div>
+                <div class="col-lg-6">
+                    <input name="KH.Email" class="registerTerm" type="email" style="float: left; width:84.3%" placeholder="Email" value="@Model.Email" />
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <input name="KH.DiaChi" class="registerTerm" type="text" style="float: right;" placeholder="Địa chỉ" value="@Model.DiaChi" />
+                </div>
+                <div class="col-lg-6" style="width: 400px;">
+                    <div class="row">
+                        <div class="col-lg-6" style="font-size: 20px;">
+                            <input id="radio-nam" type="radio" class="option-input radio" name="KH.GioiTinh" value="Nam" checked="@(Model.GioiTinh == "Nam")" />
+                            <label for="radio-nam" style="font-weight:normal;">Nam</label>
+                        </div>
+                        <div class="col-lg-6" style="font-size: 20px;">
+                            <input id="radio-nu" type="radio" class="option-input radio" name="KH.GioiTinh" value="Nữ" checked="@(Model.GioiTinh == "Nữ")" />
+                            <label for="radio-nu" style="font-weight:normal;">Nữ</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <input class="user-btn" type="button" style="float: right;" value="Đổi mật khẩu" />
+                </div>
+                <div class="col-lg-4">
+                    <input class="user-btn" type="button" id="history-btn" value="Lịch sử mua hàng" />
+                </div>
+
+                <div class="col-lg-4">
+                    <input name="KH.TaiKhoan" type="hidden" value="@Model.TaiKhoan" />
+                    <input class="user-btn" type="submit" style="float: left;" value="Lưu" />
+                </div>
+
+            </div>
+        }
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="row text-center">
+
+                <label class="alert @(ViewBag.MessageType == "Success" ? "alert-success" : "alert-warning")">@ViewBag.Message</label>
+
+            </div>
+        }
+    </div>
+
+</body>
