@@ -78,6 +78,10 @@ namespace ReBook.Controllers
                     {
                         hoadon.TinhTrang = "Hoàn thành";
                     }
+                    else if (hoadon.TinhTrang != "Hoàn thành" && hoadon.TinhTrang != "Đã huỷ")
+                    {
+                        hoadon.TinhTrang = "Không xác định";
+                    }
                     db.SaveChanges();
                     return Redirect(Request.UrlReferrer.PathAndQuery);
                 }

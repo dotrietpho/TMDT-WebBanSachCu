@@ -27,10 +27,10 @@ namespace ReBook.Controllers
         {
             using (var db = new DBConText())
             {
-                var user = db.KhachHang.Where(p => p.TaiKhoan == a.TaiKhoan).FirstOrDefault();
-                if (user != null && user.MatKhau == a.MatKhau)
+                var user = db.KhachHang.Where(p => p.TaiKhoan == a.TaiKhoan);
+                if (user.Count() > 0 && user.First().MatKhau == a.MatKhau)
                 {
-                    a.TenKH = user.TenKH;
+                    a.TenKH = user.First().TenKH;
                     Session["User"] = a;
                     return Redirect(Url.Content("~/"));
                 }
