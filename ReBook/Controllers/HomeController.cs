@@ -368,7 +368,7 @@ namespace ReBook.Controllers
                 {
                     var user = (LoginModel)HttpContext.Session["User"];
                     ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
-                    helper.LapHoaDon(user.TaiKhoan, newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu);
+                    helper.LapHoaDon(user.TaiKhoan, newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu, newHoaDon.isPaid);
 
                     TempData["messenge"] = "Đơn hàng đã được tạo thành công";
                     return RedirectToAction("Switch");

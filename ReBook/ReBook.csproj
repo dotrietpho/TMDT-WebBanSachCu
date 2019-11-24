@@ -170,6 +170,14 @@
     <Compile Include="Migrations\201911200923504_update-table-KhachHang.Designer.cs">
       <DependentUpon>201911200923504_update-table-KhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911240704042_editHoaDon.cs" />
+    <Compile Include="Migrations\201911240704042_editHoaDon.Designer.cs">
+      <DependentUpon>201911240704042_editHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911240733129_final.cs" />
+    <Compile Include="Migrations\201911240733129_final.Designer.cs">
+      <DependentUpon>201911240733129_final.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ChiTietDonHangModel.cs" />
@@ -475,6 +483,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911200923504_update-table-KhachHang.resx">
       <DependentUpon>201911200923504_update-table-KhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911240704042_editHoaDon.resx">
+      <DependentUpon>201911240704042_editHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911240733129_final.resx">
+      <DependentUpon>201911240733129_final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

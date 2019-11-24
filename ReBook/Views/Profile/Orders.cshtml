@@ -8,21 +8,35 @@
     <h1><b>LỊCH SỬ ĐƠN HÀNG</b></h1>
 </div>
 
+<div class="row text-center">
+    <form action="@Url.Action("Orders")" method="post">
+        Từ:
+        <input name="from" type="date" value="@ViewBag.From" />&nbsp;
+        Đến:
+        <input name="to" type="date" value="@ViewBag.To" />
+        <button type="submit">Lọc</button>
+    </form>
+</div>
+
 <div class="row">
     <table class="table table-hover">
         <thead>
             <tr>
-                <th style="width: 15%">Số điện thoại</th>
+                <th style="width: 8%">Mã HĐ</th>
+                <th style="width: 15%">ĐT giao hàng</th>
                 <th style="width: 30%">Đia chỉ giao hàng</th>
-                <th style="width: 20%">Ghi chú</th>
+                <th style="width: 17%">Ghi chú</th>
                 <th style="width: 15%">Tổng tiền</th>
-                <th style="width: 20%">Tình trạng</th>
+                <th style="width: 15%">Tình trạng</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in ViewData["Orders"] as List<ReBook.App_Data.HoaDon>)
             {
                 <tr>
+                    <td>
+                        @item.id
+                    </td>
                     <td>
                         @item.SDTGiaoHang
                     </td>
@@ -36,7 +50,10 @@
                         @item.TongTien
                     </td>
                     <td>
-                        @item.TinhTrang
+                        @item.TinhTrang @if (item.TinhTrang == "Chờ xác nhận")
+                        {
+                            <span> - <a href="@Url.Action("Cancel", "Profile", new { id = item.id })" style="text-decoration:none; color:darkred;">Huỷ</a></span>
+                        }
                     </td>
                 </tr>
             }

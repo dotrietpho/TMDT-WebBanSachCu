@@ -70,7 +70,7 @@ namespace ReBook.Controllers
                 {
                     var hoadon = db.HoaDon.Select(p => p).Where(p => p.id == hoaDon.id).FirstOrDefault();
                     //Edit tung property
-                    if (hoadon.TinhTrang == "Chờ xác nhận")
+                    if (hoadon.TinhTrang == "Chờ xác nhận" || hoadon.TinhTrang == "Đã thanh toán")
                     {
                         hoadon.TinhTrang = "Đang giao hàng";
                     }
