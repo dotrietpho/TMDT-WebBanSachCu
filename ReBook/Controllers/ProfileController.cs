@@ -120,5 +120,137 @@ namespace ReBook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        // GET: Profile/Orders
+        public ActionResult Orders()
+        {
+            try
+            {
+                //Neu session trong (chua dang nhap)
+                if (Session.Count == 0)
+                {
+                    TempData["messenge"] = "Vui lòng đăng nhập!";
+                    return Redirect(Url.Content("~/Login"));
+                }
+                else
+                {
+                    //Lay du lieu tu session
+                    var user = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        var orders = db.HoaDon.Where(x => x.idKhachHang == user.TaiKhoan);
+
+                        // Sắp xếp
+                        var completedOrders = orders.Where(x => x.TinhTrang == "Hoàn thành" || x.TinhTrang == "Đã huỷ").OrderByDescending(x => x.NgayLapHD);
+                        var deliveringOrders = orders.Where(x => x.TinhTrang == "Đang giao hàng").OrderByDescending(x => x.NgayLapHD);
+                        var paidOrders = orders.Where(x => x.TinhTrang == "Đã thanh toán").OrderByDescending(x => x.NgayLapHD);
+                        var validatedOrders = orders.Where(x => x.TinhTrang == "Chờ xác nhận").OrderByDescending(x => x.NgayLapHD);
+
+                        List<HoaDon> lstHoaDon = new List<HoaDon>();
+                        lstHoaDon.AddRange(validatedOrders);
+                        lstHoaDon.AddRange(paidOrders);
+                        lstHoaDon.AddRange(deliveringOrders);
+                        lstHoaDon.AddRange(completedOrders);
+
+                        ViewData["Orders"] = lstHoaDon;
+                        return View();
+                    }
+                }
+            }
+            catch
+            {
+                ViewBag.Messenge = "Some thing wong";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpPost]
+        public ActionResult Orders(string from = "", string to = "")
+        {
+            try
+            {
+                //Neu session trong (chua dang nhap)
+                if (Session.Count == 0)
+                {
+                    TempData["messenge"] = "Vui lòng đăng nhập!";
+                    return Redirect(Url.Content("~/Login"));
+                }
+                else
+                {
+                    //Lay du lieu tu session
+                    var user = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        var orders = db.HoaDon.Where(x => x.idKhachHang == user.TaiKhoan).ToList();
+
+                        if (!string.IsNullOrWhiteSpace(from))
+                            orders = orders.FindAll(x => DateTime.Parse(x.NgayLapHD) >= DateTime.Parse(from));
+                        if (!string.IsNullOrWhiteSpace(to))
+                            orders = orders.FindAll(x => DateTime.Parse(x.NgayLapHD) <= DateTime.Parse(to));
+
+                        // Sắp xếp
+                        var completedOrders = orders.FindAll(x => x.TinhTrang == "Hoàn thành" || x.TinhTrang == "Đã huỷ").OrderByDescending(x => x.NgayLapHD);
+                        var deliveringOrders = orders.FindAll(x => x.TinhTrang == "Đang giao hàng").OrderByDescending(x => x.NgayLapHD);
+                        var paidOrders = orders.FindAll(x => x.TinhTrang == "Đã thanh toán").OrderByDescending(x => x.NgayLapHD);
+                        var validatedOrders = orders.FindAll(x => x.TinhTrang == "Chờ xác nhận").OrderByDescending(x => x.NgayLapHD);
+
+                        List<HoaDon> lstHoaDon = new List<HoaDon>();
+                        lstHoaDon.AddRange(validatedOrders);
+                        lstHoaDon.AddRange(paidOrders);
+                        lstHoaDon.AddRange(deliveringOrders);
+                        lstHoaDon.AddRange(completedOrders);
+
+                        ViewData["Orders"] = lstHoaDon;
+                        ViewBag.From = from;
+                        ViewBag.To = to;
+                        return View();
+                    }
+                }
+            }
+            catch
+            {
+                ViewBag.Messenge = "Some thing wong";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [Route("Profile/Orders/Cancel/{id}")]
+        public ActionResult Cancel(int id)
+        {
+            try
+            {
+                //Neu session trong (chua dang nhap)
+                if (Session.Count == 0)
+                {
+                    TempData["messenge"] = "Vui lòng đăng nhập!";
+                    return Redirect(Url.Content("~/Login"));
+                }
+                else
+                {
+                    //Lay du lieu tu session
+                    var user = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        try
+                        {
+                            var order = db.HoaDon.Where(x => x.idKhachHang == user.TaiKhoan && x.id == id);
+                            if (order.Count() > 0)
+                            {
+                                order.First().TinhTrang = "Đã huỷ";
+                                db.SaveChanges();
+                            }
+                        }
+                        catch { }
+                    }
+
+                    return RedirectToAction("Orders");
+                }
+            }
+            catch
+            {
+                ViewBag.Messenge = "Some thing wong";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
     }
 }

@@ -38,14 +38,14 @@ namespace ReBook.Models
             }
         }
 
-        public void LapHoaDon(string idGioHang, string diaChi, string sdt, string ngayHen, string ghiChu)
+        public void LapHoaDon(string idGioHang, string diaChi, string sdt, string ngayHen, string ghiChu, bool isPaid)
         {
             try
             {
                 using (var db = new DBConText())
                 {
                     var q = db.GioHang.Where(p => p.IDGioHang == idGioHang).FirstOrDefault();
-                    HoaDon hoaDon = new HoaDon("Chờ xác nhận", q, diaChi, sdt, ngayHen, idGioHang, ghiChu);
+                    HoaDon hoaDon = new HoaDon(isPaid ? "Đã thanh toán" : "Chờ xác nhận", q, diaChi, sdt, ngayHen, idGioHang, ghiChu, isPaid);
                     db.HoaDon.Add(hoaDon);
                     db.SaveChanges();
                     LapChiTietHoaDon(hoaDon.id, idGioHang);

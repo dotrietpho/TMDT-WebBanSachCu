@@ -9,14 +9,12 @@ namespace ReBook.App_Data
         public string IDGioHang { get; set; }
 
         public int TongTienGioHang { get; set; }
-        public string TinhTrang { get; set; }
         public bool isDeleted { get; set; }
         public ICollection<ChiTietGioHang> ChiTietGioHangs { get; set; }
 
         public GioHang(string id)
         {
             this.IDGioHang = id;
-            TinhTrang = "chưa thanh toán";
             TongTienGioHang = 0;
         }
 

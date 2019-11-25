@@ -70,13 +70,17 @@ namespace ReBook.Controllers
                 {
                     var hoadon = db.HoaDon.Select(p => p).Where(p => p.id == hoaDon.id).FirstOrDefault();
                     //Edit tung property
-                    if (hoadon.TinhTrang == "Chờ xác nhận")
+                    if (hoadon.TinhTrang == "Chờ xác nhận" || hoadon.TinhTrang == "Đã thanh toán")
                     {
                         hoadon.TinhTrang = "Đang giao hàng";
                     }
                     else if (hoadon.TinhTrang == "Đang giao hàng")
                     {
                         hoadon.TinhTrang = "Hoàn thành";
+                    }
+                    else if (hoadon.TinhTrang != "Hoàn thành" && hoadon.TinhTrang != "Đã huỷ")
+                    {
+                        hoadon.TinhTrang = "Không xác định";
                     }
                     db.SaveChanges();
                     return Redirect(Request.UrlReferrer.PathAndQuery);
