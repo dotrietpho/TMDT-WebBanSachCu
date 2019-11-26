@@ -180,6 +180,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\ChiTietDonHangModel.cs" />
     <Compile Include="Models\ChiTietGioHangModel.cs" />
     <Compile Include="Models\GioHangHelper.cs" />
@@ -459,6 +460,7 @@
     <Content Include="Views\Home\XacNhanThanhToan.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Orders.cshtml" />
+    <Content Include="Views\Profile\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

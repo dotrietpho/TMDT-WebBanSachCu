@@ -3,6 +3,7 @@ using ReBook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,7 +29,8 @@ namespace ReBook.Controllers
                     using (var db = new DBConText())
                     {
                         var KH = db.KhachHang.First(x => x.TaiKhoan == user.TaiKhoan);
-
+                        ViewBag.Message = TempData["Message"];
+                        ViewBag.MessageType = TempData["MessageType"];
                         return View(KH);
                     }
                 }
@@ -252,5 +254,102 @@ namespace ReBook.Controllers
             }
         }
 
+        public ActionResult ChangePassword()
+        {
+            try
+            {
+                //Neu session trong (chua dang nhap)
+                if (Session.Count == 0)
+                {
+                    TempData["messenge"] = "Vui lòng đăng nhập!";
+                    return Redirect(Url.Content("~/Login"));
+                }
+                else
+                {
+                        return View(new ChangePasswordModel());
+                }
+            }
+            catch
+            {
+                ViewBag.Messenge = "Some thing wong";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordModel a)
+        {
+            try
+            {
+                //Neu session trong (chua dang nhap)
+                if (Session.Count == 0)
+                {
+                    TempData["messenge"] = "Vui lòng đăng nhập!";
+                    return Redirect(Url.Content("~/Login"));
+                }
+                else
+                {
+                    //Lay du lieu tu session
+                    var user = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        if (a.MatKhau == null || a.MatKhauMoi == null || a.MatKhauMoiNhapLai == null)
+                        {
+                            ViewBag.Messenge = "Vui lòng không bỏ trống dòng!";
+                            return View(a);
+                        }
+                        if (user.MatKhau != a.MatKhau)
+                        {
+                            ViewBag.Messenge = "Mật khẩu cũ không đúng!";
+                            return View(a);
+                        }
+                        if (a.MatKhauMoi != a.MatKhauMoiNhapLai)
+                        {
+                            ViewBag.Messenge = "Mật khẩu nhập lại không đúng!";
+                            return View(a);
+                        }
+                        if(!IsPassword(a.MatKhauMoi))
+                        {
+                            ViewBag.Messenge = "Password phải có ít nhất 1 ký tự, 1 số";
+                            return View(a);
+                        }
+                        if (user.MatKhau == a.MatKhauMoi)
+                        {
+                            ViewBag.Messenge = "Mật khẩu mới giống mật khẩu cũ y như đúc ???!";
+                            return View(a);
+                        }
+                        else
+                        {
+                            var olduser = db.KhachHang.FirstOrDefault(p => p.TaiKhoan == user.TaiKhoan);
+                            olduser.MatKhau = a.MatKhauMoi;
+                            db.SaveChanges();
+                            TempData["Message"] = "Chúc mừng bạn đã đổi mật khẩu thành công, mật khẩu mới là: ********";
+                            TempData["MessageType"] = "Success";
+                            return RedirectToAction("Index");
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                ViewBag.Messenge = "Some thing wong";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public bool IsPassword(string psw)
+        {
+            var hasWord = new Regex(@"[a-zA-Z]+");
+            var hasDigit = new Regex(@"[0-9]+");
+            var hasSpecialChar = new Regex("[;\"]+");
+
+            if (hasWord.IsMatch(psw) && hasDigit.IsMatch(psw) && !hasSpecialChar.IsMatch(psw))
+                return true;
+            else
+            {
+                return false;
+            }
+        }
     }
 }
