@@ -270,6 +270,10 @@ namespace ReBook.Controllers
         {
             try
             {
+                if (newHoaDon.NgayHenGiaoHang == null)
+                    newHoaDon.NgayHenGiaoHang = "";
+                if (newHoaDon.GhiChu == null)
+                    newHoaDon.GhiChu = "";
                 var helper = new HoaDonHelper();
                 var ghhelper = new GioHangHelper();
 
@@ -282,9 +286,9 @@ namespace ReBook.Controllers
                 {
                     var user = (LoginModel)HttpContext.Session["User"];
                     ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
-                    if (newHoaDon.DiaChiGiaoHang.Length < 5 || newHoaDon.SDTGiaoHang.Length < 9)
+                    if (newHoaDon.SDTGiaoHang.Length < 9)
                     {
-                        ViewBag.Messenge = "Yêu cầu nhập địa chỉ và số điện thoại chính xác!";
+                        ViewBag.Messenge = "Yêu cầu nhập số điện thoại !";
                         return View();
                     }
                     ThongTinGiaoHangModel info = new ThongTinGiaoHangModel()
