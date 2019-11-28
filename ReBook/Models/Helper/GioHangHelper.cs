@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ReBook.Models
+namespace ReBook.Models.Helper
 {
     public class GioHangHelper
     {
-        public bool isGioHangTonTai(string userID)
+        public bool isGioHangTonTai(string idGioHang)
         {
             using (var db = new DBConText())
             {
-                if (db.GioHang.Where(p => p.IDGioHang == userID).FirstOrDefault() == null)
+                if (db.GioHang.Where(p => p.IDGioHang == idGioHang).FirstOrDefault() == null)
                     return false;
                 return true;
             }
         }
 
-        public bool TaoGioHang(string userID)
+        public bool TaoGioHang(string idGioHang)
         {
             try
             {
                 using (var db = new DBConText())
                 {
-                    db.GioHang.Add(new GioHang(userID));
+                    var ghMoi = new GioHang(idGioHang);
+                    db.GioHang.Add(ghMoi);
                     db.SaveChanges();
                 }
                 return true;
@@ -33,20 +34,49 @@ namespace ReBook.Models
             }
         }
 
-        public bool ThemSanPham(int idSach, string userID)
+        public bool ClearGioHang(string idGioHang)
         {
             try
             {
                 using (var db = new DBConText())
                 {
-                    var checker = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
+                    db.ChiTietGioHang.RemoveRange(db.ChiTietGioHang.Where(x => x.IDGioHang == idGioHang));
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool ThemSanPham(int idSach, string idGioHang, bool forceCreate = false)
+        {
+            try
+            {
+                using (var db = new DBConText())
+                {
+                    if (isGioHangTonTai(idGioHang))
+                    {
+                        if (forceCreate)
+                        {
+                            ClearGioHang(idGioHang);
+                        }
+                    }
+                    else
+                    {
+                        TaoGioHang(idGioHang);
+                    }
+
+                    var checker = db.ChiTietGioHang.Where(p => p.IDGioHang == idGioHang && p.idSach == idSach).FirstOrDefault();
                     if (checker != null)
                     {
                         checker.count++;
                     }
                     else
                     {
-                        db.ChiTietGioHang.Add(new ChiTietGioHang(userID, idSach));
+                        db.ChiTietGioHang.Add(new ChiTietGioHang(idGioHang, idSach));
                     }
                     db.SaveChanges();
                     return true;
@@ -59,13 +89,13 @@ namespace ReBook.Models
         }
 
         //Tang so luong sach trong gio hang
-        public bool TangSanPham(int idSach, string userID)
+        public bool TangSanPham(int idSach, string idGioHang)
         {
             try
             {
                 using (var db = new DBConText())
                 {
-                    var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
+                    var a = db.ChiTietGioHang.Where(p => p.IDGioHang == idGioHang && p.idSach == idSach).FirstOrDefault();
                     a.count++;
                     db.SaveChanges();
                     return true;
@@ -78,13 +108,13 @@ namespace ReBook.Models
         }
 
         //Giam so luong sach trong gio hang
-        public bool XoaSanPham(int idSach, string userID)
+        public bool GiamSanPham(int idSach, string idGioHang)
         {
             try
             {
                 using (var db = new DBConText())
                 {
-                    var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
+                    var a = db.ChiTietGioHang.Where(p => p.IDGioHang == idGioHang && p.idSach == idSach).FirstOrDefault();
                     if (a.count > 1)
                         a.count--;
                     db.SaveChanges();
@@ -98,13 +128,13 @@ namespace ReBook.Models
         }
 
         //Xoa sach khoi gio hang
-        public bool RemoveSanPham(int idSach, string userID)
+        public bool XoaSanPham(int idSach, string idGioHang)
         {
             try
             {
                 using (var db = new DBConText())
                 {
-                    var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
+                    var a = db.ChiTietGioHang.Where(p => p.IDGioHang == idGioHang && p.idSach == idSach).FirstOrDefault();
                     db.ChiTietGioHang.Remove(a);
                     db.SaveChanges();
                     return true;
@@ -116,7 +146,7 @@ namespace ReBook.Models
             }
         }
 
-        public string TongTienGioHang(string userID)
+        public string TongTienGioHang(string idGioHang)
         {
             try
             {
@@ -127,7 +157,7 @@ namespace ReBook.Models
                     //Sửa bằng cách
                     //B1: chọn dữ liệu tạm bằng query
                     var q = from p in db.ChiTietGioHang
-                            where p.IDGioHang == userID
+                            where p.IDGioHang == idGioHang
                             from sach in db.Sach
                             where sach.id == p.idSach
                             from x in db.ChiTietGioHang
@@ -148,8 +178,8 @@ namespace ReBook.Models
                     {
                         total += item.GiaSach * item.SoLuong;
                     }
-                    if (db.GioHang.Where(p => p.IDGioHang == userID).FirstOrDefault() != null)
-                        db.GioHang.Where(p => p.IDGioHang == userID).FirstOrDefault().TongTienGioHang = total;
+                    if (db.GioHang.Where(p => p.IDGioHang == idGioHang).FirstOrDefault() != null)
+                        db.GioHang.Where(p => p.IDGioHang == idGioHang).FirstOrDefault().TongTienGioHang = total;
                     db.SaveChanges();
                 }
                 string s = string.Format("{0}", total);
@@ -161,46 +191,36 @@ namespace ReBook.Models
             }
         }
 
-        public bool ChuyenGioHang(string userKhach, string userDaDangNhap)
+        public bool ChuyenGioHang(string idGioHang, string userID)
         {
             try
             {
                 using (var db = new DBConText())
                 {
-                    var ghKhachs = db.GioHang.Where(x => x.IDGioHang == userKhach);
-                    var ghDaDangNhaps = db.GioHang.Where(x => x.IDGioHang == userDaDangNhap);
-                    bool daTaoGH = false;
+                    var user = db.KhachHang.Find(userID);
+                    var gioHang = db.GioHang.Find(idGioHang);
+                    var _gioHangs = db.GioHang.Where(x => x.IDGioHang == user.idGioHang).ToList();
 
-                    // TK Khách có GH
-                    if (ghKhachs.Count() > 0 && ghDaDangNhaps.Count() <= 0)
+                    user.idGioHang = idGioHang;
+                    user.GioHang = gioHang;
+                    db.SaveChanges();
+
+                    if (_gioHangs.Count() > 0)
                     {
-                        TaoGioHang(userDaDangNhap);
-                        daTaoGH = true;
-                    }
+                        var _gioHang = _gioHangs[0];
+                        var _chiTietGH = db.ChiTietGioHang.Where(x => x.IDGioHang == _gioHang.IDGioHang);
 
-                    // TK Đăng nhập có GH
-                    // Không chuyển
-
-                    // Cả 2 TK đều có giỏ hàng
-                    if (ghKhachs.Count() > 0 && (ghDaDangNhaps.Count() > 0) || daTaoGH == true)
-                    {
-                        var chitietXoa = db.ChiTietGioHang.Where(x => x.IDGioHang == userDaDangNhap);
-                        db.ChiTietGioHang.RemoveRange(chitietXoa);
-
-                        var chitietChuyen = db.ChiTietGioHang.Where(x => x.IDGioHang == userKhach);
-                        foreach (var ct in chitietChuyen)
+                        if (_chiTietGH.Count() > 0)
                         {
-                            ct.IDGioHang = userDaDangNhap;
+                            db.ChiTietGioHang.RemoveRange(_chiTietGH);
+                            db.SaveChanges();
                         }
 
-                        var ghKhach = ghKhachs.First();
-                        db.GioHang.Remove(ghKhach);
-
+                        db.GioHang.Remove(_gioHang);
                         db.SaveChanges();
                     }
-
-                    return true;
                 }
+                return true;
             }
             catch
             {
@@ -208,14 +228,14 @@ namespace ReBook.Models
             }
         }
 
-        public List<ChiTietGioHangModel> ChiTietGioHang(string userID)
+        public List<ChiTietGioHangModel> ChiTietGioHang(string idGioHang)
         {
             try
             {
                 using (var db = new DBConText())
                 {
                     var q = from p in db.ChiTietGioHang
-                            where p.IDGioHang == userID
+                            where p.IDGioHang == idGioHang
                             from sach in db.Sach
                             where sach.id == p.idSach
                             from x in db.ChiTietGioHang

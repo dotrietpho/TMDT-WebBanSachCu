@@ -11,7 +11,7 @@
 {
 <body>
     <div class="warning-text">@ViewBag.Messenge</div>
-    <div class="container-fluid" style="padding: 50px 300px px 300px;">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 text-center detailbox">
                 <div class="row">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-lg-5">
                         <h1 style="font-size: 40px; text-align:left; text-transform: uppercase;">@ViewBag.Book.TenSach</h1>
-                        <h1 style="font-size: 40px; color: #808080; text-align:left;">@ViewBag.Book.GiaSach đ</h1>
+                        <h1 style="font-size: 40px; color: #808080; text-align:left;">@ReBook.Models.Helper.StringHelper.beautifyPrice(ViewBag.Book.GiaSach) đ</h1>
                         <div style="width: 100%; border: 2px solid #e3e3e3; "></div>
                         <br>
                         <form action="~/Home/AddCart/@ViewBag.Book.id" method="post">
@@ -39,7 +39,7 @@
 
                     <div class="col-lg-3 sidebox">
 
-                    
+
                         <br>
                         <div><b>Tác giả</b>: @ViewBag.Book.TenTacGia</div>
                         <br>

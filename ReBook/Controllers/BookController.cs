@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReBook.Models.Helper;
 
 namespace ReBook.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace ReBook.Models
+﻿namespace ReBook.Models.Helper
 {
     public class AdminModel
     {

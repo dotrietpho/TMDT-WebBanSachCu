@@ -1,5 +1,6 @@
 ﻿using ReBook.App_Data;
 using ReBook.Models;
+using ReBook.Models.Helper;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
@@ -11,12 +12,12 @@ namespace ReBook.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            Session.RemoveAll();
+            // Session.RemoveAll(); ĐỊT MẸ PHÁ GAME
             if (TempData["messenge"] != null)
             {
                 ViewBag.Messenge = TempData["messenge"].ToString();
             }
-            if (Session.Count > 0)
+            if (Session["User"] != null)
                 return Redirect(Url.Content("~/"));
             return View();
         }
@@ -33,12 +34,12 @@ namespace ReBook.Controllers
                     a.TenKH = user.First().TenKH;
                     Session["User"] = a;
 
-                    var guest = Session["newUser"] as LoginModel;
-
-                    if (guest != null)
+                    if (Session["Guest"] != null)
                     {
-                        GioHangHelper gioHangHelper = new GioHangHelper();
-                        gioHangHelper.ChuyenGioHang(guest.TaiKhoan, a.TaiKhoan);
+                        var guestIP = Session["Guest"].ToString();
+                        GioHangHelper ghHelper = new GioHangHelper();
+                        ghHelper.ChuyenGioHang(guestIP, a.TaiKhoan);
+                        Session.Remove("Guest");
                     }
 
                     return Redirect(Url.Content("~/"));
@@ -102,6 +103,14 @@ namespace ReBook.Controllers
                         });
                         db.SaveChanges();
                         Session["User"] = new LoginModel(a.TaiKhoan, a.password, a.TenKH);
+
+                        if (Session["Guest"] != null)
+                        {
+                            var guestIP = Session["Guest"].ToString();
+                            GioHangHelper ghHelper = new GioHangHelper();
+                            ghHelper.ChuyenGioHang(guestIP, a.TaiKhoan);
+                        }
+
                         return RedirectToAction("Redirect");
                     }
                     else
@@ -126,8 +135,7 @@ namespace ReBook.Controllers
         [HttpGet]
         public ActionResult Logout(LoginModel a)
         {
-            Session.RemoveAll();
-            Session.Clear();
+            Session.Remove("User");
             return Redirect(Url.Content("~/"));
         }
 

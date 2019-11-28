@@ -65,7 +65,7 @@
                             <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
                             <div class="price">-15%</div>
                             <div class="title">@item.TenSach</div>
-                            <div class="gia"> @item.GiaSach VNĐ</div>
+                            <div class="gia">@ReBook.Models.Helper.StringHelper.beautifyPrice(item.GiaSach) VNĐ</div>
                         </div>
                     </a>
                 }

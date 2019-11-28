@@ -56,14 +56,14 @@
                         <td style="vertical-align: middle;">@book.TenSach</td>
                         <td style="vertical-align: middle;">@book.SoLuong</td>
                         <td style="vertical-align: middle;">
-                            <output id="x" style="padding-top:0px;">@book.GiaSach đ</output>
+                            <output id="x" style="padding-top:0px;">@ReBook.Models.Helper.StringHelper.beautifyPrice(book.GiaSach) đ</output>
                         </td>
                     </tr>
                 }
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="4"><h3>Tổng: @ViewBag.TongGia đ</h3></th>
+                    <th colspan="4"><h3>Tổng: @ReBook.Models.Helper.StringHelper.beautifyPrice(ViewBag.TongGia) đ</h3></th>
                 </tr>
             </tfoot>
         </table>

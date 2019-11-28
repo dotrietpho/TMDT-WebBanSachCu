@@ -13,19 +13,19 @@
             <div class="row">
                 @if (ViewBag.ListBook != null)
                 {
-                <div class="col-lg-12 booklist card">
-                    @foreach (var item in ViewBag.ListBook)
+                    <div class="col-lg-12 booklist card">
+                        @foreach (var item in ViewBag.ListBook)
                         {
-                    <a href="~/Home/Detail/@item.id">
-                        <div class="col-lg-4 text-center box box-padding">
-                            <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
-                            <div class="price">-15%</div>
-                            <div class="title">@item.TenSach</div>
-                            <div class="gia"> @item.GiaSach VNĐ</div>
-                        </div>
-                    </a>
+                            <a href="~/Home/Detail/@item.id">
+                                <div class="col-lg-4 text-center box box-padding">
+                                    <img src="~/UploadedFiles/@item.HinhSach" alt="@item.TenSach" class="book justify-content-center img-sach">
+                                    <div class="price">-15%</div>
+                                    <div class="title">@item.TenSach</div>
+                                    <div class="gia"> @ReBook.Models.Helper.StringHelper.beautifyPrice(item.GiaSach) VNĐ</div>
+                                </div>
+                            </a>
                         }
-                </div>
+                    </div>
                 }
             </div>
         </div>

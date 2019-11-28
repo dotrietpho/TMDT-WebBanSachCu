@@ -1,5 +1,6 @@
 ﻿using ReBook.App_Data;
 using ReBook.Models;
+using ReBook.Models.Helper;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -115,48 +116,33 @@ namespace ReBook.Controllers
                 //Goi helper cua gio hang
                 var helper = new GioHangHelper();
                 //Neu session trong (chua dang nhap)
-                if (Session["User"] != null)
+                if (Session["User"] == null)
                 {
-
-                    using (var db = new DBConText())
+                    if (Session["Guest"] == null)
                     {
-                        var a = new LoginModel()
-                        {
-                            TaiKhoan = Request.UserHostAddress
-                        };
-                        Session["newUser"] = a;
+                        string guestIP = Request.UserHostAddress;
 
-                        //Neu gio hang chua ton tai va nguoc lai
-                        if (!helper.isGioHangTonTai(a.TaiKhoan))
-                        {
-                            helper.TaoGioHang(a.TaiKhoan);
-                            helper.ThemSanPham(id, a.TaiKhoan);
-                        }
-                        else
-                        {
-                            helper.ThemSanPham(id, a.TaiKhoan);
-                        }
+                        Session["Guest"] = guestIP;
+                        helper.ThemSanPham(id, guestIP, true);
                     }
+                    else
+                    {
+                        string guestIP = Session["Guest"].ToString();
 
-                    TempData["messenge"] = "Vui lòng đăng nhập!";
-                    return Redirect(Url.Content("~/Login"));
+                        Session["Guest"] = guestIP;
+                        helper.ThemSanPham(id, guestIP);
+                    }
+                    TempData["messenge"] = "Thêm vào giỏ hàng thành công!";
+                    return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
                 else
                 {
                     //Lay du lieu tu session
-                    var user = (LoginModel)HttpContext.Session["User"];
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
                     using (var db = new DBConText())
                     {
-                        //Neu gio hang chua ton tai va nguoc lai
-                        if (!helper.isGioHangTonTai(user.TaiKhoan))
-                        {
-                            helper.TaoGioHang(user.TaiKhoan);
-                            helper.ThemSanPham(id, user.TaiKhoan);
-                        }
-                        else
-                        {
-                            helper.ThemSanPham(id, user.TaiKhoan);
-                        }
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        helper.ThemSanPham(id, user.GetIdGioHang());
                     }
                     TempData["messenge"] = "Thêm vào giỏ hàng thành công!";
                     return Redirect(Request.UrlReferrer.PathAndQuery);
@@ -176,16 +162,31 @@ namespace ReBook.Controllers
             {
                 if (Session["User"] == null)
                 {
-                    TempData["messenge"] = "Vui lòng đăng nhập!";
-                    return Redirect(Url.Content("~/Login"));
+                    if (Session["Guest"] == null)
+                    {
+                        helper.ClearGioHang(Request.UserHostAddress);
+                    }
+
+                    var guestIP = Request.UserHostAddress;
+                    ViewBag.ListBook = helper.ChiTietGioHang(guestIP);
+                    ViewBag.TongGia = helper.TongTienGioHang(guestIP);
+                    if (helper.ChiTietGioHang(guestIP).Count == 0)
+                        TempData["listemptyMessage"] = "No results";
+
+                    return View();
                 }
                 else
                 {
-                    var user = (LoginModel)HttpContext.Session["User"];
-                    ViewBag.ListBook = helper.ChiTietGioHang(user.TaiKhoan);
-                    ViewBag.TongGia = helper.TongTienGioHang(user.TaiKhoan);
-                    if (helper.ChiTietGioHang(user.TaiKhoan).Count == 0)
-                        TempData["listemptyMessage"] = "No results";
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
+
+                    using (var db = new DBConText())
+                    {
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        ViewBag.ListBook = helper.ChiTietGioHang(user.GetIdGioHang());
+                        ViewBag.TongGia = helper.TongTienGioHang(user.GetIdGioHang());
+                        if (helper.ChiTietGioHang(user.GetIdGioHang()).Count == 0)
+                            TempData["listemptyMessage"] = "No results";
+                    }
                     return View();
                 }
             }
@@ -202,13 +203,22 @@ namespace ReBook.Controllers
                 var helper = new GioHangHelper();
                 if (Session["User"] == null)
                 {
-                    TempData["messenge"] = "Vui lòng đăng nhập!";
-                    return Redirect(Url.Content("~/Login"));
+                    string guestIP = Request.UserHostAddress;
+
+                    Session["Guest"] = guestIP;
+                    helper.XoaSanPham(id, guestIP);
+
+                    ViewBag.Messenge = "Xoá sản phẩm thành công!";
+                    return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
                 else
                 {
-                    var user = (LoginModel)HttpContext.Session["User"];
-                    helper.RemoveSanPham(id, user.TaiKhoan);
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        helper.XoaSanPham(id, user.GetIdGioHang());
+                    }
                     ViewBag.Messenge = "Xoá sản phẩm thành công!";
                     return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
@@ -227,14 +237,23 @@ namespace ReBook.Controllers
                 var helper = new GioHangHelper();
                 if (Session["User"] == null)
                 {
-                    TempData["messenge"] = "Vui lòng đăng nhập!";
-                    return Redirect(Url.Content("~/Login"));
+                    string guestIP = Request.UserHostAddress;
+
+                    Session["Guest"] = guestIP;
+                    helper.TangSanPham(id, guestIP);
+
+                    ViewBag.Messenge = "Tăng số lượng sản phẩm thành công!";
+                    return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
                 else
                 {
-                    var user = (LoginModel)HttpContext.Session["User"];
-                    helper.TangSanPham(id, user.TaiKhoan);
-                    ViewBag.Messenge = "Thêm sản phẩm thành công!";
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        helper.TangSanPham(id, user.GetIdGioHang());
+                    }
+                    ViewBag.Messenge = "Tăng số lượng sản phẩm thành công!";
                     return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
             }
@@ -252,14 +271,23 @@ namespace ReBook.Controllers
                 var helper = new GioHangHelper();
                 if (Session["User"] == null)
                 {
-                    TempData["messenge"] = "Vui lòng đăng nhập!";
-                    return Redirect(Url.Content("~/Login"));
+                    string guestIP = Request.UserHostAddress;
+
+                    Session["Guest"] = guestIP;
+                    helper.GiamSanPham(id, guestIP);
+
+                    ViewBag.Messenge = "Giảm sản phẩm thành công!";
+                    return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
                 else
                 {
-                    var user = (LoginModel)HttpContext.Session["User"];
-                    helper.XoaSanPham(id, user.TaiKhoan);
-                    ViewBag.Messenge = "Thêm sản phẩm thành công!";
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        helper.GiamSanPham(id, user.GetIdGioHang());
+                    }
+                    ViewBag.Messenge = "Giảm sản phẩm thành công!";
                     return Redirect(Request.UrlReferrer.PathAndQuery);
                 }
             }
@@ -280,8 +308,12 @@ namespace ReBook.Controllers
             }
 
             var helper = new GioHangHelper();
-            var user = (LoginModel)HttpContext.Session["User"];
-            ViewBag.TongGia = helper.TongTienGioHang(user.TaiKhoan);
+            var sessionUser = (LoginModel)HttpContext.Session["User"];
+            using (var db = new DBConText())
+            {
+                var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                ViewBag.TongGia = helper.TongTienGioHang(user.GetIdGioHang());
+            }
 
             return View();
         }
@@ -305,29 +337,38 @@ namespace ReBook.Controllers
                 }
                 else
                 {
-                    var user = (LoginModel)HttpContext.Session["User"];
-                    ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
-                    if (!StringHelper.NumberValid(newHoaDon.SDTGiaoHang) || newHoaDon.SDTGiaoHang.Length < 9)
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
                     {
-                        ViewBag.Messenge = "Số điện thoại không hợp lệ!";
-                        return View();
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        ViewBag.TongGia = ghhelper.TongTienGioHang(user.GetIdGioHang());
+
+                        if (!StringHelper.NumberValid(newHoaDon.SDTGiaoHang) || newHoaDon.SDTGiaoHang.Length < 9)
+                        {
+                            ViewBag.Messenge = "Số điện thoại không hợp lệ!";
+                            return View();
+                        }
+                        ThongTinGiaoHangModel info = new ThongTinGiaoHangModel()
+                        {
+                            DiaChi = newHoaDon.DiaChiGiaoHang,
+                            SDT = newHoaDon.SDTGiaoHang,
+                            GhiChu = newHoaDon.GhiChu,
+                            NgayGiaoHang = newHoaDon.NgayHenGiaoHang.ToString()
+                        };
+                        Session["Order"] = info;
                     }
-                    ThongTinGiaoHangModel info = new ThongTinGiaoHangModel()
-                    {
-                        DiaChi = newHoaDon.DiaChiGiaoHang,
-                        SDT = newHoaDon.SDTGiaoHang,
-                        GhiChu = newHoaDon.GhiChu,
-                        NgayGiaoHang = newHoaDon.NgayHenGiaoHang.ToString()
-                    };
-                    TempData[user.TaiKhoan] = info;
                     return RedirectToAction("XacNhanThanhToan");
                 }
             }
             catch
             {
                 var ghhelper = new GioHangHelper();
-                var user = (LoginModel)HttpContext.Session["User"];
-                ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
+                var sessionUser = (LoginModel)HttpContext.Session["User"];
+                using (var db = new DBConText())
+                {
+                    var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                    ViewBag.TongGia = ghhelper.TongTienGioHang(user.GetIdGioHang());
+                }
                 return View();
             }
         }
@@ -354,19 +395,24 @@ namespace ReBook.Controllers
                 }
                 else
                 {
-                    var user = (LoginModel)HttpContext.Session["User"];
-                    var info = TempData[user.TaiKhoan];
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        ViewBag.TongGia = ghhelper.TongTienGioHang(user.GetIdGioHang());
+                        var info = Session["Order"] as ThongTinGiaoHangModel;
 
-                    if (info == null)
-                        return RedirectToAction("Index");
+                        if (info == null)
+                            return RedirectToAction("Index");
 
-                    ViewBag.ListBook = ghhelper.ChiTietGioHang(user.TaiKhoan);
-                    ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
-                    ViewBag.Info = info;
-                    ViewBag.TenKH = user.TenKH;
+                        ViewBag.ListBook = ghhelper.ChiTietGioHang(user.GetIdGioHang());
+                        ViewBag.TongGia = ghhelper.TongTienGioHang(user.GetIdGioHang());
+                        ViewBag.Info = info;
+                        ViewBag.TenKH = user.TenKH;
 
-                    if (ghhelper.ChiTietGioHang(user.TaiKhoan).Count == 0)
-                        TempData["listemptyMessage"] = "No results";
+                        if (ghhelper.ChiTietGioHang(user.GetIdGioHang()).Count == 0)
+                            TempData["listemptyMessage"] = "No results";
+                    }
                     return View();
                 }
             }
@@ -391,15 +437,19 @@ namespace ReBook.Controllers
                 }
                 else
                 {
-                    var user = (LoginModel)HttpContext.Session["User"];
-                    ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
-                    if (newHoaDon.NgayHenGiaoHang == null)
-                        newHoaDon.NgayHenGiaoHang = "";
-                    if (newHoaDon.GhiChu == null)
-                        newHoaDon.GhiChu = "";
-                    helper.LapHoaDon(user.TaiKhoan, newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu, newHoaDon.isPaid);
+                    var sessionUser = (LoginModel)HttpContext.Session["User"];
+                    using (var db = new DBConText())
+                    {
+                        var user = db.KhachHang.Find(sessionUser.TaiKhoan);
+                        ViewBag.TongGia = ghhelper.TongTienGioHang(user.GetIdGioHang());
+                        if (newHoaDon.NgayHenGiaoHang == null)
+                            newHoaDon.NgayHenGiaoHang = "";
+                        if (newHoaDon.GhiChu == null)
+                            newHoaDon.GhiChu = "";
+                        helper.LapHoaDon(user.TaiKhoan, user.GetIdGioHang(), newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu, newHoaDon.isPaid);
 
-                    TempData["messenge"] = "Đơn hàng đã được tạo thành công";
+                        TempData["messenge"] = "Đơn hàng đã được tạo thành công";
+                    }
                     return RedirectToAction("Switch");
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using ReBook.App_Data;
 using ReBook.Models;
+using ReBook.Models.Helper;
 using System.Linq;
 using System.Web.Mvc;
 

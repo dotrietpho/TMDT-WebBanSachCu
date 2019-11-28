@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ReBook.Models
+namespace ReBook.Models.Helper
 {
     public class HoaDonHelper
     {
@@ -38,33 +38,17 @@ namespace ReBook.Models
             }
         }
 
-        public void LapHoaDon(string idGioHang, string diaChi, string sdt, string ngayHen, string ghiChu, bool isPaid)
+        public void LapHoaDon(string idKhachHang, string idGioHang, string diaChi, string sdt, string ngayHen, string ghiChu, bool isPaid)
         {
             try
             {
                 using (var db = new DBConText())
                 {
                     var q = db.GioHang.Where(p => p.IDGioHang == idGioHang).FirstOrDefault();
-                    HoaDon hoaDon = new HoaDon(isPaid ? "Đã thanh toán" : "Chờ xác nhận", q, diaChi, sdt, ngayHen, idGioHang, ghiChu, isPaid);
+                    HoaDon hoaDon = new HoaDon(isPaid ? "Đã thanh toán" : "Chờ xác nhận", q, diaChi, sdt, ngayHen, idKhachHang, ghiChu, isPaid);
                     db.HoaDon.Add(hoaDon);
                     db.SaveChanges();
                     LapChiTietHoaDon(hoaDon.id, idGioHang);
-                }
-            }
-            catch
-            {
-                throw;
-            }
-        }
-        public void LapHoaDon(string idGioHang, HoaDon hd)
-        {
-            try
-            {
-                using (var db = new DBConText())
-                {
-                    db.HoaDon.Add(hd);
-                    db.SaveChanges();
-                    LapChiTietHoaDon(hd.id, idGioHang);
                 }
             }
             catch

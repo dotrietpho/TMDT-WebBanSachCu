@@ -145,7 +145,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
-    <Compile Include="Controllers\StringHelper.cs" />
+    <Compile Include="Models\Helper\StringHelper.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,12 +179,12 @@
       <DependentUpon>201911240733129_final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\Helper\AdminModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\ChiTietDonHangModel.cs" />
     <Compile Include="Models\ChiTietGioHangModel.cs" />
-    <Compile Include="Models\GioHangHelper.cs" />
-    <Compile Include="Models\HoaDonHelper.cs" />
+    <Compile Include="Models\Helper\GioHangHelper.cs" />
+    <Compile Include="Models\Helper\HoaDonHelper.cs" />
     <Compile Include="Models\HoaDonModel.cs" />
     <Compile Include="Models\ListBookModel.cs" />
     <Compile Include="Models\LoginModel.cs" />

@@ -39,5 +39,12 @@ namespace ReBook.App_Data
             this.DiaChi = a.DiaChi;
             this.Email = a.Email;
         }
+
+        public string GetIdGioHang()
+        {
+            if (idGioHang == null)
+                idGioHang = TaiKhoan;
+            return idGioHang;
+        }
     }
 }

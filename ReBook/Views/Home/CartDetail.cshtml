@@ -16,6 +16,15 @@
             <div class="title text-center" style="font-size: 50px;">GIỎ HÀNG</div>
 
             <div class="container" style="background-color: white;">
+                <style>
+                    a:hover {
+                        text-decoration: none;
+                    }
+
+                    #remove:hover {
+                        color: whitesmoke;
+                    }
+                </style>
                 <table class="table table-bordered mycart">
                     <thead>
                         <tr>
@@ -34,18 +43,18 @@
                                 <td><img src="~/UploadedFiles/@book.HinhSach" alt="" width="75" height="115" style="vertical-align: middle;"></td>
                                 <td style="vertical-align: middle;">@book.TenSach</td>
                                 <td style="vertical-align: middle; width:150px;">
-                                    <output id="x" style="padding-top:0px;">@book.GiaSach đ</output>
+                                    <output id="x" style="padding-top:0px;">@ReBook.Models.Helper.StringHelper.beautifyPrice(book.GiaSach) đ</output>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <a href="~/Home/ExtractCart/@book.idSach" class="fa fa-minus" title="Search W3Schools"></a>
+                                    <a href="~/Home/ExtractCart/@book.idSach" class="fa fa-minus" title="Giảm số lượng"></a>
                                     <input id="y" type="number" disabled value="@book.SoLuong" style="width:30px; text-align:center">
-                                    <a href="~/Home/InsertCart/@book.idSach" class="fa fa-plus" title="Search W3Schools"></a>
+                                    <a href="~/Home/InsertCart/@book.idSach" class="fa fa-plus" title="Tăng số lượng"></a>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <a href="/Home/Detail/@book.idSach" class="fa fa-search"></a>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <a href="/Home/RemoveCart/@book.idSach" class="button"> <input class="cart-btn" id="remove" value="Gỡ"></a>
+                                    <a href="/Home/RemoveCart/@book.idSach" class="button cart-btn" id="remove">Gỡ</a>
                                 </td>
                             </tr>
                         }
@@ -79,20 +88,29 @@
 
                         <div style="width: 100%; border: 1px solid #e3e3e3; "></div>
                         <div class="row">
-                            <div class="col-lg-9">
+                            <div class="col-lg-7">
                                 <div style="text-align: right;">Thành tiền</div>
                             </div>
-                            <div class="col-lg-3">
-                                <div style="text-align: right; padding-right: 20px;">@ViewBag.TongGia</div>
+                            <div class="col-lg-5">
+                                <div style="text-align: right; padding-right: 20px;">@ReBook.Models.Helper.StringHelper.beautifyPrice(ViewBag.TongGia) đ</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div style="text-align: right;">VAT</div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div style="text-align: right; padding-right: 20px;">@ReBook.Models.Helper.StringHelper.beautifyPrice(0) đ</div>
                             </div>
                         </div>
 
+                        <hr style="margin: 0; padding: 0; margin-top: 5px" />
                         <div class="row">
-                            <div class="col-lg-9">
-                                <div style="text-align: right;"><h4>Tổng thành tiền (Gồm VAT)</h4></div>
+                            <div class="col-lg-7">
+                                <div style="text-align: right;"><h4>Tổng cộng</h4></div>
                             </div>
-                            <div class="col-lg-3">
-                                <div style="text-align: right; padding-right: 20px;"><h4>@ViewBag.TongGia</h4></div>
+                            <div class="col-lg-5">
+                                <div style="text-align: right; padding-right: 20px;"><h4>@ReBook.Models.Helper.StringHelper.beautifyPrice(ViewBag.TongGia) đ</h4></div>
                             </div>
                         </div>
 

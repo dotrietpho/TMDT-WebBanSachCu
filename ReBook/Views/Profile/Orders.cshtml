@@ -47,7 +47,7 @@
                         @item.GhiChu
                     </td>
                     <td>
-                        @item.TongTien
+                        @ReBook.Models.Helper.StringHelper.beautifyPrice(item.TongTien) đ
                     </td>
                     <td>
                         @item.TinhTrang @if (item.TinhTrang == "Chờ xác nhận")
