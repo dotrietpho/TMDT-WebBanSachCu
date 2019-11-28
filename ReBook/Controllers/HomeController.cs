@@ -115,8 +115,29 @@ namespace ReBook.Controllers
                 //Goi helper cua gio hang
                 var helper = new GioHangHelper();
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] != null)
                 {
+
+                    using (var db = new DBConText())
+                    {
+                        var a = new LoginModel()
+                        {
+                            TaiKhoan = Request.UserHostAddress
+                        };
+                        Session["newUser"] = a;
+
+                        //Neu gio hang chua ton tai va nguoc lai
+                        if (!helper.isGioHangTonTai(a.TaiKhoan))
+                        {
+                            helper.TaoGioHang(a.TaiKhoan);
+                            helper.ThemSanPham(id, a.TaiKhoan);
+                        }
+                        else
+                        {
+                            helper.ThemSanPham(id, a.TaiKhoan);
+                        }
+                    }
+
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
                 }
@@ -153,7 +174,7 @@ namespace ReBook.Controllers
             var helper = new GioHangHelper();
             try
             {
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -179,7 +200,7 @@ namespace ReBook.Controllers
             try
             {
                 var helper = new GioHangHelper();
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -204,7 +225,7 @@ namespace ReBook.Controllers
             try
             {
                 var helper = new GioHangHelper();
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -229,7 +250,7 @@ namespace ReBook.Controllers
             try
             {
                 var helper = new GioHangHelper();
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -252,7 +273,7 @@ namespace ReBook.Controllers
         [HttpGet]
         public ActionResult ThanhToan()
         {
-            if (Session.Count == 0)
+            if (Session["User"] == null)
             {
                 TempData["messenge"] = "Vui lòng đăng nhập!";
                 return Redirect(Url.Content("~/Login"));
@@ -277,7 +298,7 @@ namespace ReBook.Controllers
                 var helper = new HoaDonHelper();
                 var ghhelper = new GioHangHelper();
 
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -286,9 +307,9 @@ namespace ReBook.Controllers
                 {
                     var user = (LoginModel)HttpContext.Session["User"];
                     ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
-                    if (newHoaDon.SDTGiaoHang.Length < 9)
+                    if (!StringHelper.NumberValid(newHoaDon.SDTGiaoHang) || newHoaDon.SDTGiaoHang.Length < 9)
                     {
-                        ViewBag.Messenge = "Yêu cầu nhập số điện thoại !";
+                        ViewBag.Messenge = "Số điện thoại không hợp lệ!";
                         return View();
                     }
                     ThongTinGiaoHangModel info = new ThongTinGiaoHangModel()
@@ -326,7 +347,7 @@ namespace ReBook.Controllers
             var ghhelper = new GioHangHelper();
             try
             {
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -363,7 +384,7 @@ namespace ReBook.Controllers
                 var helper = new HoaDonHelper();
                 var ghhelper = new GioHangHelper();
 
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -372,6 +393,10 @@ namespace ReBook.Controllers
                 {
                     var user = (LoginModel)HttpContext.Session["User"];
                     ViewBag.TongGia = ghhelper.TongTienGioHang(user.TaiKhoan);
+                    if (newHoaDon.NgayHenGiaoHang == null)
+                        newHoaDon.NgayHenGiaoHang = "";
+                    if (newHoaDon.GhiChu == null)
+                        newHoaDon.GhiChu = "";
                     helper.LapHoaDon(user.TaiKhoan, newHoaDon.DiaChiGiaoHang, newHoaDon.SDTGiaoHang, newHoaDon.NgayHenGiaoHang.ToString(), newHoaDon.GhiChu, newHoaDon.isPaid);
 
                     TempData["messenge"] = "Đơn hàng đã được tạo thành công";

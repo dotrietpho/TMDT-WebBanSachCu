@@ -85,9 +85,7 @@ namespace ReBook.Models
                 using (var db = new DBConText())
                 {
                     var a = db.ChiTietGioHang.Where(p => p.IDGioHang == userID && p.idSach == idSach).FirstOrDefault();
-                    if (a.count == 1)
-                        db.ChiTietGioHang.Remove(a);
-                    else
+                    if (a.count > 1)
                         a.count--;
                     db.SaveChanges();
                     return true;
@@ -160,6 +158,53 @@ namespace ReBook.Models
             catch
             {
                 throw;
+            }
+        }
+
+        public bool ChuyenGioHang(string userKhach, string userDaDangNhap)
+        {
+            try
+            {
+                using (var db = new DBConText())
+                {
+                    var ghKhachs = db.GioHang.Where(x => x.IDGioHang == userKhach);
+                    var ghDaDangNhaps = db.GioHang.Where(x => x.IDGioHang == userDaDangNhap);
+                    bool daTaoGH = false;
+
+                    // TK Khách có GH
+                    if (ghKhachs.Count() > 0 && ghDaDangNhaps.Count() <= 0)
+                    {
+                        TaoGioHang(userDaDangNhap);
+                        daTaoGH = true;
+                    }
+
+                    // TK Đăng nhập có GH
+                    // Không chuyển
+
+                    // Cả 2 TK đều có giỏ hàng
+                    if (ghKhachs.Count() > 0 && (ghDaDangNhaps.Count() > 0) || daTaoGH == true)
+                    {
+                        var chitietXoa = db.ChiTietGioHang.Where(x => x.IDGioHang == userDaDangNhap);
+                        db.ChiTietGioHang.RemoveRange(chitietXoa);
+
+                        var chitietChuyen = db.ChiTietGioHang.Where(x => x.IDGioHang == userKhach);
+                        foreach (var ct in chitietChuyen)
+                        {
+                            ct.IDGioHang = userDaDangNhap;
+                        }
+
+                        var ghKhach = ghKhachs.First();
+                        db.GioHang.Remove(ghKhach);
+
+                        db.SaveChanges();
+                    }
+
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
 

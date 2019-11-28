@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace ReBook.Controllers
 {
-    public class StringHelper
+    public static class StringHelper
     {
         public static string convertToUnSign(string s)
         {
@@ -15,6 +15,11 @@ namespace ReBook.Controllers
             Regex regex = new Regex(@"\p{IsCombiningDiacriticalMarks}+");
             string temp = s.Normalize(NormalizationForm.FormD);
             return regex.Replace(temp, string.Empty).Replace('\u0111', 'd');
+        }
+
+        public static bool NumberValid(string s)
+        {
+            return int.TryParse(s, out int i);
         }
     }
 }

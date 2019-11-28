@@ -7,7 +7,7 @@ namespace ReBook.App_Data
         public DBConText() : base()
         {
             string databasename = "DoAn1 - 31/05";
-            this.Database.Connection.ConnectionString = @"Data Source=PHO-PC\MAYCUAPHO;Initial Catalog=" + databasename + ";Trusted_Connection=Yes";
+            this.Database.Connection.ConnectionString = @"Data Source=.;Initial Catalog=" + databasename + ";Trusted_Connection=true";
         }
 
         public DbSet<Sach> Sach { get; set; }

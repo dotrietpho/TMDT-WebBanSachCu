@@ -99,7 +99,8 @@
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function (details) {
-                        $('#isPaid').attr("checked", "");
+                        $('#isPaid').attr('checked', true);
+                        $('#isPaid').val("true");
                         $('#btnConfirm').click();
                     });
                 }

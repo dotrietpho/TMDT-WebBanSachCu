@@ -12,12 +12,13 @@ namespace ReBook.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
+        [HttpGet]
         public ActionResult Index()
         {
             try
             {
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -48,7 +49,7 @@ namespace ReBook.Controllers
             try
             {
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -129,7 +130,7 @@ namespace ReBook.Controllers
             try
             {
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -171,7 +172,7 @@ namespace ReBook.Controllers
             try
             {
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -221,7 +222,7 @@ namespace ReBook.Controllers
             try
             {
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -259,7 +260,7 @@ namespace ReBook.Controllers
             try
             {
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));
@@ -282,7 +283,7 @@ namespace ReBook.Controllers
             try
             {
                 //Neu session trong (chua dang nhap)
-                if (Session.Count == 0)
+                if (Session["User"] == null)
                 {
                     TempData["messenge"] = "Vui lòng đăng nhập!";
                     return Redirect(Url.Content("~/Login"));

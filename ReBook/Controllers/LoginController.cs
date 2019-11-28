@@ -32,6 +32,15 @@ namespace ReBook.Controllers
                 {
                     a.TenKH = user.First().TenKH;
                     Session["User"] = a;
+
+                    var guest = Session["newUser"] as LoginModel;
+
+                    if (guest != null)
+                    {
+                        GioHangHelper gioHangHelper = new GioHangHelper();
+                        gioHangHelper.ChuyenGioHang(guest.TaiKhoan, a.TaiKhoan);
+                    }
+
                     return Redirect(Url.Content("~/"));
                 }
                 else
